@@ -29,12 +29,3 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-    App\Controller\HomeController:
-        tags: ['controller.service_arguments']
-        arguments:
-            $twig: '@twig'
-    
-    App\Controller\PropertyController:
-        tags: ['controller.service_arguments']
-        arguments:
-            $twig: '@twig'        
