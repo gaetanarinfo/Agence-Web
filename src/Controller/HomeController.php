@@ -11,10 +11,6 @@ class HomeController extends AbstractController
 {
 
     /**
-    * @var Environement
-    */
-
-    /**
      * @Route("/", name="home")
      * @param PropertyRepository
      * @return Responce
