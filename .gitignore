@@ -1,8 +1,5 @@
 
 ###> symfony/framework-bundle ###
-/.env.local
-/.env.local.php
-/.env.*.local
 /config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
 /var/
@@ -14,5 +11,9 @@
 .phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
+src/DataFixtures/
+src/Entity/User.php
+src/Migrations
+src/Repository/UserRepository.php
 .env
 .env.test
