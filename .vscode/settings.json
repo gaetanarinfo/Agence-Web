@@ -1,5 +1,0 @@
-{
-    "editor.gotoLocation.multipleDefinitions": "gotoAndPeek",
-    "editor.gotoLocation.multipleTypeDefinitions": "gotoAndPeek",
-    "editor.multiCursorModifier": "ctrlCmd"
-}
