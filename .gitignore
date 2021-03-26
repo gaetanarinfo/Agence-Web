@@ -15,5 +15,6 @@ src/DataFixtures/
 src/Entity/User.php
 src/Migrations
 src/Repository/UserRepository.php
-.env
-.env.test
+/.env
+/.env.test
+src/Controller/Form/PropertySearchType.php
