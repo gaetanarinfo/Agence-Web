@@ -3,12 +3,16 @@
 namespace App\Controller;
 
 use App\Entity\Property;
+use App\Entity\PropertySearch;
+use App\Form\PropertySearchType;
 use App\Repository\PropertyRepository;
 //use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 // use Doctrine\Common\Persistence\ObjectManager;
 //use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 //use Cocur\Slugify\Slugify;
@@ -34,8 +38,13 @@ class PropertyController extends AbstractController
      * @return Responce
     */
 
-    public function index(): Response
+    public function index(PaginatorInterface $paginator, Request $request): Response
     {
+
+        $search = new PropertySearch();
+        $form = $this->createForm(PropertySearchType::class, $search);
+        $form->handleRequest($request);
+
 
         // $property = new Property();
         // $property->setTitle('Mon premier bien')
@@ -53,8 +62,15 @@ class PropertyController extends AbstractController
         // $em->persist($property);
         // $em->flush();
 
+        $properties = $paginator->paginate(
+            $this->repository->findAllVisibleQuery($search), 
+        $request->query->getInt('page', 1),
+        12
+    );
         return $this->render('property/index.html.twig', [
-            'current_menu' => 'properties'
+            'current_menu' => 'properties',
+            'properties' => $properties,
+            'form' => $form->createView()
         ]);
     }
 
