@@ -1,0 +1,40 @@
+
+###> symfony/framework-bundle ###
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> symfony/phpunit-bridge ###
+.phpunit
+.phpunit.result.cache
+/phpunit.xml
+###< symfony/phpunit-bridge ###
+src/DataFixtures/
+src/Entity/User.php
+src/Migrations
+src/Repository/UserRepository.php
+/.env
+/.env.test
+src/Controller/Form/PropertySearchType.php
+src/Controller/Admin/AdminOptionController.php
+templates/admin/option/_form.html.twig
+templates/admin/option/edit.html.twig
+templates/admin/option/index.html.twig
+templates/admin/option/new.html.twig
+templates/admin/property/_form.html.twig
+templates/admin/property/_form.html.twig
+src/Entity/Option.php
+src/Form/OptionType.php
+src/Repository/OptionRepository.php
+src/Controller/Admin/AdminPropertyController.php
+migrations
+.vscode
+###> liip/imagine-bundle ###
+/public/media/cache/
+###< liip/imagine-bundle ###
+/public/images
+config/packages/liip_imagine.yaml
+config/packages/vich_uploader.yaml
+config/routes/liip_imagine.yaml
