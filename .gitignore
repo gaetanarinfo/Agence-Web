@@ -18,3 +18,15 @@ src/Repository/UserRepository.php
 /.env
 /.env.test
 src/Controller/Form/PropertySearchType.php
+src/Controller/Admin/AdminOptionController.php
+templates/admin/option/_form.html.twig
+templates/admin/option/edit.html.twig
+templates/admin/option/index.html.twig
+templates/admin/option/new.html.twig
+templates/admin/property/_form.html.twig
+templates/admin/property/_form.html.twig
+migrations/Version20210326133145.php
+src/Entity/Option.php
+src/Form/OptionType.php
+src/Repository/OptionRepository.php
+src/Controller/Admin/AdminPropertyController.php
