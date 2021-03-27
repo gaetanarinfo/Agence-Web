@@ -59,7 +59,7 @@ class PropertyController extends AbstractController
         //     ->setFloor(4)
         //     ->setHeat(1)
         //     ->setCity('Montpellier')
-        //     ->setAdress('15 Boulevard Gambetta')
+        //     ->setAddress('15 Boulevard Gambetta')
         //     ->setPostalCode('37500');
         // $em = $this->getDoctrine()->getManager();
         // $em->persist($property);

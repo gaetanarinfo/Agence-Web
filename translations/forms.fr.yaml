@@ -1,12 +1,17 @@
 City: Ville
-Adress: Adresse
+Address: Adresse
 Surface: Surface
 Price: Prix
 Heat: Chauffage
 Floor: Etage
-Content: Description
 Sold: Vendu
 Postal code: Code postal
 Rooms: Pièces
 Bedrooms: Chambres
 Title: Titre
+Firstname: Prénom
+Lastname: Nom
+Phone: Téléphone
+Email: Adresse email
+Content: Message
+Picture files: Image du bien

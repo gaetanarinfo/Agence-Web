@@ -1,6 +1,7 @@
+public/media
 
 ###> symfony/framework-bundle ###
-/config/secrets/prod/prod.decrypt.private.php
+/.env
 /public/bundles/
 /var/
 /vendor/
@@ -8,35 +9,20 @@
 
 ###> symfony/phpunit-bridge ###
 .phpunit
-.phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
-src/DataFixtures/
-src/Entity/User.php
-src/Migrations
-src/Repository/UserRepository.php
-/.env
-/.env.test
-src/Controller/Form/PropertySearchType.php
-src/Controller/Admin/AdminOptionController.php
-templates/admin/option/_form.html.twig
-templates/admin/option/edit.html.twig
-templates/admin/option/index.html.twig
-templates/admin/option/new.html.twig
-templates/admin/property/edit.html.twig
-templates/admin/property/index.html.twig
-templates/admin/property/new.html.twig
-templates/admin/property/_form.html.twig
-src/Entity/Option.php
-src/Form/OptionType.php
-src/Repository/OptionRepository.php
-src/Controller/Admin/AdminPropertyController.php
-migrations
-.vscode
+
+###> symfony/web-server-bundle ###
+/.web-server-pid
+###< symfony/web-server-bundle ###
+
 ###> liip/imagine-bundle ###
 /public/media/cache/
 ###< liip/imagine-bundle ###
-/public/images
-config/packages/liip_imagine.yaml
-config/packages/vich_uploader.yaml
-config/routes/liip_imagine.yaml
+
+###> symfony/webpack-encore-pack ###
+/node_modules/
+/public/build/
+npm-debug.log
+yarn-error.log
+###< symfony/webpack-encore-pack ###
