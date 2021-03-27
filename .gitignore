@@ -23,7 +23,9 @@ templates/admin/option/_form.html.twig
 templates/admin/option/edit.html.twig
 templates/admin/option/index.html.twig
 templates/admin/option/new.html.twig
-templates/admin/property/_form.html.twig
+templates/admin/property/edit.html.twig
+templates/admin/property/index.html.twig
+templates/admin/property/new.html.twig
 templates/admin/property/_form.html.twig
 src/Entity/Option.php
 src/Form/OptionType.php
