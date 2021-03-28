@@ -47,32 +47,9 @@ class PropertyController extends AbstractController
         $search = new PropertySearch();
         $form = $this->createForm(PropertySearchType::class, $search);
         $form->handleRequest($request);
-
-
-        // $property = new Property();
-        // $property->setTitle('Mon premier bien')
-        //     ->setPrice(200000)
-        //     ->setRooms(4)
-        //     ->setBedrooms(3)
-        //     ->setContent('Une petite description')
-        //     ->setSurface(60)
-        //     ->setFloor(4)
-        //     ->setHeat(1)
-        //     ->setCity('Montpellier')
-        //     ->setAddress('15 Boulevard Gambetta')
-        //     ->setPostalCode('37500');
-        // $em = $this->getDoctrine()->getManager();
-        // $em->persist($property);
-        // $em->flush();
-
-        $properties = $paginator->paginate(
-            $this->repository->findAllVisibleQuery($search), 
-        $request->query->getInt('page', 1),
-        12
-    );
         return $this->render('property/index.html.twig', [
             'current_menu' => 'properties',
-            'properties' => $properties,
+            'properties' => $this->repository->paginateAllVisible($search, $request->query->getInt('page', 1)),
             'form' => $form->createView()
         ]);
     }
