@@ -3,11 +3,18 @@ Address: Adresse
 Surface: Surface
 Price: Prix
 Heat: Chauffage
+Electrique: Electrique
+Gaz: Gaz
+Options: Options
 Floor: Etage
 Sold: Vendu
 Postal code: Code postal
 Rooms: Pièces
 Bedrooms: Chambres
+Surface minimale: Surface minimale
+Budjet max: Budjet max
+10 km: 10 km
+1000 km: 1000 km
 Title: Titre
 Firstname: Prénom
 Lastname: Nom
