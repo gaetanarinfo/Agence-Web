@@ -1,5 +1,4 @@
-import L from 'leaflet'
-import 'leaflet/dist/leaflet.css'
+var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
 
 export default class Map {
 
@@ -8,18 +7,49 @@ export default class Map {
         if (map === null) {
             return
         }
-        let icon = L.icon({
-            iconUrl: '/images/marker-icon.png',
-        })
-        let center = [map.dataset.lat, map.dataset.lng]
-        map = L.map('map').setView(center, 13)
-        let token = 'pk.eyJ1IjoibGVmb3JnZXVyNzIiLCJhIjoiY2ttdDBoYnNkMGl3dDJvbnNyeHF1ZXFqOCJ9.3pv-3De2cjyRbzGTNMC8qg'
-        L.tileLayer(`https://api.mapbox.com/v4/mapbox.streets/{z}/{x}/{y}.png?access_token=${token}`, {
-            maxZoom: 18,
-            minZoom: 12,
-            attribution: '© <a href="https://www.mapbox.com/feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map)
-        L.marker(center, { icon: icon }).addTo(map)
+
+        let centers = [map.dataset.lng, map.dataset.lat]
+
+        if (centers !== null) {
+            mapboxgl.accessToken = 'pk.eyJ1IjoibGVmb3JnZXVyNzIiLCJhIjoiY2ttdDBoYnNkMGl3dDJvbnNyeHF1ZXFqOCJ9.3pv-3De2cjyRbzGTNMC8qg';
+            map = new mapboxgl.Map({
+                container: map, // container id
+                style: 'mapbox://styles/mapbox/streets-v11', // style URL
+                center: centers, // starting position [lng, lat]
+                zoom: 13 // starting zoom
+            })
+            map.loadImage(
+                '/images/marker-icon.png',
+                function(error, image) {
+                    map.addImage('custom-marker', image);
+
+                    map.addSource('points', {
+                        'type': 'geojson',
+                        'data': {
+                            'type': 'FeatureCollection',
+                            'features': [{
+                                // feature for Mapbox DC
+                                'type': 'Feature',
+                                'geometry': {
+                                    'type': 'Point',
+                                    'coordinates': centers
+                                }
+                            }]
+                        }
+                    });
+
+                    map.addLayer({
+                        'id': 'points',
+                        'type': 'symbol',
+                        'source': 'points',
+                        'layout': {
+                            'icon-image': 'custom-marker',
+                            // get the title name from the source's "title" property
+                        }
+                    });
+
+                })
+        }
     }
 
 }
