@@ -44,7 +44,7 @@ class ImageCacheSubscriber implements EventSubscriber
         {
             return;
         }
-        $this->cacheManager->remove($this->uploaderHelper->asset($entity, 'imageFile'));
+        $this->cacheManager->remove($this->uploaderHelper->asset($entity, 'pictureFile'));
     }
 
     public function preUpdate(PreUpdateEventArgs $args)
@@ -56,9 +56,9 @@ class ImageCacheSubscriber implements EventSubscriber
             return;
         }
 
-        if($entity->getImageFile() instanceof UploadedFile)
+        if($entity->getPictureFiles() instanceof UploadedFile)
         {
-            $this->cacheManager->remove($this->uploaderHelper->asset($entity, 'imageFile'));
+            $this->cacheManager->remove($this->uploaderHelper->asset($entity, 'pictureFile'));
         }
     }
 

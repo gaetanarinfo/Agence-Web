@@ -8,6 +8,7 @@ use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method Option|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Option|null find($email, $lockMode = null, $lockVersion = null)
  * @method Option|null findOneBy(array $criteria, array $orderBy = null)
  * @method Option[]    findAll()
  * @method Option[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)

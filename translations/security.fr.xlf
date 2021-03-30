@@ -51,7 +51,7 @@
       </trans-unit>
       <trans-unit id="By5eLYM" resname="Account has expired.">
         <source>Account has expired.</source>
-        <target>Le compte a expiré.</target>
+        <target>Votre compte n'a pas été validé.</target>
       </trans-unit>
       <trans-unit id="YfZhiuA" resname="Credentials have expired.">
         <source>Credentials have expired.</source>

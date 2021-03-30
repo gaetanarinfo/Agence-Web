@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Repository\PropertyRepository;
+use App\Repository\RentRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class HomeController extends AbstractController
 {
@@ -16,11 +18,13 @@ class HomeController extends AbstractController
      * @return Responce
     */
 
-    public function index (PropertyRepository $repository):Response{
+    public function index (PropertyRepository $repository, RentRepository $repositoryRent, SessionInterface $session):Response{
 
         $properties = $repository->findLatest();
+        $rent = $repositoryRent->findAll();
         return $this->render('pages/home.html.twig', [
-            'properties' => $properties
+            'properties' => $properties,
+            'rent' => $rent
         ]);
 
     }

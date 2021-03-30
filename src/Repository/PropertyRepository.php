@@ -85,7 +85,7 @@ class PropertyRepository extends ServiceEntityRepository
     public function findLatest(): array
     {
         $properties = $this->findVisibleQuery()
-            ->setMaxResults(4)
+            ->setMaxResults(6)
             ->getQuery()
             ->getResult();
         $this->hydratePicture($properties);

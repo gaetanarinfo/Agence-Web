@@ -1,22 +1,31 @@
 {% extends "base.html.twig" %}
 
-{% block title 'Agence lorem ipsum' %}
+{% block title 'AgenceWeb - Le Mans' %}
 
 {% block body %}
-    <div class="jumbotron text-center">  
-        <h1>Agence lorem ipsum</h1>
-        <p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500.</p>
-    </div>    
+	<div class="container">
+		<h2>Les derniers biens</h2>
+		<hr />
+		<div class="row flex">
+			{% for property in properties %}
+				<div class="col-4 mb-4">
+					{% include 'property/_property.html.twig' %}
+				</div>
+			{% endfor %}
+		</div>
+		<hr />
+	</div>
 
-
-    <div class="container">
-        <h2>Les derniers biens</h2>
-        <div class="row flex">
-            {% for property in properties %}
-                <div class="col-3">
-                    {% include 'property/_property.html.twig' %}
-                </div>
-            {% endfor %}
-        </div>
-    </div>
+	<div class="container">
+		<h2>Les dernières locations</h2>
+		<hr />
+		<div class="row flex">
+			{% for rents in rent %}
+				<div class="col-4">
+					{% include 'rent/_rent.html.twig' %}
+				</div>
+			{% endfor %}
+		</div>
+		<hr />
+	</div>
 {% endblock %}

@@ -2,9 +2,28 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
+        <title>{% block title %}AgenceWeb - Le Mans{% endblock %}</title>
+
+        <!-- Primary Meta Tags -->
+        <meta name="title" content="AgenceWeb - Le Mans">
+        <meta name="description" content="Large choix d'appartements et maisons en Location et Vente avec AgenceWeb Immobilier. Toutes nos Annonces d'appartements et maisons en Location et Vente Avec AgenceWeb Immobilier. 
+        Trouver votre bien immo. Gestion Locative. Suivi Complet.">
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://agence-web.website/">
+        <meta property="og:title" content="AgenceWeb - Le Mans">
+        <meta property="og:description" content="Large choix d'appartements et maisons en Location et Vente avec AgenceWeb Immobilier. Toutes nos Annonces d'appartements et maisons en Location et Vente Avec AgenceWeb Immobilier. 
+        Trouver votre bien immo. Gestion Locative. Suivi Complet.">
+        <meta property="og:image" content="{{ '/images/ban.jpg' }}">
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="https://agence-web.website/">
+        <meta property="twitter:title" content="AgenceWeb - Le Mans">
+        <meta property="twitter:description" content="Large choix d'appartements et maisons en Location et Vente avec AgenceWeb Immobilier. Toutes nos Annonces d'appartements et maisons en Location et Vente Avec AgenceWeb Immobilier. 
+        Trouver votre bien immo. Gestion Locative. Suivi Complet.">
+        <meta property="twitter:image" content="{{ '/images/ban.jpg' }}">
         
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
@@ -15,30 +34,78 @@
     </head>
     <body>
 
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <a class="navbar-brand" href="{{ path('home') }}">Mon Agence</a>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+             <a class="navbar-brand" href="/">
+                <img src="/images/cropped-icone.png" width="30" height="30" class="d-inline-block align-top mr-2" alt="AgenceWeb - Le Mans">
+                AgenceWeb - Le Mans
+            </a>
+
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link {% if current_menu is defined and current_menu == 'properties' %}active{% endif %}" href="{{ path('property.index') }}">Acheter</a>
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item {% if current_menu is defined and current_menu == 'properties' %}active{% endif %}">
+                        <a class="nav-link" href="{{ path('property.index') }}">Acheter un bien</a>
                     </li>
+                    <li class="nav-item {% if current_menu2 is defined and current_menu2 == 'rent' %}active{% endif %}">
+                        <a class="nav-link" href="{{ path('rent.index') }}">Louer un bien</a>
+                    </li>
+                    {# <li class="nav-item {% if current_menu is defined and current_menu == 'contact' %}active{% endif %}">
+                        <a class="nav-link" href="{{ path('property.index') }}">Prendre un rendez-vous</a>
+                    </li> #}
                 </ul>
                 {% if app.user %}
+
+                <ul class="navbar-nav">
+
+                {% if is_granted('ROLE_PRO') %}
+
+                    <li class="nav-item">
+                        <a href="{{ path('professionnel.property.index') }}" class="nav-link">Professionnel</a>
+                    </li>
+                
+                {% endif %}
+
+                    <li class="nav-item">
+                        <a href="{{ path('logout') }}" class="nav-link">Se déconnecter</a>
+                    </li>
+
+                </ul>
+
+                {% else %}   
+
                     <ul class="navbar-nav">
                         <li class="nav-link">
-                            <a href="{{ path('logout') }}" class="nav-link">Se déconnecter</a>
+                            <a href="{{ path('register') }}" class="btn btn-outline-success nav-link text-white text-bold">Inscription</a>
+                        </li>
+                        <li class="nav-link">
+                            <a href="{{ path('login') }}" class="btn btn-outline-info nav-link text-white text-bold">Connexion</a>
                         </li>
                     </ul>
+
                 {% endif %}
             </div>
         </nav>
 
+        <div class="jumbotron text-center jumb-head">
+            <div class="head-title">
+                <h1 class="mt-5">AgenceWeb - Le Mans</h1>
+                <p class="mt-5">Large choix d'appartements et maisons en Location et Vente avec AgenceWeb Immobilier. Toutes nos Annonces d'appartements et maisons en Location et Vente Avec AgenceWeb Immobilier. 
+                            Trouver votre bien immo. Gestion Locative. Suivi Complet.</p>
+            </div>
+        </div>
+
         {% block body %}
+            
         {% endblock %}
+
+        <footer class="footer">
+            <div class="container text-center">
+                <span class="footer-span">&copy; Copyright 2021, AgenceWeb - Gaëtan Seigneur</span>
+            </div>
+        </footer>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>

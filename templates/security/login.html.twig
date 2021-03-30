@@ -4,7 +4,7 @@
 
 {% block body %}
 
-    <div class="container mt-4">
+    <div class="container mt-4 mb-4 w-25">
 
     {% if error %}
         <div class="alert alert-danger">
@@ -12,17 +12,29 @@
         </div>
     {% endif %}
 
-    <form action="{{ path('login') }}" method="post">
-        <div class="form-group">
-            <label for="username">Nom d'utilisateur</label>
-            <input type="text" id="username" name="_username" class="form-control" value="{{ last_username }}" />
-        </div>
-        <div class="form-group">
-            <label for="password">Mot de passe</label>
-            <input type="password" id="password" name="_password" class="form-control" />
-        </div>
+    <div class="m-auto text-center">
+        <img class="mb-4" src="/images/cropped-icone.png" alt="" width="72" height="72">
+    </div>
 
-        <button type="submit" class="btn btn-primary">Se connecter</button>
+    <div class="text-center title-form mb-2">
+        <h3>Connexion</h3>
+    </div>
+
+    <hr class="mb-3" />
+
+    <form action="{{ path('login') }}" method="post" class="form-signin">
+            <label for="username" class="sr-only">Nom d'utilisateur</label>
+            <input type="text" id="username" name="_username" class="form-control" value="{{ last_username }}" placeholder="Nom d'utilisateur" />
+            <label for="password" class="sr-only">Mot de passe</label>
+            <input type="password" id="password" name="_password" class="form-control" placeholder="Mot de passe" />
+        <div class="checkbox mb-3 text-center mt-4">
+            <label>
+            <input type="checkbox" id="remember" name="_remember" value="yes"> Rester connecté
+            </label>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-lg btn-primary btn-block">Se connecter</button> <a href="{{ path('password_recover') }}" class="btn btn-lg btn-info btn-block">Mot de passe oublié</a>
+        </div>
     </form>
 
     </div>

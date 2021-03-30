@@ -25,6 +25,18 @@
         <source>Heat</source>
         <target>Chauffage</target>
       </trans-unit>
+      <trans-unit id="gxfMkxn" resname="Electrique">
+        <source>Electrique</source>
+        <target>Electrique</target>
+      </trans-unit>
+      <trans-unit id="7x.62E." resname="Gaz">
+        <source>Gaz</source>
+        <target>Gaz</target>
+      </trans-unit>
+      <trans-unit id="0NuLXjZ" resname="Options">
+        <source>Options</source>
+        <target>Options</target>
+      </trans-unit>
       <trans-unit id="0mjJxEk" resname="Floor">
         <source>Floor</source>
         <target>Etage</target>
@@ -45,13 +57,29 @@
         <source>Bedrooms</source>
         <target>Chambres</target>
       </trans-unit>
+      <trans-unit id="O1nSJd8" resname="Surface minimale">
+        <source>Surface minimale</source>
+        <target>Surface minimale</target>
+      </trans-unit>
+      <trans-unit id="arIahZh" resname="Budjet max">
+        <source>Budjet max</source>
+        <target>Budjet max</target>
+      </trans-unit>
+      <trans-unit id="EeWOaUZ" resname="10 km">
+        <source>10 km</source>
+        <target>10 km</target>
+      </trans-unit>
+      <trans-unit id="DqeypRF" resname="1000 km">
+        <source>1000 km</source>
+        <target>1000 km</target>
+      </trans-unit>
       <trans-unit id="fozSBW2" resname="Title">
         <source>Title</source>
         <target>Titre</target>
       </trans-unit>
       <trans-unit id="ZHz6kbI" resname="Firstname">
         <source>Firstname</source>
-        <target>Prenom</target>
+        <target>Prénom</target>
       </trans-unit>
       <trans-unit id="htiPHRy" resname="Lastname">
         <source>Lastname</source>
@@ -72,6 +100,26 @@
       <trans-unit id="ZXKYCGT" resname="Picture files">
         <source>Picture files</source>
         <target>Image du bien</target>
+      </trans-unit>
+      <trans-unit id="47ienTP" resname="Username">
+        <source>Username</source>
+        <target>Nom d'utilisateur</target>
+      </trans-unit>
+      <trans-unit id="588_9PF" resname="Password">
+        <source>Password</source>
+        <target>Mot de passe</target>
+      </trans-unit>
+      <trans-unit id="Hkmh4Tp" resname="Repeat Password">
+        <source>Repeat Password</source>
+        <target>Répéter le mot de passe</target>
+      </trans-unit>
+      <trans-unit id="c1prjRW" resname="Agree terms">
+        <source>Agree terms</source>
+        <target>J'accepte les termes et conditions du site internet.</target>
+      </trans-unit>
+      <trans-unit id="TdLhlyP" resname="The password fields must match.">
+        <source>The password fields must match.</source>
+        <target>Les champs du mot de passe doivent correspondre !</target>
       </trans-unit>
     </body>
   </file>

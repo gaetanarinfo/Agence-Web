@@ -13,8 +13,8 @@ doctrine:
         port:                 '%env(resolve:DB_PORT)%'
         user:                 '%env(resolve:DB_USER)%'
         password:             '%env(resolve:DB_PASSWORD)%'
-        driver:               pdo_mysql
-        server_version: '5.7'
+        driver:               'pdo_mysql'
+        server_version:       'mariadb-10.3.25'
         charset: utf8mb4
         default_table_options:
             charset: utf8mb4

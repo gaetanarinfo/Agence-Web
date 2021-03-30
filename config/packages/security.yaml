@@ -12,6 +12,8 @@ security:
             security: false
         main:
             anonymous: true
+            user_checker: App\Security\UserChecker
+            access_denied_url: /
             logout:
                 path: /logout
                 target: /    
@@ -25,12 +27,16 @@ security:
             # switch_user: true
 
             form_login: 
-                check_path: login
+                check_path: login         
+
+    role_hierarchy:
+        ROLE_ADMIN: [ROLE_PRO]
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/professionnel, roles: ROLE_PRO }
         # - { path: ^/profile, roles: ROLE_USER }
 
     encoders:
