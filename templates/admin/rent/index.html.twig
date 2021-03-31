@@ -1,12 +1,12 @@
 {% extends "base.html.twig" %}
 
-{% block title 'Gérer les options' %}
+{% block title 'Gérer les locations' %}
 
 {% block body %}
 
-    <div class="container mt-4 mb-4 w-25">
+    <div class="container mt-4 mb-4 w-50">
 
-        <p class="title-cont">Gérer les options</p>
+        <p class="title-cont">Gérer les locations</p>
 
         {% for message in app.flashes('success') %}
             <div class="alert alert-success">
@@ -17,19 +17,19 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Nom</th>
+                    <th>Titre</th>
                     <th>Action</th>
                 </tr>    
             </thead>
             <tbody>
-            {% for option in options %}
+            {% for rent in rents %}
                 <tr>
-                    <td>{{ option.name }}</td>
+                    <td>{{ rent.title }}</td>
                     <td>
-                        <a href="{{ path('admin.option.edit', {id: option.id}) }}" class="btn btn-secondary">Editer</a>
-                        <form method="post" action="{{ path('admin.option.delete', {id: option.id}) }}" style="display: inline-block;">
+                        <a href="{{ path('admin.rent.edit', {id: rent.id}) }}" class="btn btn-secondary">Editer</a>
+                        <form method="post" action="{{ path('admin.rent.delete', {id: rent.id}) }}" style="display: inline-block;">
                             <input type="hidden" name="_method" value="DELETE" />
-                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ option.id) }}" />
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ rent.id) }}" />
                             <button class="btn btn-danger">Supprimer</button>
                         </form>
                     </td>
@@ -39,7 +39,7 @@
         </table>
 
         <div class="text-right">
-            <a href='{{ path('admin.option.new') }}' class="btn btn-primary">Crée une option</a>
+            <a href='{{ path('admin.rent.new') }}' class="btn btn-primary">Crée une locations</a>
         </div>
 
     </div>

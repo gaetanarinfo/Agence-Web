@@ -25,7 +25,7 @@ class AdminPropertyController extends AbstractController
     }
 
     /**
-     * @Route("/admin", name="admin.property.index")
+     * @Route("/admin/property", name="admin.property.index")
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function index()
@@ -45,7 +45,6 @@ class AdminPropertyController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid())
         {
-            dump($property);
             $this->em->persist($property);
             $this->em->flush();
             $this->addFlash('success', 'Bien crée avec succès');

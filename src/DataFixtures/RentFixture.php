@@ -12,12 +12,12 @@ class RentFixture extends Fixture
     public function load(ObjectManager $manager)
     {
         $faker = Factory::create('fr_FR');
-        for($i = 0; $i < 100; $i++)
+        for($i = 0; $i < 250; $i++)
         {
             $rent = new Rent();
             $rent
-                ->setTitle($faker->words(3, true))
-                ->setContent($faker->sentence(3, true))
+                ->setTitle($faker->word(100, true))
+                ->setContent($faker->sentence(255, true))
                 ->setSurface($faker->numberBetween(20, 350))
                 ->setRooms($faker->numberBetween(2, 10))
                 ->setBedrooms($faker->numberBetween(1, 9))
@@ -27,7 +27,9 @@ class RentFixture extends Fixture
                 ->setCity($faker->city)
                 ->setAddress($faker->address)
                 ->setPostalCode($faker->postcode)
-                ->setAvailable(false);
+                ->setAvailable(false)
+                ->setLat($faker->latitude())
+                ->setLng($faker->longitude());
             $manager->persist($rent);    
         }
         $manager->flush();

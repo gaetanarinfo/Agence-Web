@@ -25,7 +25,7 @@ class PictureRent
      * @Assert\Image(
      *     mimeTypes="image/jpeg"
      * )
-     * 
+     * @Vich\UploadableField(mapping="rent_image", fileNameProperty="filename")
      */
     private $imageFile;
 

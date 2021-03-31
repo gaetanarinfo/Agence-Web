@@ -72,6 +72,23 @@
 
                 {% if is_granted('ROLE_PRO') %}
 
+                   <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Administration
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Gérer les utilisateurs</a>
+                        <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ path('admin.property.index') }}">Gérer les biens</a>
+                        <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ path('admin.rent.index') }}">Gérer les locations</a>
+                        </div>
+                    </li>
+                
+                {% endif %}
+
+                {% if is_granted('ROLE_PRO') %}
+
                     <li class="nav-item">
                         <a href="{{ path('professionnel.property.index') }}" class="nav-link">Professionnel</a>
                     </li>

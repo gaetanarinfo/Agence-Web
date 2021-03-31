@@ -132,6 +132,14 @@ class Rent
      */
     private $options;
 
+    public function __construct()
+    {
+        $this->created_at = new \DateTime();
+        $this->updated_at = new \DateTime();
+        $this->options = new ArrayCollection();
+        $this->pictures = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
