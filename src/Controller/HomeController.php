@@ -21,7 +21,7 @@ class HomeController extends AbstractController
     public function index (PropertyRepository $repository, RentRepository $repositoryRent, SessionInterface $session):Response{
 
         $properties = $repository->findLatest();
-        $rent = $repositoryRent->findAll();
+        $rent = $repositoryRent->findLatest();
         return $this->render('pages/home.html.twig', [
             'properties' => $properties,
             'rent' => $rent

@@ -55,7 +55,7 @@ class PropertyController extends AbstractController
 
     /**
      * @Route("/biens/{slug}:{id}", name="property.show") requirements={"slug": [a-z0-9\-]""}
-     * @param Propert $property
+     * @param Property $property
      * @return Response
      */
     public function show(Property $property, string $slug, Request $request, ContactNotification $notification): Response
@@ -84,6 +84,7 @@ class PropertyController extends AbstractController
 
         return $this->render('property/show.html.twig', [
             'property' => $property,
+            'sold' => $property->getSold(),
             'current_menu' => 'properties',
             'form' => $form->createView()
         ]);

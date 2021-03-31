@@ -1,22 +1,23 @@
 <div class="card card-per shadow-sm">
-  {% if rent.picture %}
-    <img src="{{ vich_uploader_asset(rent.picture, 'imageFile') }}" alt="card-img-top" style="width: 100%; height:auto;">
+  {% if rents.picture %}
+    <img src="{{ vich_uploader_asset(rents.picture, 'imageFile') }}" alt="card-img-top" style="width: 100%; height:auto;">
     {% else %}
       <img src="{{ '/images/empty.jpg' }}" alt="card-img-top" style="width: 100%; height:auto;">
   {% endif %}
   <div class="card-body">
     <h5 class="card-title">
-      <a href="{{ path('rent.show', {slug: rent.slug, id: rent.id}) }}">
-        {{ rent.title }}
+      <a href="{{ path('rent.show', {slug: rents.slug, id: rents.id}) }}">
+        {{ rents.title }}
       </a>
     </h5>
-    <p class="card-text">{{ rent.surface }} m² - {{ rent.city }} ({{ rent.postalCode }})</p>
+    <p class="card-text">{{ rents.surface }} m² - {{ rents.city }} ({{ rents.postalCode }})</p>
+    <p>{% if rents.available == 0 %}<i class="fas fa-check text-success"></i> Disponible{% else %}<i class="fas fa-times text-danger"></i> Louer{% endif %}</p>
     <div class="text-success card-foot mb-3">
-      {{ rent.formattedPrice }} €
+      {{ rents.formattedPrice }} €
     </div>
     <div class="d-flex justify-content-between align-items-center mt-2">
       <div class="btn-group">
-        <a href="" class="btn btn-outline-info nav-link text-black text-bold">Voir le bien</a>
+        <a href="{{ path('rent.show', {slug: rents.slug, id: rents.id}) }}" class="btn btn-outline-info nav-link text-black text-bold">Voir le bien</a>
       </div>
     </div>
   </div>

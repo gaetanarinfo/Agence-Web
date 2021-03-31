@@ -2,6 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Contact;
+use App\Entity\Rent;
+use App\Entity\RentSearch;
+use App\Form\ContactType;
+use App\Form\RentSearchType;
+use App\Notification\ContactNotification;
 use App\Repository\RentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -30,11 +36,52 @@ class RentController extends AbstractController
      * @Route("/louer", name="rent.index")
      * @return Responce
     */
-
     public function index(PaginatorInterface $paginator, Request $request): Response
     {
+        $search = new RentSearch();
+        $form = $this->createForm(RentSearchType::class, $search);
+        $form->handleRequest($request);
         return $this->render('rent/index.html.twig', [
-            'current_menu2' => 'rent'
+            'current_menu2' => 'rents',
+            'rent' => $this->repository->paginateAllVisible($search, $request->query->getInt('page', 1)),
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/louer/{slug}:{id}", name="rent.show") requirements={"slug": [a-z0-9\-]""}
+     * @param Rent $rent
+     * @return Response
+     */
+    public function show(Rent $rent, string $slug, Request $request, ContactNotification $notification): Response
+    {
+        if($rent->getSlug() !== $slug){
+            return $this->redirectToRoute('rent.show', [
+                'id' => $rent->getId(),
+                'slug' => $rent->getSlug()
+            ], 301);
+        }
+
+        $contact = new Contact();
+        $contact->setProperty($rent);
+        $form = $this->createForm(ContactType::class, $contact);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $notification->notify($contact);
+            $this->addFlash('success', 'Votre message a bien été envoyé');
+            return $this->redirectToRoute('rent.show', [
+                'id' => $rent->getId(),
+                'slug' => $rent->getSlug()
+            ]);
+        }
+
+        return $this->render('rent/show.html.twig', [
+            'rent' => $rent,
+            'available' => $rent->getAvailable(),
+            'current_menu2' => 'rent',
+            'form' => $form->createView()
         ]);
     }
 

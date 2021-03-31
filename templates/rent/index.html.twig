@@ -1,50 +1,70 @@
 {% extends "base.html.twig" %}
 
-{% block title 'Tous nos biens' %}
+{% block title 'AgenceWeb - Toutes nos locations' %}
 
 {% block body %}
-    <div class="jumbotron">
+
         <div class="container">
-            {{ form_start(form) }}
-            <div class="form-row align-items-end">
-                <div class="col">
+
+        <p class="title-cont">Affiner les résultats : </p>
+
+        <hr class="mb-4" />
+        
+        {{ form_start(form) }}
+        <div style="display: flex; justify-content: center;">
+            <div class="form-row">
+                <div class="col-4">
                     {{ form_row(form.minSurface) }}
                 </div>
-                <div class="col">
+                <div class="col-4">
                     {{ form_row(form.maxPrice) }}
                 </div>
-                <div class="col">
+                <div class="col-4">
                     {{ form_row(form.options) }}
                 </div>
-                <div class="col">
+            </div>
+        </div>
+        <div style="display: flex; justify-content: center;">
+            <div class="form-row">
+                <div class="col-9">
                     {{ form_row(form.address, {'id': 'search_address'}) }}
                 </div>
-                <div class="col">
+                <div class="col-3">
                     {{ form_row(form.distance) }}
                 </div>
                 <div class="col">
-                    <div class="form-group">
-                        <button class="btn btn-primary">Rechercher</button>
+                    <div class="form-group text-center">
+                        <button class="button-submit">Rechercher</button>
                     </div>
                 </div>
             </div>
-            {{ form_end(form) }}
         </div>
-    </div>
+        {{ form_end(form) }}
+
+            <hr/>
+
+        </div>
 
     <div class="container mt-4">  
-        <h1>Voir tous nos biens</h1>
+
+        <p class="title-cont">Voir toutes nos locations</p>
+
+        <hr/>
 
         <div class="row">
             {% for rents in rent %}
-            <div class="col-md-4">
+            <div class="col-md-4 mb-4">
                 {% include 'rent/_rent.html.twig' %}
             </div>
             {% endfor %}
         </div>
 
-        <div class="pagination">
-            {{ knp_pagination_render(rent) }}
+        <hr/>
+
+        <div class="row mt-4">
+            <div class="col-12 col-md-12 col-xl-12" style="display: flex;justify-content: space-around;">
+                {{ knp_pagination_render(rent) }}
+            </div>
         </div>
     </div>    
 {% endblock %}

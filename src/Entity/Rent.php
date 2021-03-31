@@ -2,33 +2,45 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use App\Repository\RentRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Cocur\Slugify\Slugify;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=RentRepository::class)
  */
 class Rent
 {
+    const HEAT = [
+        0 => 'Electrique',
+        1 => 'Gaz'
+    ];
+
     /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
+     * @Assert\Length(min=5, max=255)
      * @ORM\Column(type="string", length=255)
      */
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $content;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Range(min=10, max=400)
      */
     private $surface;
 
@@ -65,12 +77,18 @@ class Rent
     /**
      * @ORM\Column(type="string", length=255)
      */
+    private $address;
+
+    /**
+     * @Assert\Regex("/^[0-9]{5}$/")
+     * @ORM\Column(type="string", length=255)
+     */
     private $postal_code;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default": false})
      */
-    private $sold;
+    private $available = false;
 
     /**
      * @ORM\Column(type="datetime")
@@ -83,19 +101,36 @@ class Rent
     private $updated_at;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var Picture|null
      */
-    private $adress;
+    private $picture;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\OneToMany(targetEntity="App\Entity\PictureRent", mappedBy="rent", orphanRemoval=true, cascade={"persist"})
+     */
+    private $pictures;
+
+    /**
+     * @Assert\All({
+     *   @Assert\Image(mimeTypes="image/jpeg")
+     * })
+     */
+    private $pictureFiles;
+
+    /**
+     * @ORM\Column(type="float", scale=4, precision=6)
      */
     private $lat;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="float", scale=4, precision=7)
      */
     private $lng;
+
+     /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\OptionRent", inversedBy="rent")
+     */
+    private $options;
 
     public function getId(): ?int
     {
@@ -125,6 +160,12 @@ class Rent
 
         return $this;
     }
+
+    public function getSlug(): string
+    {
+        return (new Slugify())->slugify($this->title);
+    }
+
 
     public function getSurface(): ?int
     {
@@ -186,6 +227,11 @@ class Rent
         return $this;
     }
 
+    public function getFormattedPrice(): string
+    {
+        return number_format($this->price, 0, '', ' ');
+    }
+
     public function getHeat(): ?int
     {
         return $this->heat;
@@ -196,6 +242,11 @@ class Rent
         $this->heat = $heat;
 
         return $this;
+    }
+
+    public function getHeatType(): string
+    {
+        return self::HEAT[$this->heat];
     }
 
     public function getCity(): ?string
@@ -222,14 +273,14 @@ class Rent
         return $this;
     }
 
-    public function getSold(): ?bool
+    public function getAvailable(): ?bool
     {
-        return $this->sold;
+        return $this->available;
     }
 
-    public function setSold(bool $sold): self
+    public function setAvailable(bool $available): self
     {
-        $this->sold = $sold;
+        $this->available = $available;
 
         return $this;
     }
@@ -258,14 +309,79 @@ class Rent
         return $this;
     }
 
-    public function getAdress(): ?string
+    /**
+     * @return Collection|PictureRent[]
+     */
+    public function getPictures(): Collection
     {
-        return $this->adress;
+        return $this->pictures;
     }
 
-    public function setAdress(string $adress): self
+    public function getPicture(): ?PictureRent
     {
-        $this->adress = $adress;
+        return $this->picture;
+    }
+
+    public function setPicture(PictureRent $picture): self
+    {
+        $this->picture = $picture;
+        return $this;
+    }
+
+    public function addPicture(PictureRent $picture): self
+    {
+        if (!$this->pictures->contains($picture)) {
+            $this->pictures[] = $picture;
+            $picture->setRent($this);
+        }
+
+        return $this;
+    }
+
+    public function removePicture(PictureRent $picture): self
+    {
+        if ($this->pictures->contains($picture)) {
+            $this->pictures->removeElement($picture);
+            // set the owning side to null (unless already changed)
+            if ($picture->getRent() === $this) {
+                $picture->setRent(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPictureFiles()
+    {
+        return $this->pictureFiles;
+    }
+
+    /**
+     * @param mixed $pictureFiles
+     * @return Rent
+     */
+    public function setPictureFiles($pictureFiles): self
+    {
+        foreach($pictureFiles as $pictureFile) {
+            $picture = new PictureRent();
+            $picture->setImageFile($pictureFile);
+            $this->addPicture($picture);
+        }
+        $this->pictureFiles = $pictureFiles;
+        return $this;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(string $address): self
+    {
+        $this->address = $address;
 
         return $this;
     }
@@ -290,6 +406,34 @@ class Rent
     public function setLng(int $lng): self
     {
         $this->lng = $lng;
+
+        return $this;
+    }
+
+        /**
+     * @return Collection|OptionRent[]
+     */
+    public function getOptions(): Collection
+    {
+        return $this->options;
+    }
+
+    public function addOption(OptionRent $option): self
+    {
+        if (!$this->options->contains($option)) {
+            $this->options[] = $option;
+            $option->addRent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOption(OptionRent $option): self
+    {
+        if ($this->options->contains($option)) {
+            $this->options->removeElement($option);
+            $option->removeRent($this);
+        }
 
         return $this;
     }
