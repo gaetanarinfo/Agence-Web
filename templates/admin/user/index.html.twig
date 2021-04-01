@@ -1,0 +1,70 @@
+{% extends "base.html.twig" %}
+
+{% block title 'Gérer les utilisateurs' %}
+
+{% block body %}
+
+    <div class="container mt-4 mb-4 w-50">
+
+        <p class="title-cont">Gérer les utilisateurs</p>
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nom d'utilisateur</th>
+                    <th>Adresse email</th>
+                    <th>Status</th>
+                    <th>Roles</th>
+                    <th>Action</th>
+                </tr>    
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <td style="vertical-align: middle;">{{ user.username }}</td>
+                    <td style="vertical-align: middle;">{{ user.email }}</td>
+                    <td style="vertical-align: middle;">{% if user.isBanned == 0 %}<i class="fas fa-check text-success"></i> Actif{% else %}<i class="fas fa-times text-danger"></i> Bannis{% endif %}</td>
+                    <td style="vertical-align: middle;">
+                        {# On boucle sur les rôles #}
+                        {% for role in user.roles %}
+                            {% if role == "ROLE_USER" %}
+                                Utilisateur
+                            {% elseif role == "ROLE_EDITOR" %}
+                                Editeur
+                            {% elseif role == "ROLE_ADMIN" %}
+                                Administrateur
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td style="vertical-align: middle;">
+                        <a href="{{ path('admin.user.edit', {id: user.id}) }}" class="btn btn-primary"><i class="fas fa-user-edit"></i></a>
+                        {% if user.isBanned == 0 %}<a href="{{ path('admin.user.bannir', {id: user.id}) }}" class="btn btn-secondary"><i class="fas fa-ban"></i></a>{% else %}<a href="{{ path('admin.user.unbannir', {id: user.id}) }}" class="btn btn-secondary"><i class="fas fa-user-plus"></i></a>{% endif %}
+                        <form method="post" action="{{ path('admin.user.delete', {id: user.id}) }}" style="display: inline-block;">
+                            <input type="hidden" name="_method" value="DELETE" />
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}" />
+                            <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="row mt-4">
+            <div class="col-12 col-md-12 col-xl-12" style="display: flex;justify-content: space-around;">
+                {{ knp_pagination_render(users) }}
+            </div>
+        </div>
+
+        <div class="text-right">
+            <a href='{{ path('admin.user.new') }}' class="btn btn-primary">Crée un utilisateur</a>
+        </div>
+
+    </div>
+{% endblock %}

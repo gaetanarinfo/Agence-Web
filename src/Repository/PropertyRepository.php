@@ -80,6 +80,25 @@ class PropertyRepository extends ServiceEntityRepository
     }
 
     /**
+     * @return PaginationInterface
+     */
+    public function paginateAllVisible2(int $page): PaginationInterface
+    {
+        $query = $this->findVisibleQuery();
+
+        $properties = $this->paginator->paginate(
+            $query->getQuery(),
+            $page,
+            12
+        );
+
+
+        $this->hydratePicture($properties);
+
+        return $properties;
+    }
+
+    /**
      * @return Property[]
      */
     public function findLatest(): array

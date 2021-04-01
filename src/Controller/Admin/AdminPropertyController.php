@@ -8,6 +8,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Form\PropertyType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Knp\Component\Pager\PaginatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class AdminPropertyController extends AbstractController
 {
@@ -25,17 +27,21 @@ class AdminPropertyController extends AbstractController
     }
 
     /**
-     * @Route("/admin/property", name="admin.property.index")
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/admin/biens", name="admin.property.index")
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index()
+    public function index(PaginatorInterface $paginator, Request $request)
     {
         $properties = $this->repository->findAll();
-        return $this->render('admin/property/index.html.twig', compact('properties'));
+        return $this->render('admin/property/index.html.twig', [
+            'properties' => $this->repository->paginateAllVisible2($request->query->getInt('page', 1)),
+        ]);
     }
 
     /**
-     * @Route("/admin/property/create", name="admin.property.new")
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/admin/biens/create", name="admin.property.new")
      */
     public function new(Request $request)
     {
@@ -58,7 +64,8 @@ class AdminPropertyController extends AbstractController
     }
 
     /**
-     * @Route("/admin/property/{id}", name="admin.property.edit", methods="GET|POST")
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/admin/biens/{id}", name="admin.property.edit", methods="GET|POST")
      * @param Property $property
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
@@ -82,7 +89,8 @@ class AdminPropertyController extends AbstractController
     }
 
     /**
-     * @Route("/admin/property/{id}", name="admin.property.delete", methods="DELETE")
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/admin/biens/{id}", name="admin.property.delete", methods="DELETE")
      */
     public function delete(Property $property, Request $request)
     {

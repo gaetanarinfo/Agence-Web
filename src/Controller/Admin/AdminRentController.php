@@ -7,7 +7,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Form\RentType;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class AdminRentController extends AbstractController
 {
@@ -25,17 +27,21 @@ class AdminRentController extends AbstractController
     }
 
     /**
-     * @Route("/admin/rent", name="admin.rent.index")
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/admin/louer", name="admin.rent.index")
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index()
+    public function index(PaginatorInterface $paginator, Request $request)
     {
         $rents = $this->repository->findAll();
-        return $this->render('admin/rent/index.html.twig', compact('rents'));
+        return $this->render('admin/rent/index.html.twig', [
+            'rents' => $this->repository->paginateAllVisible2($request->query->getInt('page', 1)),
+        ]);
     }
 
     /**
-     * @Route("/admin/rent/create", name="admin.rent.new")
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/admin/louer/create", name="admin.rent.new")
      */
     public function new(Request $request)
     {
@@ -58,7 +64,8 @@ class AdminRentController extends AbstractController
     }
 
     /**
-     * @Route("/admin/rent/{id}", name="admin.rent.edit", methods="GET|POST")
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/admin/louer/{id}", name="admin.rent.edit", methods="GET|POST")
      * @param Rent $rent
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
@@ -82,7 +89,8 @@ class AdminRentController extends AbstractController
     }
 
     /**
-     * @Route("/admin/rent/{id}", name="admin.rent.delete", methods="DELETE")
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/admin/louer/{id}", name="admin.rent.delete", methods="DELETE")
      */
     public function delete(Rent $rent, Request $request)
     {

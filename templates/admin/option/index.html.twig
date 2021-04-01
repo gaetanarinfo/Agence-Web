@@ -24,8 +24,8 @@
             <tbody>
             {% for option in options %}
                 <tr>
-                    <td>{{ option.name }}</td>
-                    <td>
+                    <td style="vertical-align: middle;">{{ option.name }}</td>
+                    <td style="vertical-align: middle;">
                         <a href="{{ path('admin.option.edit', {id: option.id}) }}" class="btn btn-secondary">Editer</a>
                         <form method="post" action="{{ path('admin.option.delete', {id: option.id}) }}" style="display: inline-block;">
                             <input type="hidden" name="_method" value="DELETE" />

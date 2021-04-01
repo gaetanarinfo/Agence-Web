@@ -9,13 +9,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
+* @IsGranted("ROLE_ADMIN")
  * @Route("/admin/option")
  */
 class AdminOptionController extends AbstractController
 {
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/", name="admin.option.index", methods={"GET"})
      */
     public function index(OptionRepository $optionRepository): Response
@@ -26,6 +29,7 @@ class AdminOptionController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/new", name="admin.option.new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
@@ -49,6 +53,7 @@ class AdminOptionController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/{id}/edit", name="admin.option.edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Option $option): Response
@@ -69,6 +74,7 @@ class AdminOptionController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/{id}", name="admin.option.delete", methods={"POST"})
      */
     public function delete(Request $request, Option $option): Response

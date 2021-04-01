@@ -25,7 +25,7 @@ class ProfessionnelPropertyController extends AbstractController
     }
 
     /**
-     * @Route("/professionnel", name="professionnel.property.index")
+     * @Route("/professionnel/biens", name="professionnel.property.index")
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function index()

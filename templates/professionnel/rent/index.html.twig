@@ -4,9 +4,9 @@
 
 {% block body %}
 
-    <div class="container mt-4 mb-4 w-50">
+    <div class="container mt-4">
 
-        <p class="title-cont">Gérer les locations</p>
+        <h1>Gérer les locations</h1>
 
         {% for message in app.flashes('success') %}
             <div class="alert alert-success">
@@ -18,36 +18,28 @@
             <thead>
                 <tr>
                     <th>Titre</th>
-                    <th>Disponibilité</th>
                     <th>Action</th>
                 </tr>    
             </thead>
             <tbody>
             {% for rent in rents %}
                 <tr>
-                    <td style="vertical-align: middle;">{{ rent.title }}</td>
-                    <td style="vertical-align: middle;">{% if rent.available == 0 %}<i class="fas fa-check text-success"></i> Disponible{% else %}<i class="fas fa-times text-danger"></i> Louer{% endif %}</td>
-                    <td style="vertical-align: middle;">
+                    <td>{{ rent.title }}</td>
+                    <td>
                         <a href="{{ path('admin.rent.edit', {id: rent.id}) }}" class="btn btn-secondary">Editer</a>
                         <form method="post" action="{{ path('admin.rent.delete', {id: rent.id}) }}" style="display: inline-block;">
                             <input type="hidden" name="_method" value="DELETE" />
                             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ rent.id) }}" />
                             <button class="btn btn-danger">Supprimer</button>
                         </form>
-                    </td style="vertical-align: middle;">
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
 
-        <div class="row mt-4">
-            <div class="col-12 col-md-12 col-xl-12" style="display: flex;justify-content: space-around;">
-                {{ knp_pagination_render(rents) }}
-            </div>
-        </div>
-
         <div class="text-right">
-            <a href='{{ path('admin.rent.new') }}' class="btn btn-primary">Crée une locations</a>
+            <a href='{{ path('admin.rent.new') }}' class="btn btn-primary">Crée un nouveau bien</a>
         </div>
 
     </div>

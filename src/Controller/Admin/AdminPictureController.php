@@ -6,13 +6,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
+ * @IsGranted("ROLE_ADMIN")
  * @Route("/admin/picture")
  */
 class AdminPictureController extends AbstractController {
 
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/{id}", name="admin.picture.delete", methods="DELETE")
      */
     public function delete(Picture $picture, Request $request) {

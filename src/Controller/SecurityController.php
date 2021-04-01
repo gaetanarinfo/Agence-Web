@@ -16,6 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class SecurityController extends AbstractController
 {
@@ -32,6 +33,7 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("/login", name="login")
+     * @Security("not is_granted('ROLE_USER')")
      */
     public function login(AuthenticationUtils $authentificationUtils)
     {
@@ -45,7 +47,8 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("/register", name="register")
-    * @var UserPasswordEncoderInterface
+     * @Security("not is_granted('ROLE_USER')")
+     * @var UserPasswordEncoderInterface
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, RegisterNotification $register, SessionInterface $session)
     {
@@ -83,6 +86,7 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("/registerValidate/{token}", name="security.registerValidate")
+     * @Security("not is_granted('ROLE_USER')")
      * @param User $user
      */
     public function registerValidate(User $user, string $token)
@@ -99,6 +103,7 @@ class SecurityController extends AbstractController
     }
 
     /**
+     * @Security("not is_granted('ROLE_USER')")
      * @Route("/password_recover", name="password_recover")
      */
     public function passwordRecover(Request $request, RecoverNotification $recover, SessionInterface $session)
@@ -131,6 +136,7 @@ class SecurityController extends AbstractController
     }
 
     /**
+     * @Security("not is_granted('ROLE_USER')")
      * @Route("/recoverValidate/{token}", name="security.recoverValidate", methods={"GET"})
      * @param User $user
      * @return Response
@@ -145,7 +151,8 @@ class SecurityController extends AbstractController
         return $this->redirectToRoute('hom');
     }
 
-        /**
+    /**
+     * @Security("not is_granted('ROLE_USER')")
      * @Route("/passwordNew", name="passwordNew")
     * @var UserPasswordEncoderInterface
      */
