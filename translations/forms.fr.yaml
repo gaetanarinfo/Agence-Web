@@ -20,6 +20,7 @@ Title: Titre
 Firstname: Prénom
 Lastname: Nom
 Phone: Téléphone
+Mobile phone: Téléphone mobile
 Email: Adresse email
 Content: Message
 Picture files: Image du bien
@@ -28,7 +29,6 @@ Password: Mot de passe
 Repeat Password: Répéter le mot de passe
 Agree terms: J'accepte les termes et conditions du site internet.
 Name: Nom
-Is banned: Compte bannis
 Is active: Compte actif
 Gender: Sexe
 Yes: Oui
@@ -38,4 +38,10 @@ Female: Femme
 Admin: Administrateur
 Users: Utilisateur
 Pro: Professionnel
-Roles: Rôle utilisateur
+Roles: Rôle Utilisateur
+Rôles: Rôle Utilisateur
+Country: Pays
+Link: Site internet
+Twitter:  Compte twitter
+Instagram: Compte instagram
+Facebook: Compte facebook

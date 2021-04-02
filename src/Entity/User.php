@@ -3,9 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use phpDocumentor\Reflection\Types\Boolean;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
@@ -15,10 +17,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  */
 class User implements UserInterface,\Serializable
 {
-    const BANNED = [
-        0 => 'No',
-        1 => 'Yes'
-    ];
 
     const ACTIVE = [
         0 => 'No',
@@ -65,11 +63,6 @@ class User implements UserInterface,\Serializable
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isBanned;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
     private $isActive;
 
     /**
@@ -78,7 +71,7 @@ class User implements UserInterface,\Serializable
     private $token;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $lastname;
 
@@ -88,7 +81,7 @@ class User implements UserInterface,\Serializable
     private $firstname;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $gender;
 
@@ -98,7 +91,7 @@ class User implements UserInterface,\Serializable
     private $address;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $postalCode;
 
@@ -107,11 +100,62 @@ class User implements UserInterface,\Serializable
      */
     private $city;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $country;
+
+    /**
+     * @ORM\Column(type="integer", length=10, nullable=true)
+     */
+    private $phone;
+
+    /**
+     * @ORM\Column(type="integer", length=10, nullable=true)
+     */
+    private $mobile;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $link;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $twitter;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $instagram;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $facebook;
+
+    /**
+     * @var Picture|null
+     */
+    private $picture;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Avatar", mappedBy="user", orphanRemoval=true, cascade={"persist"})
+     */
+    private $pictures;
+
+    /**
+     * @Assert\All({
+     *   @Assert\Image(mimeTypes="image/jpeg")
+     * })
+     */
+    private $pictureFiles;
+
     public function __construct()
     {
         $this->createDate = new \DateTime();
         $this->roles = array('ROLE_USER');
-        $this->isBanned = 0;
         $this->isActive = 0;
         $this->token = "";
     }
@@ -182,7 +226,6 @@ class User implements UserInterface,\Serializable
             $this->password,
             $this->roles,
             $this->createDate,
-            $this->isBanned,
             $this->isActive,
             $this->token,
             $this->lastname,
@@ -190,7 +233,14 @@ class User implements UserInterface,\Serializable
             $this->gender,
             $this->postalCode,
             $this->city,
-            $this->address
+            $this->address,
+            $this->country,
+            $this->phone,
+            $this->mobile,
+            $this->link,
+            $this->twitter,
+            $this->instagram,
+            $this->facebook
         ]);
     }
 
@@ -203,7 +253,6 @@ class User implements UserInterface,\Serializable
             $this->password,
             $this->roles,
             $this->createDate,
-            $this->isBanned,
             $this->isActive,
             $this->token,
             $this->lastname,
@@ -211,7 +260,14 @@ class User implements UserInterface,\Serializable
             $this->gender,
             $this->postalCode,
             $this->city,
-            $this->address
+            $this->address,
+            $this->country,
+            $this->phone,
+            $this->mobile,
+            $this->link,
+            $this->twitter,
+            $this->instagram,
+            $this->facebook
         ) = unserialize($serialized, ['allowed_classes' => false]);
     }
 
@@ -235,18 +291,6 @@ class User implements UserInterface,\Serializable
     public function setCreateDate(\DateTimeInterface $createDate): self
     {
         $this->createDate = $createDate;
-
-        return $this;
-    }
-
-    public function getIsBanned(): ?bool
-    {
-        return $this->isBanned;
-    }
-
-    public function setIsBanned(bool $isBanned): self
-    {
-        $this->isBanned = $isBanned;
 
         return $this;
     }
@@ -344,6 +388,156 @@ class User implements UserInterface,\Serializable
     {
         $this->city = $city;
 
+        return $this;
+    }
+
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(string $country): self
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    public function getPhone(): ?int
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(int $phone): self
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    public function getMobile(): ?int
+    {
+        return $this->mobile;
+    }
+
+    public function setMobile(int $mobile): self
+    {
+        $this->mobile = $mobile;
+
+        return $this;
+    }
+
+    public function getLink(): ?string
+    {
+        return $this->link;
+    }
+
+    public function setLink(?string $link): self
+    {
+        $this->link = $link;
+
+        return $this;
+    }
+
+    public function getTwitter(): ?string
+    {
+        return $this->twitter;
+    }
+
+    public function setTwitter(?string $twitter): self
+    {
+        $this->twitter = $twitter;
+
+        return $this;
+    }
+
+    public function getInstagram(): ?string
+    {
+        return $this->instagram;
+    }
+
+    public function setInstagram(?string $instagram): self
+    {
+        $this->instagram = $instagram;
+
+        return $this;
+    }
+
+    public function getFacebook(): ?string
+    {
+        return $this->facebook;
+    }
+
+    public function setFacebook(?string $facebook): self
+    {
+        $this->facebook = $facebook;
+
+        return $this;
+    }
+
+
+    /**
+     * @return Collection|Avatar[]
+     */
+    public function getPictures(): Collection
+    {
+        return $this->pictures;
+    }
+
+    public function getPicture(): ?Avatar
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(Avatar $picture): self
+    {
+        $this->picture = $picture;
+        return $this;
+    }
+
+    public function addPicture(Avatar $picture): self
+    {
+        if (!$this->pictures->contains($picture)) {
+            $this->pictures[] = $picture;
+            $picture->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePicture(Avatar $picture): self
+    {
+        if ($this->pictures->contains($picture)) {
+            $this->pictures->removeElement($picture);
+            // set the owning side to null (unless already changed)
+            if ($picture->getUser() === $this) {
+                $picture->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPictureFiles()
+    {
+        return $this->pictureFiles;
+    }
+
+    /**
+     * @param mixed $pictureFiles
+     * @return User
+     */
+    public function setPictureFiles($pictureFiles): self
+    {
+        foreach($pictureFiles as $pictureFile) {
+            $picture = new Avatar();
+            $picture->setImageFile($pictureFile);
+            $this->addPicture($picture);
+        }
+        $this->pictureFiles = $pictureFiles;
         return $this;
     }
 }

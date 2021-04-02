@@ -35,7 +35,7 @@ class SecurityController extends AbstractController
      * @Route("/login", name="login")
      * @Security("not is_granted('ROLE_USER')")
      */
-    public function login(AuthenticationUtils $authentificationUtils)
+    public function login(AuthenticationUtils $authentificationUtils, SessionInterface $session)
     {
         $error = $authentificationUtils->getLastAuthenticationError();
         $lastUsername = $authentificationUtils->getLastUsername();

@@ -6,6 +6,7 @@ use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Form\UserType;
+use App\Form\UserType2;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -47,7 +48,7 @@ class AdminUserController extends AbstractController
     public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
         $user = new User();
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserType2::class, $user);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid())
@@ -68,7 +69,7 @@ class AdminUserController extends AbstractController
 
     /**
      * @IsGranted("ROLE_ADMIN")
-     * @Route("/admin/utilisateur/{id}", name="admin.user.edit", methods="GET|POST")
+     * @Route("/admin/utilisateur/{id}", name="admin.user.edit", methods="GET|POST", requirements={"id":"\d+"})
      * @param User $user
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
@@ -103,36 +104,6 @@ class AdminUserController extends AbstractController
             $this->em->flush();
             $this->addFlash('success', 'Utilisateur supprimé avec succès');
         } 
-        return $this->redirectToRoute('admin.user.index');
-    }
-
-    /**
-     * @IsGranted("ROLE_ADMIN")
-     * @Route("/admin/utilisateur/bannir/{id}", name="admin.user.bannir", methods="GET|POST")
-     * @param User $user
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function ban(User $user, Request $request)
-    {
-        $user->setIsBanned(1);
-        $this->em->flush();
-        $this->addFlash('success', 'Utilisaeur bannis avec succès');
-        return $this->redirectToRoute('admin.user.index');
-    }
-
-    /**
-     * @IsGranted("ROLE_ADMIN")
-     * @Route("/admin/utilisateur/debannir/{id}", name="admin.user.unbannir", methods="GET|POST")
-     * @param User $user
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function removeban(User $user, Request $request)
-    {
-        $user->setIsBanned(0);
-        $this->em->flush();
-        $this->addFlash('success', 'Utilisaeur débannis avec succès');
         return $this->redirectToRoute('admin.user.index');
     }
 
