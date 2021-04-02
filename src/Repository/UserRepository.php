@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\User;
+use App\Entity\Avatar;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
@@ -36,13 +37,13 @@ class UserRepository extends ServiceEntityRepository
     {
         $query = $this->findVisibleQuery();
 
-        $properties = $this->paginator->paginate(
+        $users = $this->paginator->paginate(
             $query->getQuery(),
             $page,
             12
         );
-
-        return $properties;
+        
+        return $users;
     }
 
     private function findVisibleQuery(): QueryBuilder
@@ -50,4 +51,5 @@ class UserRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('p')
             ->where('p.username = false');
     }
+
 }

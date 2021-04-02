@@ -48,6 +48,11 @@ class UserType2 extends AbstractType
                 'multiple' => true,
                 'label' => 'Rôles' 
             ])
+            ->add('avatar', FileType::class,[
+                'multiple' => false,
+                'mapped' => false,
+                'required' => false
+            ])
         ;
     }
 

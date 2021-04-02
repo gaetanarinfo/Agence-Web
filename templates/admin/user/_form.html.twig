@@ -6,10 +6,12 @@
 			<div class="col-md-5">{{ form_row(form.email) }}</div>
 			<div class="col-md-3">{{ form_row(form.isActive) }}</div>
 			<div class="col-md-3">{{ form_row(form.gender) }}</div>
+
 		</div>
 		<div class="row" style="justify-content: center;">	
 			<div class="col-md-5">{{ form_row(form.lastname) }}</div>
 			<div class="col-md-5">{{ form_row(form.firstname) }}</div>
+			<div class="col-md-5">{{ form_row(form.pictureFiles) }}</div>
 		</div>
 		<div class="row" style="justify-content: center;">	
 			<div class="col-md-5">{{ form_row(form.address) }}</div>
@@ -33,6 +35,21 @@
 		
 	</div>
 
+	<div class="row mb-4">
+		<div class="col-md-12">
+			<div class="row" style="justify-content: center;">
+				{% for picture in user.pictures %}
+					<div class="" style="margin: 0 auto;">
+						<img class="img-thumbnail" src="{{ vich_uploader_asset(picture, 'imageFile') }}" width="150" alt="" style="position: relative;display: flex;margin: 0 auto;justify-content: space-around;">
+						<div style="position: relative;display: flex;margin: 0 auto;justify-content: space-around;">
+							<a href="{{ path('admin.user.deleteImage', {id: picture.id})}}" class="btn btn-danger mt-2">Supprimer</a>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>	
+
 	{{ form_rest(form) }}
 	<div class="row mb-4">
 		<div class="m-auto">
@@ -42,4 +59,5 @@
 		</div>
 	</div>	
 	{{ form_end(form) }}
+
 </div>

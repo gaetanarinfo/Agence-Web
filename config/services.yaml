@@ -33,10 +33,13 @@ services:
     App\Listener\ImageCacheSubscriber: 
         tags: 
         - { name: doctrine_event_subscriber }
-    App\Listener\ImageCacheSubscriber2: 
+    App\Listener\ImageCacheSubscriberRent: 
         tags: 
         - { name: doctrine_event_subscriber2 }    
-
+    App\Listener\ImageCacheSubscriberUser: 
+        tags: 
+        - { name: doctrine_event_subscriber3 }        
+        
     Twig\CacheExtension\CacheStrategyInterface:
         class: Twig\CacheExtension\CacheStrategy\LifetimeCacheStrategy
 

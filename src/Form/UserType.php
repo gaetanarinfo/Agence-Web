@@ -47,6 +47,10 @@ class UserType extends AbstractType
                 'multiple' => true,
                 'label' => 'Rôles' 
             ])
+            ->add('pictureFiles', FileType::class,[
+                'multiple' => false,
+                'required' => false
+            ])
         ;
     }
 

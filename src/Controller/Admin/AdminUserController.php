@@ -2,6 +2,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use App\Entity\Avatar;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -82,7 +83,7 @@ class AdminUserController extends AbstractController
         if($form->isSubmitted() && $form->isValid())
         {
             $this->em->flush();
-            $this->addFlash('success', 'Utilisaeur modifié avec succès');
+            $this->addFlash('success', 'Utilisateur modifié avec succès');
             return $this->redirectToRoute('admin.user.index');
         }
 
@@ -104,6 +105,18 @@ class AdminUserController extends AbstractController
             $this->em->flush();
             $this->addFlash('success', 'Utilisateur supprimé avec succès');
         } 
+        return $this->redirectToRoute('admin.user.index');
+    }
+
+    /**
+    * @Route("/admin/utilisateur/image/{id}", name="admin.user.deleteImage")
+    */
+    public function deleteImage(Avatar $picture, Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($picture);
+        $em->flush();
+        $this->addFlash('success', 'Avatar supprimé avec succès');
         return $this->redirectToRoute('admin.user.index');
     }
 

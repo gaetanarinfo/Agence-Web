@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use phpDocumentor\Reflection\Types\Boolean;
@@ -136,7 +137,7 @@ class User implements UserInterface,\Serializable
     private $facebook;
 
     /**
-     * @var Picture|null
+     * @var Avatar|null
      */
     private $picture;
 
@@ -147,18 +148,26 @@ class User implements UserInterface,\Serializable
 
     /**
      * @Assert\All({
-     *   @Assert\Image(mimeTypes="image/jpeg")
+     *   @Assert\Image(mimeTypes="image/*")
      * })
      */
     private $pictureFiles;
 
-    public function __construct()
-    {
-        $this->createDate = new \DateTime();
-        $this->roles = array('ROLE_USER');
-        $this->isActive = 0;
-        $this->token = "";
-    }
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $updated_at;
+
+
+     public function __construct()
+     {
+         $this->createDate = new \DateTime();
+         $this->roles = array('ROLE_USER');
+         $this->isActive = 0;
+         $this->token = "";
+         $this->updated_at = new \DateTime();
+         $this->pictures = new ArrayCollection();
+     }
 
     public function getId(): ?int
     {
@@ -475,6 +484,17 @@ class User implements UserInterface,\Serializable
         return $this;
     }
 
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updated_at): self
+    {
+        $this->updated_at = $updated_at;
+
+        return $this;
+    }
 
     /**
      * @return Collection|Avatar[]
@@ -532,12 +552,9 @@ class User implements UserInterface,\Serializable
      */
     public function setPictureFiles($pictureFiles): self
     {
-        foreach($pictureFiles as $pictureFile) {
-            $picture = new Avatar();
-            $picture->setImageFile($pictureFile);
-            $this->addPicture($picture);
-        }
-        $this->pictureFiles = $pictureFiles;
+        $picture = new Avatar();
+        $picture->setImageFile($pictureFiles);
+        $this->addPicture($picture);
         return $this;
     }
 }

@@ -23,7 +23,7 @@ class Avatar
     /**
      * @var File|null
      * @Assert\Image(
-     *     mimeTypes="image/jpeg"
+     *     mimeTypes="image/*"
      * )
      * @Vich\UploadableField(mapping="user_image", fileNameProperty="filename")
      */

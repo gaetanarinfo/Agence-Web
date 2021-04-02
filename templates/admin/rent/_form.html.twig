@@ -51,7 +51,7 @@
 					<div class="" style="width: 300px; margin: 5px;">
 						<img class="img-thumbnail" src="{{ vich_uploader_asset(picture, 'imageFile') }}" width="100%" alt="">
 						<div style="position: relative;display: flex;margin: 0 auto;justify-content: space-around;">
-							<a href="{{ path('admin.picture.delete', {id: picture.id}) }}" class="btn btn-danger mt-2" data-delete data-token="{{ csrf_token('delete' ~ picture.id) }}">Supprimer</a>
+							<a href="{{ path('admin.picture2.delete', {id: picture.id}) }}" class="btn btn-danger mt-2" data-delete data-token="{{ csrf_token('delete' ~ picture.id) }}">Supprimer</a>
 						</div>
 					</div>
 				{% endfor %}

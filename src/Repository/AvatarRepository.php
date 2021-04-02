@@ -13,7 +13,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Avatar|null findOneBy(array $criteria, array $orderBy = null)
  * @method Avatar[]    findAll()
  * @method Avatar[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- * @method Avatar|null findForRent(array $rent)
+ * @method Avatar|null findForProperties(array $properties)
  */
 class AvatarRepository extends ServiceEntityRepository
 {
@@ -23,10 +23,10 @@ class AvatarRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param User[] $user
+     * @param User[] $users
      * @return ArrayCollection
      */
-    public function findForUser(array $user): ArrayCollection
+    public function findForUser(array $users): ArrayCollection
     {
         $qb = $this->createQueryBuilder('p');
         $pictures = $qb
@@ -36,13 +36,13 @@ class AvatarRepository extends ServiceEntityRepository
                     'p.id',
                     $this->createQueryBuilder('p2')
                         ->select('MIN(p2.id)')
-                        ->where('p2.user IN (:user)')
+                        ->where('p2.user IN (:users)')
                         ->groupBy('p2.user')
                         ->getDQL()
                 )
             )
             ->getQuery()
-            ->setParameter('user', $user)
+            ->setParameter('users', $users)
             ->getResult();
         $pictures = array_reduce($pictures, function (array $acc, Avatar $picture) {
             $acc[$picture->getUser()->getId()] = $picture;
