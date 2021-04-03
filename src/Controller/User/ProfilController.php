@@ -48,11 +48,19 @@ class ProfilController extends AbstractController
         $form = $this->createForm(UserType3::class, $user);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid())
+        if($form->isSubmitted())
         {
-            $this->em->flush();
-            $this->addFlash('success', 'Profil modifié avec succès');
-            return $this->redirectToRoute('profil');
+            if($form->isValid()) 
+            {
+
+                $this->em->flush();
+                $this->addFlash('success', 'Profil modifié avec succès.');
+                return $this->redirectToRoute('profil');
+
+            }else{
+                return $this->redirectToRoute('profil');
+                $this->addFlash('error', 'Une erreur est survenue.');
+            }
         }
 
         return $this->render('user/edit.html.twig', [

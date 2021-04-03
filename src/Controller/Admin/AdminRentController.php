@@ -49,12 +49,17 @@ class AdminRentController extends AbstractController
         $form = $this->createForm(RentType::class, $rent);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid())
+        if($form->isSubmitted())
         {
-            $this->em->persist($rent);
-            $this->em->flush();
-            $this->addFlash('success', 'Location crée avec succès');
-            return $this->redirectToRoute('admin.rent.index');
+            if($form->isValid()) {
+                $this->em->persist($rent);
+                $this->em->flush();
+                $this->addFlash('success', 'Location crée avec succès');
+                return $this->redirectToRoute('admin.rent.index');
+            }else{
+                $this->addFlash('error', 'Une erreur est survenue');
+                return $this->redirectToRoute('admin.rent.index');
+            }
         }
 
         return $this->render('admin/rent/new.html.twig', [
@@ -75,11 +80,16 @@ class AdminRentController extends AbstractController
         $form = $this->createForm(RentType::class, $rent);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid())
+        if($form->isSubmitted())
         {
-            $this->em->flush();
-            $this->addFlash('success', 'Location modifié avec succès');
-            return $this->redirectToRoute('admin.rent.index');
+            if($form->isValid()){
+                $this->em->flush();
+                $this->addFlash('success', 'Location modifié avec succès');
+                return $this->redirectToRoute('admin.rent.index');
+            }else{
+                $this->addFlash('error', 'Une erreur est survenue');
+                return $this->redirectToRoute('admin.rent.index');
+            }
         }
 
         return $this->render('admin/rent/edit.html.twig', [
@@ -99,9 +109,13 @@ class AdminRentController extends AbstractController
             $this->em->remove($rent);
             $this->em->flush();
             $this->addFlash('success', 'Location supprimé avec succès');
-        } 
-        return $this->redirectToRoute('admin.rent.index');
+            return $this->redirectToRoute('admin.rent.index');
+        }else{
+            $this->addFlash('error', 'Une erreur est survenue');
+            return $this->redirectToRoute('admin.rent.index');
+        }
     }
+       
 }
 
 ?>

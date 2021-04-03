@@ -32,8 +32,8 @@
                 <tr>
                     <td style="vertical-align: middle;">{{ option.name }}</td>
                     <td style="vertical-align: middle;">
-                        <a href="{{ path('admin.option.edit', {id: option.id}) }}" class="btn btn-secondary">Editer</a>
-                        <form method="post" action="{{ path('admin.option.delete', {id: option.id}) }}" style="display: inline-block;">
+                        <a href="{{ path('admin.option2.edit', {id: option.id}) }}" class="btn btn-secondary">Editer</a>
+                        <form method="post" action="{{ path('admin.option2.delete', {id: option.id}) }}" style="display: inline-block;">
                             <input type="hidden" name="_method" value="DELETE" />
                             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ option.id) }}" />
                             <button class="btn btn-danger">Supprimer</button>
@@ -45,7 +45,7 @@
         </table>
 
         <div class="text-right">
-            <a href='{{ path('admin.option.new') }}' class="btn btn-primary">Crée une option</a>
+            <a href='{{ path('admin.option2.new') }}' class="btn btn-primary">Crée une option</a>
         </div>
 
     </div>

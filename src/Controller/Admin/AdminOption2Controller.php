@@ -2,9 +2,9 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Option;
-use App\Form\OptionType;
-use App\Repository\OptionRepository;
+use App\Entity\OptionRent;
+use App\Form\OptionType2;
+use App\Repository\OptionRentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,29 +13,29 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
 * @IsGranted("ROLE_ADMIN")
- * @Route("/admin/option")
+ * @Route("/admin/option2")
  */
-class AdminOptionController extends AbstractController
+class AdminOption2Controller extends AbstractController
 {
     /**
      * @IsGranted("ROLE_ADMIN")
-     * @Route("/", name="admin.option.index", methods={"GET"})
+     * @Route("/", name="admin.option2.index", methods={"GET"})
      */
-    public function index(OptionRepository $optionRepository): Response
+    public function index(OptionRentRepository $optionRepository): Response
     {
-        return $this->render('admin/option/index.html.twig', [
+        return $this->render('admin/option2/index.html.twig', [
             'options' => $optionRepository->findAll(),
         ]);
     }
 
     /**
      * @IsGranted("ROLE_ADMIN")
-     * @Route("/cree", name="admin.option.new", methods={"GET","POST"})
+     * @Route("/cree", name="admin.option2.new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
-        $option = new Option();
-        $form = $this->createForm(OptionType::class, $option);
+        $option = new OptionRent();
+        $form = $this->createForm(OptionType2::class, $option);
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
@@ -44,14 +44,14 @@ class AdminOptionController extends AbstractController
                 $entityManager->persist($option);
                 $entityManager->flush();
                 $this->addFlash('success', 'Option crée avec succès');
-                return $this->redirectToRoute('admin.option.index');
+                return $this->redirectToRoute('admin.option2.index');
             }else{
                 $this->addFlash('error', 'Une erreur est survenue.');
-                return $this->redirectToRoute('admin.option.index');
+                return $this->redirectToRoute('admin.option2.index');
             }
         }
 
-        return $this->render('admin/option/new.html.twig', [
+        return $this->render('admin/option2/new.html.twig', [
             'option' => $option,
             'form' => $form->createView(),
         ]);
@@ -59,24 +59,25 @@ class AdminOptionController extends AbstractController
 
     /**
      * @IsGranted("ROLE_ADMIN")
-     * @Route("/{id}/editer", name="admin.option.edit", methods={"GET","POST"})
+     * @Route("/{id}/editer", name="admin.option2.edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Option $option): Response
+    public function edit(Request $request, OptionRent $option): Response
     {
-        $form = $this->createForm(OptionType::class, $option);
+        $form = $this->createForm(OptionType2::class, $option);
         $form->handleRequest($request);
+
         if ($form->isSubmitted()) {
             if($form->isValid()) {
                 $this->getDoctrine()->getManager()->flush();
                 $this->addFlash('success', 'Option modifier avec succès');
-                return $this->redirectToRoute('admin.option.index');
+                return $this->redirectToRoute('admin.option2.index');
             }else{
                 $this->addFlash('error', 'Une erreur est survenue.');
-                return $this->redirectToRoute('admin.option.index');
+                return $this->redirectToRoute('admin.option2.index');
             }
-        }    
+        }
 
-        return $this->render('admin/option/edit.html.twig', [
+        return $this->render('admin/option2/edit.html.twig', [
             'option' => $option,
             'form' => $form->createView(),
         ]);
@@ -84,20 +85,19 @@ class AdminOptionController extends AbstractController
 
     /**
      * @IsGranted("ROLE_ADMIN")
-     * @Route("/supprimer/{id}", name="admin.option.delete")
+     * @Route("/supprimer/{id}", name="admin.option2.delete")
      */
-    public function delete(Request $request, Option $option): Response
+    public function delete(Request $request, OptionRent $option): Response
     {
         if ($this->isCsrfTokenValid('delete'.$option->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($option);
             $entityManager->flush();
             $this->addFlash('success', 'Option supprimer avec succès');
-            return $this->redirectToRoute('admin.option.index');
+            return $this->redirectToRoute('admin.option2.index');     
         }else{
             $this->addFlash('error', 'Option supprimer avec succès');
-            return $this->redirectToRoute('admin.option.index');
+            return $this->redirectToRoute('admin.option2.index');
         }
-        
     }
 }

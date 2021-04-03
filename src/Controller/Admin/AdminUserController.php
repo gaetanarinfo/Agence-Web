@@ -52,14 +52,20 @@ class AdminUserController extends AbstractController
         $form = $this->createForm(UserType2::class, $user);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid())
+        if($form->isSubmitted())
         {
-            $password = $passwordEncoder->encodePassword($user, $user->getPassword());
-            $user->setPassword($password);
-            $this->em->persist($user);
-            $this->em->flush();
-            $this->addFlash('success', 'Utilisateur crée avec succès');
-            return $this->redirectToRoute('admin.user.index');
+            if($form->isValid())
+            {
+                $password = $passwordEncoder->encodePassword($user, $user->getPassword());
+                $user->setPassword($password);
+                $this->em->persist($user);
+                $this->em->flush();
+                $this->addFlash('success', 'Utilisateur crée avec succès');
+                return $this->redirectToRoute('admin.user.index');
+            }else{
+                $this->addFlash('error', 'Une erreur est survenue');
+                return $this->redirectToRoute('admin.user.index');
+            }
         }
 
         return $this->render('admin/user/new.html.twig', [
@@ -80,11 +86,16 @@ class AdminUserController extends AbstractController
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid())
+        if($form->isSubmitted())
         {
-            $this->em->flush();
-            $this->addFlash('success', 'Utilisateur modifié avec succès');
-            return $this->redirectToRoute('admin.user.index');
+            if($form->isValid()){
+                $this->em->flush();
+                $this->addFlash('success', 'Utilisateur modifié avec succès');
+                return $this->redirectToRoute('admin.user.index');
+            }else{
+                $this->addFlash('error', 'Une erreur est survenue');
+                return $this->redirectToRoute('admin.user.index');
+            }
         }
 
         return $this->render('admin/user/edit.html.twig', [
@@ -104,8 +115,11 @@ class AdminUserController extends AbstractController
             $this->em->remove($user);
             $this->em->flush();
             $this->addFlash('success', 'Utilisateur supprimé avec succès');
-        } 
-        return $this->redirectToRoute('admin.user.index');
+            return $this->redirectToRoute('admin.user.index');
+        }else{
+            $this->addFlash('error', 'Une erreur est survenue');
+            return $this->redirectToRoute('admin.user.index');
+        }
     }
 
     /**

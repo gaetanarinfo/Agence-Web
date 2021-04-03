@@ -49,12 +49,17 @@ class AdminPropertyController extends AbstractController
         $form = $this->createForm(PropertyType::class, $property);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid())
+        if($form->isSubmitted())
         {
-            $this->em->persist($property);
-            $this->em->flush();
-            $this->addFlash('success', 'Bien crée avec succès');
-            return $this->redirectToRoute('admin.property.index');
+            if($form->isValid()) {
+                $this->em->persist($property);
+                $this->em->flush();
+                $this->addFlash('success', 'Bien crée avec succès');
+                return $this->redirectToRoute('admin.property.index');
+            }else{
+                $this->addFlash('error', 'Une erreur est survenue');
+                return $this->redirectToRoute('admin.property.index');
+            }
         }
 
         return $this->render('admin/property/new.html.twig', [
@@ -75,11 +80,16 @@ class AdminPropertyController extends AbstractController
         $form = $this->createForm(PropertyType::class, $property);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid())
+        if($form->isSubmitted())
         {
-            $this->em->flush();
-            $this->addFlash('success', 'Bien modifié avec succès');
-            return $this->redirectToRoute('admin.property.index');
+            if($form->isValid()) {
+                $this->em->flush();
+                $this->addFlash('success', 'Bien modifié avec succès');
+                return $this->redirectToRoute('admin.property.index');
+            }else{
+                $this->addFlash('error', 'Une erreur est survenue');
+                return $this->redirectToRoute('admin.property.index');
+            }
         }
 
         return $this->render('admin/property/edit.html.twig', [
@@ -99,8 +109,11 @@ class AdminPropertyController extends AbstractController
             $this->em->remove($property);
             $this->em->flush();
             $this->addFlash('success', 'Bien supprimé avec succès');
-        } 
-        return $this->redirectToRoute('admin.property.index');
+            return $this->redirectToRoute('admin.property.index');
+        }else{
+            $this->addFlash('error', 'Une erreur est survenue');
+            return $this->redirectToRoute('admin.property.index');
+        }
     }
 }
 

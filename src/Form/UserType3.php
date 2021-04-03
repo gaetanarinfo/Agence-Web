@@ -58,6 +58,12 @@ class UserType3 extends AbstractType
             ->add('facebook', TextType::class, [
                 'label' => false
             ])
+            ->add('avatar', FileType::class,[
+                'label' => false,
+                'multiple' => false,
+                'mapped' => false,
+                'required' => false
+            ])
         ;
     }
 
