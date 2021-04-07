@@ -158,6 +158,11 @@ class User implements UserInterface,\Serializable
      */
     private $updated_at;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $biography;
+
 
      public function __construct()
      {
@@ -555,6 +560,18 @@ class User implements UserInterface,\Serializable
         $picture = new Avatar();
         $picture->setImageFile($pictureFiles);
         $this->addPicture($picture);
+        return $this;
+    }
+
+    public function getBiography(): ?string
+    {
+        return $this->biography;
+    }
+
+    public function setBiography(string $biography): self
+    {
+        $this->biography = $biography;
+
         return $this;
     }
 }

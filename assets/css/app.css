@@ -122,6 +122,10 @@ h2 {
     border-top-right-radius: 0;
 }
 
+.custom-file-input~.custom-file-label::after {
+    content: "Choisissez un fichier";
+}
+
 .button-submit {
     width: 140px;
     height: 45px;

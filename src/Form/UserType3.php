@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -19,49 +20,58 @@ class UserType3 extends AbstractType
     {
         $builder
             ->add('lastname', TextType::class, [
-                'label' => false
+                'label' => false,
+                'required' => false
             ])
             ->add('firstname', TextType::class, [
-                'label' => false
+                'label' => false,
+                'required' => false
             ])
             ->add('gender', ChoiceType::class, [
                 'choices' => $this->getChoices3(),
                 'label' => false
              ])
             ->add('city', TextType::class, [
-                'label' => false
+                'label' => false,
+                'required' => false
             ])
             ->add('address', TextType::class, [
-                'label' => false
+                'label' => false,
+                'required' => false
             ])
             ->add('postalCode', NumberType::class, [
-                'label' => false
+                'label' => false,
+                'required' => false
             ])
             ->add('country', CountryType::class, [
-                'label' => false
+                'label' => false,
+                'required' => false
             ])
             ->add('phone', NumberType::class, [
-                'label' => false
+                'label' => false,
+                'required' => false
             ])
             ->add('mobile', NumberType::class, [
-                'label' => false
+                'label' => false,
+                'required' => false
             ])
             ->add('link', TextType::class, [
                 'label' => false
             ])
             ->add('twitter', TextType::class, [
-                'label' => false
+                'label' => false,
+                'required' => false
             ])
             ->add('instagram', TextType::class, [
-                'label' => false
+                'label' => false,
+                'required' => false
             ])
             ->add('facebook', TextType::class, [
-                'label' => false
-            ])
-            ->add('avatar', FileType::class,[
                 'label' => false,
-                'multiple' => false,
-                'mapped' => false,
+                'required' => false
+            ])
+            ->add('biography', TextareaType::class, [
+                'label' => false,
                 'required' => false
             ])
         ;

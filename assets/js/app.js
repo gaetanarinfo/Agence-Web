@@ -19,6 +19,19 @@ if (inputAddress !== null) {
     })
 }
 
+let inputAddress2 = document.querySelector('#rent_address')
+if (inputAddress2 !== null) {
+    let place = Places({
+        container: inputAddress2
+    })
+    place.on('change', e => {
+        document.querySelector('#rent_city').value = e.suggestion.city
+        document.querySelector('#rent_postal_code').value = e.suggestion.postcode
+        document.querySelector('#rent_lat').value = e.suggestion.latlng.lat
+        document.querySelector('#rent_lng').value = e.suggestion.latlng.lng
+    })
+}
+
 let searchAddress = document.querySelector('#search_address')
 if (searchAddress !== null) {
     let place = Places({
@@ -40,6 +53,7 @@ $('[data-slider]').slick({
 })
 $('select').select2()
 $('property_heat').select2()
+$('rent_heat').select2()
 let $contactButton = $('#contactButton')
 $contactButton.click(e => {
     e.preventDefault();
@@ -70,8 +84,10 @@ document.querySelectorAll('[data-delete]').forEach(a => {
     })
 })
 
+$(function() {
+    $('[data-toggle="tooltip"]').tooltip()
+})
+
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
 // var $ = require('jquery');
-
-console.log('Hello Webpack Encore! Edit me in assets/js/app.js');

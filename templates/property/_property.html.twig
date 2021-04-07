@@ -11,6 +11,7 @@
       </a>
     </h5>
     <p class="card-text">{{ property.surface }} m² - {{ property.city }} ({{ property.postalCode }})</p>
+    <p>Mise en ligne par {{ property.createdBy }}</p>
     <p>{% if property.sold == 0 %}<i class="fas fa-check text-success"></i> Disponible{% else %}<i class="fas fa-times text-danger"></i> Vendu{% endif %}</p>
     <div class="text-success card-foot mb-3">
       {{ property.formattedPrice }} €

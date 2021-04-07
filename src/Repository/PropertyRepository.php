@@ -129,4 +129,20 @@ class PropertyRepository extends ServiceEntityRepository
             }
         }
     }
+
+    /**
+     * @return Property[]
+     */
+    public function findAllProperty(string $username): array
+    {
+        $property = $this->findVisibleQuery('p')
+            ->orderBy('p.id', 'DESC')
+            ->where('p.createdBy = :username')
+            ->setParameter('username', $username)
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult();
+
+        return $property;
+    }
 }

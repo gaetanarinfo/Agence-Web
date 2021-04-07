@@ -1,0 +1,337 @@
+{% extends "base.html.twig" %}
+
+{% block title 'Boîte de réception' %}
+
+{% block body %}
+
+	<style>
+		.badge {
+			border-radius: 8px;
+			padding: 4px 8px;
+			text-transform: uppercase;
+			font-size: 0.7142em;
+			line-height: 12px;
+			background-color: transparent;
+			border: 1px solid;
+			margin-bottom: 5px;
+			border-radius: 0.875rem;
+		}
+		.bg-green {
+			background-color: #50d38a !important;
+			color: #fff;
+		}
+		.bg-blush {
+			background-color: #ff758e !important;
+			color: #fff;
+		}
+		.bg-amber {
+			background-color: #FFC107 !important;
+			color: #fff;
+		}
+		.bg-red {
+			background-color: #ec3b57 !important;
+			color: #fff;
+		}
+		.bg-blue {
+			background-color: #60bafd !important;
+			color: #fff;
+		}
+		.card {
+			background: #fff;
+			margin-bottom: 30px;
+			transition: 0.5s;
+			border: 0;
+			border-radius: 0.1875rem;
+			display: inline-block;
+			position: relative;
+			width: 100%;
+			box-shadow: none;
+		}
+		.inbox .action_bar .delete_all {
+			margin-bottom: 0;
+			margin-top: 8px
+		}
+
+		.inbox .action_bar .btn,
+		.inbox .action_bar .search {
+			margin: 0
+		}
+
+		.inbox .mail_list .list-group-item {
+			border: 0;
+			padding: 15px;
+			margin-bottom: 1px
+		}
+
+		.inbox .mail_list .list-group-item:hover {
+			background: #eceeef
+		}
+
+		.inbox .mail_list .list-group-item .media {
+			margin: 0;
+			width: 100%
+		}
+
+		.inbox .mail_list .list-group-item .controls {
+			display: inline-block;
+			margin-right: 10px;
+			vertical-align: top;
+			text-align: center;
+			margin-top: 11px
+		}
+
+		.inbox .mail_list .list-group-item .controls .checkbox {
+			display: inline-block
+		}
+
+		.inbox .mail_list .list-group-item .controls .checkbox label {
+			margin: 0;
+			padding: 10px
+		}
+
+		.inbox .mail_list .list-group-item .controls .favourite {
+			margin-left: 10px
+		}
+
+		.inbox .mail_list .list-group-item .thumb {
+			display: inline-block
+		}
+
+		.inbox .mail_list .list-group-item .thumb img {
+			width: 40px
+		}
+
+		.inbox .mail_list .list-group-item .media-heading a {
+			color: #555;
+			font-weight: normal
+		}
+
+		.inbox .mail_list .list-group-item .media-heading a:hover,
+		.inbox .mail_list .list-group-item .media-heading a:focus {
+			text-decoration: none
+		}
+
+		.inbox .mail_list .list-group-item .media-heading time {
+			font-size: 13px;
+			margin-right: 10px
+		}
+
+		.inbox .mail_list .list-group-item .media-heading .badge {
+			margin-bottom: 0;
+			border-radius: 50px;
+			font-weight: normal
+		}
+
+		.inbox .mail_list .list-group-item .msg {
+			margin-bottom: 0
+		}
+
+		.inbox .mail_list .unread {
+			border-left: 2px solid
+		}
+
+		.inbox .mail_list .unread .media-heading a {
+			color: #333;
+			font-weight: 700
+		}
+
+		.inbox .btn-group {
+			box-shadow: none
+		}
+
+		.inbox .bg-gray {
+			background: #e6e6e6
+		}
+
+		@media only screen and(max-width: 767px) {
+			.inbox .mail_list .list-group-item .controls {
+				margin-top: 3px
+			}
+		}
+
+		a {
+			text-decoration: none !important;
+		}
+	</style>
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+
+    <div class="container">
+		<div class="row">
+
+         <p class="title-cont w-50 text-center m-auto mb-2">Boîte de réception</p>
+                <hr class="w-50 m-auto mb-4" />
+
+				{% for message in app.flashes('success') %}
+            <div class="alert alert-success text-center w-50 m-auto mb-3">
+                <i class="fa fa-check text-success" aria-hidden="true"></i> {{ message }}
+            </div>
+        {% endfor %}
+
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-danger text-center w-50 m-auto mb-3">
+                <i class="fas fa-times text-danger" aria-hidden="true"></i> {{ message }}
+            </div>
+        {% endfor %}
+
+			<div class="col-lg-12">
+				<div class="card">
+					<div class="card-body">
+						<div class="row">
+							<!-- Left sidebar -->
+							<div class="col-lg-3 col-md-4">
+								<div class="card shadow-none">
+									<div class="list-group shadow-none">
+										<a href="{{ path('admin.mailbox.index') }}" class="list-group-item active">
+										<i class="fa fa-inbox mr-2"></i>Boîte de réception
+											<b>
+												{% if reception == false %}
+													(0)
+												{% else %}
+													({{ reception }})
+												{% endif %}
+											</b>
+										</a>
+										<a href="{{ path('admin.mailbox.favoris') }}" class="list-group-item">
+											<i class="fa fa-star-o mr-2"></i>Favoris
+											{% if favorite == false %}
+												(0)
+											{% else %}
+												<b>({{ favorite }})
+												</b>
+											{% endif %}
+										</a>
+										<a href="{{ path('admin.mailbox.trash') }}" class="list-group-item">
+											<i class="fa fa-trash-o mr-2"></i>Corbeille
+											{% if trash == false %}
+												(0)
+											{% else %}
+												<b>({{ trash }})</b>
+											{% endif %}
+										</a>
+										<a href="{{ path('admin.mailbox.importants') }}" class="list-group-item">
+											<i class="fa fa-bookmark mr-2"></i>Important
+											{% if important == false %}
+												(0)
+											{% else %}
+												<b>({{ important }})</b>
+											{% endif %}
+										</a>
+									</div>
+								</div>
+
+							</div>
+							<!-- End Left sidebar -->
+
+							<!-- Right Sidebar -->
+							<div class="col-lg-8 col-md-8">
+								<div class="row">
+									<div class="col-lg-8">
+										<div class="btn-toolbar" role="toolbar">
+											<div class="btn-group mr-1">
+												<a onclick="window.location.reload();" class="btn btn-outline-primary waves-effect waves-light">
+													<i class="fa fa-refresh"></i>
+												</a>
+											</div>
+
+										</div>
+									</div>
+
+								</div>
+								<!-- End row -->
+								<div class="card shadow-none border border-light">
+									<div class="card-body">
+										<section class="content inbox">
+			<div class="container-fluid">
+				<div class="row clearfix">
+
+				<div class="col-md-9 m-auto">
+					{% if reception == false %}
+						<img src="../../images/empty-notification-email-mail-icon.svg" width="100px" class="m-auto mb-2" style="display: block;position: relative;" />
+						<h4 class="text-center">Pas de nouveau message pour le moment</h4>
+					{% endif %}
+				</div>
+
+					<div class="col-md-12 col-lg-12 col-xl-12 m-auto">
+						<ul class="mail_list list-group list-unstyled">
+							{% for mail in mails %}
+								<li class="list-group-item">
+									<div class="media">
+										<div class="pull-left">
+											<div class="controls">
+											{% if mail.favorite == 0 %}
+												<a href="{{ path('admin.mailbox.favorite', {id: mail.id}) }}" class="favourite text-muted hidden-sm-down" data-toggle="active">
+													<i class="zmdi zmdi-star-outline"></i>
+												</a>
+											{% else %}
+												<i class="zmdi zmdi-star"></i>
+											{% endif %}	
+
+											<a href="{{ path('admin.mailbox.delete', {id: mail.id}) }}" class="favourite text-muted hidden-sm-down">
+												<i class="zmdi zmdi-delete"></i>
+											</a>
+
+											</div>
+											<div class="thumb hidden-sm-down m-r-20">
+												<img src="../images/default_profil.png" class="rounded-circle" alt="">
+											</div>
+										</div>
+										<div class="media-body ml-3">
+											<div class="media-heading">
+												<a href="{{ path('admin.mailbox.show', {slug: mail.subject, id: mail.id}) }}" class="m-r-10">{{ mail.lastname }} - {{ mail.firstname }}</a>
+												{% if mail.categorie == 0 %}
+													<span class="badge bg-blue">
+														Bien
+													</span>
+												{% elseif mail.categorie == 1 %}
+													<span class="badge bg-red">
+														Location
+													</span>
+												{% elseif mail.categorie == 2 %}
+													<span class="badge bg-green">
+														Gérance
+													</span>	
+												{% elseif mail.categorie == 3 %}
+													<span class="badge bg-yellow">
+														Transaction
+													</span>		
+												{% endif %}
+												<small class="float-right text-muted">
+													<time class="hidden-sm-down">{{ mail.createdAt|format_datetime() }}</time>
+												</small>
+											</div>
+											<p class="msg">{{ mail.subject }}
+											</p>
+										</div>
+									</div>
+								</li>
+							{% endfor %}
+						</ul>
+						<div class="card mt-3 text-center">
+							<div class="body">
+								{{ knp_pagination_render(mails) }}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+									</div>
+								</div>
+								<!-- card -->
+							</div>
+							<!-- end Col-9 -->
+
+						</div>
+						<!-- End row -->
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End row -->
+
+	</div>
+
+{% endblock %}

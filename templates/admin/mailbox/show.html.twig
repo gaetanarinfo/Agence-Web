@@ -1,0 +1,138 @@
+{% extends "base.html.twig" %}
+
+{% block title 'Boîte de réception' %}
+
+{% block body %}
+
+	<style>
+		a {
+			text-decoration: none !important;
+		}
+	</style>
+
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="card">
+					<div class="card-body">
+						<div class="row">
+							<!-- Left sidebar -->
+							<div class="col-lg-3 col-md-4">
+								
+								<div class="card shadow-none">
+									<div class="list-group shadow-none">
+										<a href="{{ path('admin.mailbox.index') }}" class="list-group-item">
+										<i class="fa fa-inbox mr-2"></i>Boîte de réception
+											<b>
+												{% if reception == false %}
+													(0)
+												{% else %}
+													({{ reception }})
+												{% endif %}
+											</b>
+										</a>
+										<a href="{{ path('admin.mailbox.favoris') }}" class="list-group-item">
+											<i class="fa fa-star-o mr-2"></i>Favoris
+											{% if favorite == false %}
+												(0)
+											{% else %}
+												<b>({{ favorite }})
+												</b>
+											{% endif %}
+										</a>
+										
+										<a href="{{ path('admin.mailbox.trash') }}" class="list-group-item">
+											<i class="fa fa-trash-o mr-2"></i>Corbeille
+											{% if trash == false %}
+												(0)
+											{% else %}
+												<b>({{ trash }})</b>
+											{% endif %}
+										</a>
+										<a href="{{ path('admin.mailbox.importants') }}" class="list-group-item">
+											<i class="fa fa-bookmark mr-2"></i>Important
+											{% if important == false %}
+												(0)
+											{% else %}
+												<b>({{ important }})</b>
+											{% endif %}
+										</a>
+									</div>
+								</div>
+
+							</div>
+							<!-- End Left sidebar -->
+
+							<!-- Right Sidebar -->
+							<div class="col-lg-9 col-md-8">
+								<div class="row">
+									<div class="col-lg-8">
+										<div class="btn-toolbar" role="toolbar">
+											<div class="btn-group mr-1">
+												<a href="{{ path('admin.mailbox.index') }}" class="btn btn-outline-primary waves-effect waves-light">
+													<i class="fa fa-inbox"></i>
+												</a>
+												<a onclick="window.location.reload();" class="btn btn-outline-primary waves-effect waves-light">
+													<i class="fa fa-refresh"></i>
+												</a>
+												<a href="{{ path('admin.mailbox.delete', {id: mailbox.id}) }}" class="btn btn-outline-primary waves-effect waves-light">
+													<i class="fa fa-trash-o"></i>
+												</a>
+											</div>
+
+											<div class="btn-group mr-1">
+												<a href="{{ path('admin.mailbox.favorite', {id: mailbox.id}) }}" class="btn btn-outline-warning">
+													<i class="fas fa-star"></i>
+												</a>
+											</div>
+
+                                            <div class="btn-group mr-1">
+												<a href="{{ path('admin.mailbox.important', {id: mailbox.id}) }}" class="btn btn-outline-danger">
+													<i class="fas fa-bookmark"></i>
+												</a>
+											</div>
+
+										</div>
+									</div>
+
+								</div>
+								<!-- End row -->
+								<div class="card shadow-none border border-light">
+									<div class="card-body">
+										<div class="media mb-3">
+											<img src="../../../images/default_profil.png" class="rounded-circle mr-3 mail-img shadow" alt="media image" width="100" height="100">
+											<div class="media-body">
+												<span class="media-meta float-right">{{ mailbox.createdAt|format_datetime() }}</span>
+												<h4 class="text-primary m-0">{{ mailbox.lastname }} - {{ mailbox.firstname }}</h4>
+                                                <small class="text-muted">Sujet : {{ mailbox.subject }}</small><br/>
+												<small class="text-muted">De : {{ mailbox.email }}</small>
+											</div>
+										</div>
+										<!-- media -->
+
+                                        <hr/>
+
+										<p>
+											<b>Bonjour {{ app.user.username }},</b>
+										</p>
+										<p>{{ mailbox.content }}</p>
+
+									</div>
+								</div>
+								<!-- card -->
+							</div>
+							<!-- end Col-9 -->
+
+						</div>
+						<!-- End row -->
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End row -->
+
+	</div>
+
+{% endblock %}

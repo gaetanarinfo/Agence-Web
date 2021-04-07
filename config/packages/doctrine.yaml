@@ -14,7 +14,8 @@ doctrine:
         user:                 '%env(resolve:DB_USER)%'
         password:             '%env(resolve:DB_PASSWORD)%'
         driver:               'pdo_mysql'
-        server_version:       'mariadb-10.3.25'
+        server_version:       '10.3.25-MariaDB-0ubuntu1'
+        schema_filter: ~^(?!rememberme_token)~
         charset: utf8mb4
         default_table_options:
             charset: utf8mb4

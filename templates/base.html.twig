@@ -5,24 +5,23 @@
         <title>{% block title %}AgenceWeb - Le Mans{% endblock %}</title>
 
         <!-- Primary Meta Tags -->
-        <meta name="title" content="AgenceWeb - Le Mans">
-        <meta name="description" content="Large choix d'appartements et maisons en Location et Vente avec AgenceWeb Immobilier. Toutes nos Annonces d'appartements et maisons en Location et Vente Avec AgenceWeb Immobilier. 
-        Trouver votre bien immo. Gestion Locative. Suivi Complet.">
+        <meta name="description" content="{% block description %}Large choix d'appartements et maisons en Location et Vente avec AgenceWeb Immobilier. Toutes nos Annonces d'appartements et maisons en Location et Vente Avec AgenceWeb Immobilier. 
+        Trouver votre bien immo. Gestion Locative. Suivi Complet.{% endblock %}">
 
         <!-- Open Graph / Facebook -->
         <meta property="og:type" content="website">
-        <meta property="og:url" content="https://agence-web.website/">
-        <meta property="og:title" content="AgenceWeb - Le Mans">
-        <meta property="og:description" content="Large choix d'appartements et maisons en Location et Vente avec AgenceWeb Immobilier. Toutes nos Annonces d'appartements et maisons en Location et Vente Avec AgenceWeb Immobilier. 
-        Trouver votre bien immo. Gestion Locative. Suivi Complet.">
+        <meta property="og:url" content="https://agence-web.website{% block url %}{% endblock %}">
+        <meta property="og:title" content="{% block title2 %}AgenceWeb - Le Mans{% endblock %}">
+        <meta property="og:description" content="{% block description2 %}Large choix d'appartements et maisons en Location et Vente avec AgenceWeb Immobilier. Toutes nos Annonces d'appartements et maisons en Location et Vente Avec AgenceWeb Immobilier. 
+        Trouver votre bien immo. Gestion Locative. Suivi Complet.{% endblock %}">
         <meta property="og:image" content="{{ '/images/ban.jpg' }}">
 
         <!-- Twitter -->
         <meta property="twitter:card" content="summary_large_image">
-        <meta property="twitter:url" content="https://agence-web.website/">
-        <meta property="twitter:title" content="AgenceWeb - Le Mans">
-        <meta property="twitter:description" content="Large choix d'appartements et maisons en Location et Vente avec AgenceWeb Immobilier. Toutes nos Annonces d'appartements et maisons en Location et Vente Avec AgenceWeb Immobilier. 
-        Trouver votre bien immo. Gestion Locative. Suivi Complet.">
+        <meta property="twitter:url" content="https://agence-web.website{% block url2 %}{% endblock %}">
+        <meta property="twitter:title" content="{% block title3 %}AgenceWeb - Le Mans{% endblock %}">
+        <meta property="twitter:description" content="{% block description3 %}Large choix d'appartements et maisons en Location et Vente avec AgenceWeb Immobilier. Toutes nos Annonces d'appartements et maisons en Location et Vente Avec AgenceWeb Immobilier. 
+        Trouver votre bien immo. Gestion Locative. Suivi Complet.{% endblock %}">
         <meta property="twitter:image" content="{{ '/images/ban.jpg' }}">
         
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
@@ -70,22 +69,26 @@
 
                 <ul class="navbar-nav">
 
-                {% if is_granted('ROLE_PRO') %}
+                {% if is_granted('ROLE_SUPER_ADMIN') %}
 
                    <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Administration
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ path('admin.user.index') }}">Gérer les utilisateurs</a>
+                        <a class="dropdown-item" href="{{ path('admin.website.index') }}"><i class="fas fa-cogs mr-2"></i>Gérer le site internet</a>
                         <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{ path('admin.property.index') }}">Gérer les biens</a>
+                            <a class="dropdown-item" href="{{ path('admin.mailbox.index') }}"><i class="fas fa-inbox mr-2"></i>Boîte de réception</a>
                         <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{ path('admin.rent.index') }}">Gérer les locations</a>
+                            <a class="dropdown-item" href="{{ path('admin.user.index') }}"><i class="fas fa-users-cog mr-2"></i>Gérer les utilisateurs</a>
                         <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{ path('admin.option.index') }}">Options des biens</a>
+                            <a class="dropdown-item" href="{{ path('admin.property.index') }}"><i class="fas fa-toolbox mr-2"></i>Gérer les biens</a>
                         <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{ path('admin.option2.index') }}">Options des locations</a>    
+                            <a class="dropdown-item" href="{{ path('admin.rent.index') }}"><i class="fas fa-toolbox mr-2"></i>Gérer les locations</a>
+                        <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ path('admin.option.index') }}"><i class="fas fa-toolbox mr-2"></i>Options des biens</a>
+                        <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ path('admin.option2.index') }}"><i class="fas fa-toolbox mr-2"></i>Options des locations</a>    
                         </div>  
                     </li>
                 
@@ -93,8 +96,21 @@
 
                 {% if is_granted('ROLE_PRO') %}
 
-                    <li class="nav-item">
-                        <a href="{{ path('professionnel.property.index') }}" class="nav-link">Professionnel</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Professionnel
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ path('admin.mailbox.index') }}"><i class="fas fa-inbox mr-2"></i>Boîte de réception</a>
+                        <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ path('admin.property.index') }}"><i class="fas fa-home mr-2"></i>Gérer les biens</a>
+                        <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ path('admin.rent.index') }}"><i class="fas fa-home mr-2"></i>Gérer les locations</a>
+                        <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ path('admin.option.index') }}"><i class="fas fa-toolbox mr-2"></i>Options des biens</a>
+                        <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ path('admin.option2.index') }}"><i class="fas fa-toolbox mr-2"></i>Options des locations</a>    
+                        </div>  
                     </li>
                 
                 {% endif %}
@@ -141,6 +157,7 @@
         <div class="container p-4 pb-0">
             <!-- Section: Social media -->
             <section class="mb-4">
+            
             <!-- Facebook -->
             <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
                 ><i class="fab fa-facebook-f"></i
@@ -149,11 +166,6 @@
             <!-- Twitter -->
             <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
                 ><i class="fab fa-twitter"></i
-            ></a>
-
-            <!-- Google -->
-            <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
-                ><i class="fab fa-google"></i
             ></a>
 
             <!-- Instagram -->

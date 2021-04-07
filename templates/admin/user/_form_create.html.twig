@@ -30,6 +30,9 @@
 			<div class="col-md-3">{{ form_row(form.facebook) }}</div>
 		</div>	
 		<div class="row" style="justify-content: center;">	
+			<div class="col-md-6">{{ form_row(form.biography) }}</div>
+		</div>
+		<div class="row" style="justify-content: center;">	
 			<div class="col-md-2">{{ form_row(form.roles) }}</div>
 		</div>	
 	</div>
@@ -37,7 +40,7 @@
 	<div class="row mb-4">
 		<div class="col-md-12">
 			<div class="row" style="justify-content: center;">
-				{% for image in user.images %}
+				{% for picture in user.pictures %}
 					<div class="" style="margin: 0 auto;">
 						<img class="img-thumbnail" src="{{ vich_uploader_asset(picture, 'imageFile') }}" width="150" alt="" style="position: relative;display: flex;margin: 0 auto;justify-content: space-around;">
 						<div style="position: relative;display: flex;margin: 0 auto;justify-content: space-around;">

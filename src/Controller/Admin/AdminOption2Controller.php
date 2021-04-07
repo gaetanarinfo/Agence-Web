@@ -12,7 +12,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
-* @IsGranted("ROLE_ADMIN")
  * @Route("/admin/option2")
  */
 class AdminOption2Controller extends AbstractController
@@ -29,7 +28,6 @@ class AdminOption2Controller extends AbstractController
     }
 
     /**
-     * @IsGranted("ROLE_ADMIN")
      * @Route("/cree", name="admin.option2.new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
@@ -58,7 +56,6 @@ class AdminOption2Controller extends AbstractController
     }
 
     /**
-     * @IsGranted("ROLE_ADMIN")
      * @Route("/{id}/editer", name="admin.option2.edit", methods={"GET","POST"})
      */
     public function edit(Request $request, OptionRent $option): Response
@@ -84,7 +81,6 @@ class AdminOption2Controller extends AbstractController
     }
 
     /**
-     * @IsGranted("ROLE_ADMIN")
      * @Route("/supprimer/{id}", name="admin.option2.delete")
      */
     public function delete(Request $request, OptionRent $option): Response

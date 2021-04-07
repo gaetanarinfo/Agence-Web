@@ -10,13 +10,11 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
- * @IsGranted("ROLE_ADMIN")
  * @Route("/admin/picture")
  */
 class AdminPictureController extends AbstractController {
 
     /**
-     * @IsGranted("ROLE_ADMIN")
      * @Route("/{id}", name="admin.picture.delete", methods="DELETE")
      */
     public function delete(Picture $picture, Request $request) {
@@ -32,7 +30,6 @@ class AdminPictureController extends AbstractController {
     }
 
     /**
-     * @IsGranted("ROLE_ADMIN")
      * @Route("/{id}", name="admin.picture2.delete", methods="DELETE")
      */
     public function delete2(PictureRent $picture, Request $request) {

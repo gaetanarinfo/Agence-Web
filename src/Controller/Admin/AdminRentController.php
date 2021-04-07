@@ -9,7 +9,6 @@ use App\Form\RentType;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class AdminRentController extends AbstractController
 {
@@ -27,7 +26,6 @@ class AdminRentController extends AbstractController
     }
 
     /**
-     * @IsGranted("ROLE_ADMIN")
      * @Route("/admin/louer", name="admin.rent.index")
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -40,7 +38,6 @@ class AdminRentController extends AbstractController
     }
 
     /**
-     * @IsGranted("ROLE_ADMIN")
      * @Route("/admin/louer/create", name="admin.rent.new")
      */
     public function new(Request $request)
@@ -69,7 +66,6 @@ class AdminRentController extends AbstractController
     }
 
     /**
-     * @IsGranted("ROLE_ADMIN")
      * @Route("/admin/louer/{id}", name="admin.rent.edit", methods="GET|POST")
      * @param Rent $rent
      * @param Request $request
@@ -99,7 +95,6 @@ class AdminRentController extends AbstractController
     }
 
     /**
-     * @IsGranted("ROLE_ADMIN")
      * @Route("/admin/louer/{id}", name="admin.rent.delete", methods="DELETE")
      */
     public function delete(Rent $rent, Request $request)

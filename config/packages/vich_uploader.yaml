@@ -14,3 +14,7 @@ vich_uploader:
             uri_prefix: /media/avatar
             upload_destination: '%kernel.project_dir%/public/media/avatar'
             namer: Vich\UploaderBundle\Naming\UniqidNamer
+        galerie_image:
+            uri_prefix: /media/galerie
+            upload_destination: '%kernel.project_dir%/public/media/galerie'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer

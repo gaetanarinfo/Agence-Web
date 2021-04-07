@@ -42,14 +42,44 @@ class UserRepository extends ServiceEntityRepository
             $page,
             12
         );
+
+        $this->hydratePicture($users);
         
         return $users;
     }
 
     private function findVisibleQuery(): QueryBuilder
     {
-        return $this->createQueryBuilder('p')
-            ->where('p.username = false');
+        return $this->createQueryBuilder('p');
+    }
+
+    private function hydratePicture($user) {
+        if (method_exists($user, 'getItems')) {
+            $user = $user->getItems();
+        }
+        $pictures = $this->getEntityManager()->getRepository(Avatar::class)->findForUser($user);
+        foreach($user as $users) {
+            /** @var $rent Rent */
+            if($pictures->containsKey($users->getId())) {
+                $users->setPicture($pictures->get($users->getId()));
+            }
+        }
+    }
+
+    /**
+     * @return User[]
+     */
+    public function findLatest(): array
+    {
+        $user = $this->findVisibleQuery('p')
+            ->orderBy('p.roles', 'ASC')
+            ->where('p.roles LIKE :role')
+            ->setParameter('role', '%"'.'ROLE_PRO'.'"%')
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult();
+        $this->hydratePicture($user);
+        return $user;
     }
 
 }

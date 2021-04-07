@@ -130,4 +130,20 @@ class RentRepository extends ServiceEntityRepository
             }
         }
     }
+
+    /**
+     * @return Rent[]
+     */
+    public function findAllRent(string $username): array
+    {
+        $rent = $this->findVisibleQuery('p')
+            ->orderBy('p.id', 'DESC')
+            ->where('p.createdBy = :username')
+            ->setParameter('username', $username)
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult();
+
+        return $rent;
+    }
 }

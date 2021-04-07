@@ -10,6 +10,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\RangeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -44,13 +45,13 @@ class PropertySearchType extends AbstractType
                 'label' => false,
                 'required' => false,
             ])
-            ->add('distance', ChoiceType::class, [
-                'label' => false,
-                'required' => false,
-                'choices' => [
-                    '10 km' => 10,
-                    '1000 km' => 1000
-                ]
+            ->add('distance', RangeType::class, [
+                'attr' => [
+                    'class' => 'form-range',
+                    'min' => 0,
+                    'max' => 2000
+                ],
+                'data' => 0
             ])
             ->add('lat', HiddenType::class)
             ->add('lng', HiddenType::class)

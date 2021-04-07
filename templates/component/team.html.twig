@@ -1,0 +1,25 @@
+<div class="container">
+		<h2 class="text-center">Notre équipe à votre écoute</h2>
+		<hr/>
+		<div class="row">
+			{% for users in user %}
+			<div class="col-lg-4 text-center">
+				{% if users.pictures is empty %}
+                    <img src="{{ '/images/default_profil.png' }}" alt="{{ users.username }}" class="rounded-circle mb-3 sm-shadow" width="150" height="150" />
+                {% else %}
+					{% for picture in users.pictures %}
+						<img src="{{ vich_uploader_asset(picture, 'imageFile') }}" alt="{{ users.username }}" class="rounded-circle mb-3 sm-shadow" width="150" height="150" />
+					{% endfor %}
+                {% endif %}
+				<h2>{{ users.lastname }} - {{ users.firstname }}</h2>
+				<p>{{ users.biography }}</p>
+				<p>
+					<a class="btn btn-primary" href="{{ path('user.public', { username: users.username }) }}" role="button">Voir le profil</a>
+				</p>
+			</div>
+			{% endfor %}
+		</div>
+
+		<hr/>
+
+	</div>

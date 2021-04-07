@@ -9,7 +9,6 @@ use App\Form\PropertyType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Knp\Component\Pager\PaginatorInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class AdminPropertyController extends AbstractController
 {
@@ -27,7 +26,6 @@ class AdminPropertyController extends AbstractController
     }
 
     /**
-     * @IsGranted("ROLE_ADMIN")
      * @Route("/admin/biens", name="admin.property.index")
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -40,7 +38,6 @@ class AdminPropertyController extends AbstractController
     }
 
     /**
-     * @IsGranted("ROLE_ADMIN")
      * @Route("/admin/biens/create", name="admin.property.new")
      */
     public function new(Request $request)
@@ -69,7 +66,6 @@ class AdminPropertyController extends AbstractController
     }
 
     /**
-     * @IsGranted("ROLE_ADMIN")
      * @Route("/admin/biens/{id}", name="admin.property.edit", methods="GET|POST")
      * @param Property $property
      * @param Request $request
@@ -99,7 +95,6 @@ class AdminPropertyController extends AbstractController
     }
 
     /**
-     * @IsGranted("ROLE_ADMIN")
      * @Route("/admin/biens/{id}", name="admin.property.delete", methods="DELETE")
      */
     public function delete(Property $property, Request $request)

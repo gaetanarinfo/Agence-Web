@@ -47,6 +47,7 @@
         "ttskch/select2-bootstrap4-theme": "^1.5",
         "twig/cache-extension": "^1.5",
         "twig/extra-bundle": "^2.12|^3.0",
+        "twig/intl-extra": "^3.3",
         "twig/twig": "^2.12|^3.0",
         "vich/uploader-bundle": "^1.17"
     },

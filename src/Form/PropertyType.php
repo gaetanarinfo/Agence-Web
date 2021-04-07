@@ -19,6 +19,7 @@ class PropertyType extends AbstractType
         $builder
             ->add('title')
             ->add('content')
+            ->add('createdBy', HiddenType::class)
             ->add('surface')
             ->add('rooms')
             ->add('bedrooms')

@@ -30,7 +30,6 @@ class AdminUserController extends AbstractController
     }
 
     /**
-     * @IsGranted("ROLE_ADMIN")
      * @Route("/admin/utilisateur", name="admin.user.index")
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -43,7 +42,6 @@ class AdminUserController extends AbstractController
     }
 
     /**
-     * @IsGranted("ROLE_ADMIN")
      * @Route("/admin/utilisateur/create", name="admin.user.new")
      */
     public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder)
@@ -75,7 +73,6 @@ class AdminUserController extends AbstractController
     }
 
     /**
-     * @IsGranted("ROLE_ADMIN")
      * @Route("/admin/utilisateur/{id}", name="admin.user.edit", methods="GET|POST", requirements={"id":"\d+"})
      * @param User $user
      * @param Request $request
@@ -105,7 +102,6 @@ class AdminUserController extends AbstractController
     }
 
     /**
-     * @IsGranted("ROLE_ADMIN")
      * @Route("/admin/utilisateur/{id}", name="admin.user.delete", methods="DELETE")
      */
     public function delete(User $user, Request $request)
@@ -130,7 +126,7 @@ class AdminUserController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $em->remove($picture);
         $em->flush();
-        $this->addFlash('success', 'Avatar supprimé avec succès');
+        $this->addFlash('success', 'Image de profil supprimé avec succès');
         return $this->redirectToRoute('admin.user.index');
     }
 

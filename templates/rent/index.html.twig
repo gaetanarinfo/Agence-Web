@@ -26,11 +26,13 @@
         </div>
         <div style="display: flex; justify-content: center;">
             <div class="form-row">
-                <div class="col-9">
+                <div class="col-9 m-auto">
                     {{ form_row(form.address, {'id': 'search_address'}) }}
                 </div>
-                <div class="col-3">
-                    {{ form_row(form.distance) }}
+                <div class="col-md-12">
+                    <div class="form-group text-center range">
+                        {{ form_row(form.distance) }}
+                    </div>  
                 </div>
                 <div class="col">
                     <div class="form-group text-center">

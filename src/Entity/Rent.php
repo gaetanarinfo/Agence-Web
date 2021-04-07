@@ -132,6 +132,11 @@ class Rent
      */
     private $options;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $createdBy;
+
     public function __construct()
     {
         $this->created_at = new \DateTime();
@@ -442,6 +447,18 @@ class Rent
             $this->options->removeElement($option);
             $option->removeRent($this);
         }
+
+        return $this;
+    }
+
+    public function getCreatedBy(): ?string
+    {
+        return $this->createdBy;
+    }
+
+    public function setCreatedBy(string $createdBy): self
+    {
+        $this->createdBy = $createdBy;
 
         return $this;
     }

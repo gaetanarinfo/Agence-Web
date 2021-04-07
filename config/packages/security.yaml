@@ -17,6 +17,15 @@ security:
             logout:
                 path: /logout
                 target: /    
+            remember_me:
+                secret:   '%kernel.secret%'
+                lifetime: 604800 # 1 week in seconds
+                token_provider: 'Symfony\Bridge\Doctrine\Security\RememberMe\DoctrineTokenProvider'
+                path:     /
+                # by default, the feature is enabled by checking a
+                # checkbox in the login form (see below), uncomment the
+                # following line to always enable it.
+                #always_remember_me: true    
 
             #http_basic: true
 
@@ -30,13 +39,20 @@ security:
                 check_path: login         
 
     role_hierarchy:
-        ROLE_ADMIN: [ROLE_PRO]
+        ROLE_PRO: ROLE_ADMIN
+        ROLE_ADMIN: ROLE_ADMIN
+        ROLE_SUPER_ADMIN: ROLE_ADMIN, ROLE_PRO
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/professionnel, roles: ROLE_PRO }
+        - { path: /admin/utilisateur, roles: ROLE_SUPER_ADMIN }
+        - { path: ^/admin/website/, roles: ROLE_SUPER_ADMIN }
+        - { path: /admin/biens, roles: ROLE_PRO }
+        - { path: /admin/louer, roles: ROLE_PRO }
+        - { path: /admin/option, roles: ROLE_PRO }
+        - { path: /admin/option2, roles: ROLE_PRO }
+        - { path: ^/admin/mailbox, roles: ROLE_PRO }
         - { path: ^/user, roles: ROLE_USER }
 
     encoders:

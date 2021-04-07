@@ -1,6 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title rent.title %}
+{% block title 'AgenceWeb - ' ~ rent.title %}
+{% block description '' ~ rent.content %}
+{% block url '' ~ path('rent.show', {slug: rent.slug, id: rent.id}) %}
+{% block url2 '' ~ path('rent.show', {slug: rent.slug, id: rent.id}) %}
+{% block title2 'AgenceWeb - ' ~ rent.title %}
+{% block title3 'AgenceWeb - ' ~ rent.title %}
+{% block description2 '' ~ rent.content %}
+{% block description3 '' ~ rent.content %}
 
 {% block stylesheets %}
 
@@ -14,18 +21,18 @@
 
 {% block body %}
 
-	<div class="jumbotron">
+	<div class="jumbotron pt-3 pb-3">
 		<div class="container">
 
 			{% for message in app.flashes('success') %}
-				<div class="alert alert-success text-center">
+				<div class="alert alert-success text-center w-25 m-auto mb-3">
 					<i class="fa fa-check text-success" aria-hidden="true"></i> {{ message }}
 				</div>
 			{% endfor %}
 
 			{% if not form.vars.valid %}
-				<div class="alert alert-danger">
-					Une erreur est survenue !
+				<div class="alert alert-danger text-center w-25 m-auto mb-3">
+					<i class="fas fa-times text-danger" aria-hidden="true"></i> Une erreur est survenue !
 				</div>
 			{% endif %}
 
@@ -43,6 +50,7 @@
 				</div>
 				<div class="col-md-4 ml-4 mr-4 col-4 col-sm-4">
 					<h3>{{ rent.title }}</h3>
+					<h6>Mise en ligne par {{ rent.createdBy }}</h6>
 					<h5>{{ rent.rooms }}
 						pièces -
 						{{ rent.surface }}
@@ -116,7 +124,7 @@
 			<div class="col-md-4">
 				<h2>Spécificités</h2>
 				<ul class="list-group">
-					{% for option in property.options %}
+					{% for option in rent.options %}
 						<li class="list-group-item">{{ option.name }}</li>
 					{% endfor %}
 				</ul>

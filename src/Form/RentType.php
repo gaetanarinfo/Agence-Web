@@ -20,6 +20,7 @@ class RentType extends AbstractType
             ->add('title')
             ->add('content')
             ->add('surface')
+            ->add('createdBy', HiddenType::class)
             ->add('rooms')
             ->add('bedrooms')
             ->add('floor')
