@@ -37,9 +37,34 @@ class WebSiteMenu2
     private $link1;
 
     /**
+     * @Assert\Length(max=20)
      * @ORM\Column(type="string", length=20, nullable=true)
      */
     private $link2;
+
+    /**
+     * @Assert\Length(max=20)
+     * @ORM\Column(type="string", length=20, nullable=true)
+     */
+    private $button3;
+
+    /**
+     * @Assert\Length(max=20)
+     * @ORM\Column(type="string", length=20, nullable=true)
+     */
+    private $link3;
+
+    /**
+     * @Assert\Length(max=20)
+     * @ORM\Column(type="string", length=20, nullable=true)
+     */
+    private $button4;
+
+    /**
+     * @Assert\Length(max=20)
+     * @ORM\Column(type="string", length=20, nullable=true)
+     */
+    private $link4;
 
     public function getId(): ?int
     {
@@ -123,6 +148,54 @@ class WebSiteMenu2
     public function setLink1($link1)
     {
         $this->link1 = $link1;
+
+        return $this;
+    }
+
+    public function getButton3(): ?string
+    {
+        return $this->button3;
+    }
+
+    public function setButton3(string $button3): self
+    {
+        $this->button3 = $button3;
+
+        return $this;
+    }
+
+    public function getLink3(): ?string
+    {
+        return $this->link3;
+    }
+
+    public function setLink3(string $link3): self
+    {
+        $this->link3 = $link3;
+
+        return $this;
+    }
+
+    public function getButton4(): ?string
+    {
+        return $this->button4;
+    }
+
+    public function setButton4(?string $button4): self
+    {
+        $this->button4 = $button4;
+
+        return $this;
+    }
+
+    public function getLink4(): ?string
+    {
+        return $this->link4;
+    }
+
+    public function setLink4(?string $link4): self
+    {
+        $this->link4 = $link4;
 
         return $this;
     }

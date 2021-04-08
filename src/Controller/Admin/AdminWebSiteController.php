@@ -5,14 +5,20 @@ use App\Entity\WebSiteFooter;
 use App\Entity\WebSiteHeader;
 use App\Entity\WebSiteMenu;
 use App\Entity\WebSiteMenu2;
+use App\Entity\WebSiteMenuAdmin;
+use App\Entity\WebSiteMenuPro;
 use App\Form\WebSiteFooterType;
 use App\Form\WebSiteHeaderType;
 use App\Form\WebSiteMenu2Type;
+use App\Form\WebSiteMenuAdminType;
+use App\Form\WebSiteMenuProType;
 use App\Form\WebSiteMenuType;
 use App\Repository\WebSiteFooterRepository;
 use App\Repository\WebSiteHeaderRepository;
 use App\Repository\WebSiteMenuRepository;
 use App\Repository\WebSiteMenu2Repository;
+use App\Repository\WebSiteMenuAdminRepository;
+use App\Repository\WebSiteMenuProRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
@@ -30,13 +36,17 @@ class AdminWebSiteController extends AbstractController
     private $repository2;
     private $repository3;
     private $repository4;
+    private $repository5;
+    private $repository6;
 
-    public function __construct(WebSiteHeaderRepository $repository, WebSiteFooterRepository $repository2, WebSiteMenuRepository $repository3, WebSiteMenu2Repository $repository4, EntityManagerInterface $em)
+    public function __construct(WebSiteHeaderRepository $repository, WebSiteFooterRepository $repository2, WebSiteMenuRepository $repository3, WebSiteMenu2Repository $repository4, WebSiteMenuAdminRepository $repository5, WebSiteMenuProRepository $repository6, EntityManagerInterface $em)
     {
         $this->repository = $repository;
         $this->repository2 = $repository2;
         $this->repository3 = $repository3;
         $this->repository4 = $repository4;
+        $this->repository5 = $repository5;
+        $this->repository6 = $repository6;
         $this->em = $em;
     }
 
@@ -50,11 +60,15 @@ class AdminWebSiteController extends AbstractController
         $websiteMenu = $this->repository3->findMenu();
         $websiteMenu2 = $this->repository4->findMenu2();
         $websiteFooter = $this->repository2->findFooter();
+        $websiteMenuAdmin = $this->repository5->findMenuAdmin();
+        $websiteMenuPro = $this->repository6->findMenuPro();
         return $this->render('admin/website/index.html.twig', [
             'websiteHeader' => $websiteHeader,
             'websiteMenu' => $websiteMenu,
             'websiteMenu2' => $websiteMenu2,
             'websiteFooter' => $websiteFooter,
+            'websiteMenuAdmin' => $websiteMenuAdmin,
+            'websiteMenuPro' => $websiteMenuPro
         ]);
     }
 
@@ -127,6 +141,56 @@ class AdminWebSiteController extends AbstractController
         }
 
         return $this->render('admin/website/editMenu.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/admin/website/menu/admin/{id}", name="admin.website.editMenuAdmin", requirements={"id":"\d+"})
+     * @param WebSiteMenuAdmin $website
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function editMenuAdmin(WebSiteMenuAdmin $website, Request $request)
+    {
+        $form = $this->createForm(WebSiteMenuAdminType::class, $website);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+           
+                $this->em->flush();
+                $this->addFlash('success', 'Le menu à bien été modifié');
+                return $this->redirectToRoute('admin.website.index');
+            
+        }
+
+        return $this->render('admin/website/editMenuAdmin.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/admin/website/menu/pro/{id}", name="admin.website.editMenuPro", requirements={"id":"\d+"})
+     * @param WebSiteMenuPro $website
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function editMenuPro(WebSiteMenuPro $website, Request $request)
+    {
+        $form = $this->createForm(WebSiteMenuProType::class, $website);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+           
+                $this->em->flush();
+                $this->addFlash('success', 'Le menu à bien été modifié');
+                return $this->redirectToRoute('admin.website.index');
+            
+        }
+
+        return $this->render('admin/website/editMenuPro.html.twig', [
             'form' => $form->createView()
         ]);
     }

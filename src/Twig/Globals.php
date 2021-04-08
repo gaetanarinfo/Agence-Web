@@ -4,6 +4,9 @@ namespace App\Twig;
 
 use App\Repository\WebSiteFooterRepository;
 use App\Repository\WebSiteHeaderRepository;
+use App\Repository\WebSiteMenu2Repository;
+use App\Repository\WebSiteMenuAdminRepository;
+use App\Repository\WebSiteMenuProRepository;
 use App\Repository\WebSiteMenuRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -17,12 +20,19 @@ class Globals {
      */
     private $repository;
     private $repository2;
+    private $repository3;
+    private $repository4;
+    private $repository5;
+    private $repository6;
 
-    public function __construct(WebSiteHeaderRepository $repository, WebSiteFooterRepository $repository2, WebSiteMenuRepository $repository3, EntityManagerInterface $em)
+    public function __construct(WebSiteHeaderRepository $repository, WebSiteFooterRepository $repository2, WebSiteMenuRepository $repository3, WebSiteMenu2Repository $repository4, WebSiteMenuAdminRepository $repository5, WebSiteMenuProRepository $repository6, EntityManagerInterface $em)
     {
         $this->repository = $repository;
         $this->repository2 = $repository2;
         $this->repository3 = $repository3;
+        $this->repository4 = $repository4;
+        $this->repository5 = $repository5;
+        $this->repository6 = $repository6;
         $this->em = $em;
     }
 
@@ -67,6 +77,27 @@ class Globals {
         $menu = $this->repository3->findMenu();
         
         return $menu;
+    }
+
+    public function menu2()
+    {
+        $menu2 = $this->repository4->findMenu2();
+        
+        return $menu2;
+    }
+
+    public function menuAdmin()
+    {
+        $menuAdmin = $this->repository5->findMenuAdmin();
+        
+        return $menuAdmin;
+    }
+
+    public function menuPro()
+    {
+        $menuPro = $this->repository6->findMenuPro();
+        
+        return $menuPro;
     }
 
     public function copyright()

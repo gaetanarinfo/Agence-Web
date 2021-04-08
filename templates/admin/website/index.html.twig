@@ -64,9 +64,51 @@
                         <ul class="list-group">
                             {% if websites.button1 != null %}<li class="list-group-item text-center"><b>Bouton 1 : </b><br/><a href="../{{ websites.link1 }}">{{ websites.button1 }}</a></li>{% endif %}
                             {% if websites.button2 != null %}<li class="list-group-item text-center"><b>Bouton 2 : </b><br/><a href="../{{ websites.link2 }}">{{ websites.button2 }}</a></li>{% endif %}
+                            {% if websites.button3 != null %}<li class="list-group-item text-center"><b>Bouton 3 : </b><br/><a href="../{{ websites.link3 }}">{{ websites.button3 }}</a></li>{% endif %}
+                            {% if websites.button4 != null %}<li class="list-group-item text-center"><b>Bouton 4 : </b><br/><a href="../{{ websites.link4 }}">{{ websites.button4 }}</a></li>{% endif %}
                         </ul>
                         <div class="m-auto text-center mt-4 mb-4">
                             <a href="{{ path('admin.website.editMenu2', {id: websites.id}) }}" class="btn btn-primary">Editer</a>
+                        </div>
+                    {% endfor %}  
+                </div>
+
+                <div class="col-md-6">
+                    <p class="title-cont text-center">Menu Admin</p>
+                    {% for websites in websiteMenuAdmin %}
+                        <ul class="list-group m-auto">
+                            {% if websites.button1 != null %}<li class="list-group-item text-center"><b>Bouton 1 : </b><i class="fas {{ websites.icon1 }} mr-2"></i><br/><a href="../{{ websites.link1 }}">{{ websites.button1 }}</a></li>{% endif %}
+                            {% if websites.button2 != null %}<li class="list-group-item text-center"><b>Bouton 2 : </b><i class="fas {{ websites.icon2 }} mr-2"></i><br/><a href="../{{ websites.link2 }}">{{ websites.button2 }}</a></li>{% endif %}
+                            {% if websites.button3 != null %}<li class="list-group-item text-center"><b>Bouton 3 : </b><i class="fas {{ websites.icon3 }} mr-2"></i><br/><a href="../{{ websites.link3 }}">{{ websites.button3 }}</a></li>{% endif %}
+                            {% if websites.button4 != null %}<li class="list-group-item text-center"><b>Bouton 4 : </b><i class="fas {{ websites.icon4 }} mr-2"></i><br/><a href="../{{ websites.link4 }}">{{ websites.button4 }}</a></li>{% endif %}
+                            {% if websites.button5 != null %}<li class="list-group-item text-center"><b>Bouton 5 : </b><i class="fas {{ websites.icon5 }} mr-2"></i><br/><a href="../{{ websites.link5 }}">{{ websites.button5 }}</a></li>{% endif %}
+                            {% if websites.button6 != null %}<li class="list-group-item text-center"><b>Bouton 6 : </b><i class="fas {{ websites.icon6 }} mr-2"></i><br/><a href="../{{ websites.link6 }}">{{ websites.button6 }}</a></li>{% endif %}
+                            {% if websites.button7 != null %}<li class="list-group-item text-center"><b>Bouton 7 : </b><i class="fas {{ websites.icon7 }} mr-2"></i><br/><a href="../{{ websites.link7 }}">{{ websites.button7 }}</a></li>{% endif %}
+                        </ul>
+                        <div class="m-auto text-center mt-4 mb-4">
+                            <a href="{{ path('admin.website.editMenuAdmin', {id: websites.id}) }}" class="btn btn-primary">Editer</a>
+                        </div>
+                    {% endfor %}    
+                </div>
+            </div>        
+        </div>
+
+        <hr class="w-50 m-auto mb-3">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="title-cont text-center">Menu Professionnel</p>
+                    {% for websites in websiteMenuPro %}
+                        <ul class="list-group m-auto">
+                            {% if websites.button1 != null %}<li class="list-group-item text-center"><b>Bouton 1 : </b><i class="fas {{ websites.icon1 }} mr-2"></i><br/><a href="../{{ websites.link1 }}">{{ websites.button1 }}</a></li>{% endif %}
+                            {% if websites.button2 != null %}<li class="list-group-item text-center"><b>Bouton 2 : </b><i class="fas {{ websites.icon2 }} mr-2"></i><br/><a href="../{{ websites.link2 }}">{{ websites.button2 }}</a></li>{% endif %}
+                            {% if websites.button3 != null %}<li class="list-group-item text-center"><b>Bouton 3 : </b><i class="fas {{ websites.icon3 }} mr-2"></i><br/><a href="../{{ websites.link3 }}">{{ websites.button3 }}</a></li>{% endif %}
+                            {% if websites.button4 != null %}<li class="list-group-item text-center"><b>Bouton 4 : </b><i class="fas {{ websites.icon4 }} mr-2"></i><br/><a href="../{{ websites.link4 }}">{{ websites.button4 }}</a></li>{% endif %}
+                            {% if websites.button5 != null %}<li class="list-group-item text-center"><b>Bouton 5 : </b><i class="fas {{ websites.icon5 }} mr-2"></i><br/><a href="../{{ websites.link5 }}">{{ websites.button5 }}</a></li>{% endif %}
+                        </ul>
+                        <div class="m-auto text-center mt-4 mb-4">
+                            <a href="{{ path('admin.website.editMenuPro', {id: websites.id}) }}" class="btn btn-primary">Editer</a>
                         </div>
                     {% endfor %}  
                 </div>

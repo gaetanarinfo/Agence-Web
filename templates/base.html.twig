@@ -91,19 +91,35 @@
                         Administration
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ path('admin.website.index') }}"><i class="fas fa-cogs mr-2"></i>Gérer le site internet</a>
+                        {% for website in globals.menuAdmin %}
+                        {% if website.button1 != null %}
+                        <a class="dropdown-item" href="../../../../{{ website.link1 }}"><i class="fas {{ website.icon1 }} mr-2"></i>{{ website.button1 }}</a>
                         <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{ path('admin.mailbox.index') }}"><i class="fas fa-inbox mr-2"></i>Boîte de réception</a>
+                        {% endif %}
+                        {% if website.button2 != null %}
+                            <a class="dropdown-item" href="../../../../{{ website.link2 }}"><i class="fas {{ website.icon2 }} mr-2"></i>{{ website.button2 }}</a>
                         <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{ path('admin.user.index') }}"><i class="fas fa-users-cog mr-2"></i>Gérer les utilisateurs</a>
+                        {% endif %}
+                        {% if website.button3 != null %}
+                            <a class="dropdown-item" href="../../../../{{ website.link3 }}"><i class="fas {{ website.icon3 }} mr-2"></i>{{ website.button3 }}</a>
+                        {% endif %}
+                        {% if website.button4 != null %}
                         <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{ path('admin.property.index') }}"><i class="fas fa-toolbox mr-2"></i>Gérer les biens</a>
+                            <a class="dropdown-item" href="../../../../{{ website.link4 }}"><i class="fas {{ website.icon4 }} mr-2"></i>{{ website.button4 }}</a>
+                        {% endif %}
+                        {% if website.button5 != null %}
                         <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{ path('admin.rent.index') }}"><i class="fas fa-toolbox mr-2"></i>Gérer les locations</a>
+                            <a class="dropdown-item" href="../../../../{{ website.link5 }}"><i class="fas {{ website.icon5 }} mr-2"></i>{{ website.button5 }}</a>
+                        {% endif %}
+                        {% if website.button6 != null %}
                         <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{ path('admin.option.index') }}"><i class="fas fa-toolbox mr-2"></i>Options des biens</a>
+                            <a class="dropdown-item" href="../../../../{{ website.link6 }}"><i class="fas {{ website.icon6 }} mr-2"></i>{{ website.button6 }}</a>
+                        {% endif %}
+                        {% if website.button7 != null %}
                         <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{ path('admin.option2.index') }}"><i class="fas fa-toolbox mr-2"></i>Options des locations</a>    
+                            <a class="dropdown-item" href="../../../../{{ website.link7 }}"><i class="fas {{ website.icon7 }} mr-2"></i>{{ website.button7 }}</a>    
+                        {% endif %}
+                        {% endfor %}
                         </div>  
                     </li>
                 
@@ -116,39 +132,62 @@
                         Professionnel
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ path('admin.mailbox.index') }}"><i class="fas fa-inbox mr-2"></i>Boîte de réception</a>
+                        {% for website in globals.menuPro %}
+                        {% if website.button1 != null %}
+                        <a class="dropdown-item" href="../../../../{{ website.link1 }}"><i class="fas {{ website.icon1 }} mr-2"></i>{{ website.button1 }}</a>
                         <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{ path('admin.property.index') }}"><i class="fas fa-home mr-2"></i>Gérer les biens</a>
+                        {% endif %}
+                        {% if website.button2 != null %}
+                            <a class="dropdown-item" href="../../../../{{ website.link2 }}"><i class="fas {{ website.icon2 }} mr-2"></i>{{ website.button2 }}</a>
                         <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{ path('admin.rent.index') }}"><i class="fas fa-home mr-2"></i>Gérer les locations</a>
+                        {% endif %}
+                        {% if website.button3 != null %}
+                            <a class="dropdown-item" href="../../../../{{ website.link3 }}"><i class="fas {{ website.icon3 }} mr-2"></i>{{ website.button3 }}</a>
+                        {% endif %}
+                        {% if website.button4 != null %}
                         <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{ path('admin.option.index') }}"><i class="fas fa-toolbox mr-2"></i>Options des biens</a>
+                            <a class="dropdown-item" href="../../../../{{ website.link4 }}"><i class="fas {{ website.icon4 }} mr-2"></i>{{ website.button4 }}</a>
+                        {% endif %}
+                        {% if website.button5 != null %}
                         <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{ path('admin.option2.index') }}"><i class="fas fa-toolbox mr-2"></i>Options des locations</a>    
+                            <a class="dropdown-item" href="../../../../{{ website.link5 }}"><i class="fas {{ website.icon5 }} mr-2"></i>{{ website.button5 }}</a>
+                        {% endif %}
+                        {% endfor %}
                         </div>  
                     </li>
                 
                 {% endif %}
 
-                    <li class="nav-item">
-                        <a href="{{ path('profil') }}" class="nav-link">Mon profil</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a href="{{ path('logout') }}" class="nav-link">Se déconnecter</a>
-                    </li>
+                    {% for website in globals.menu2 %}
+                        {% if website.button4 != null %}
+                        <li class="nav-item {% if app.request.requesturi == '/' ~ website.link4 %}active{% endif %}">
+                            <a href="../{{ website.link4 }}" class="nav-link">{{ website.button4 }}</a>
+                        </li>
+                        {% endif %}
+                        {% if website.button3 != null %}    
+                        <li class="nav-item">
+                            <a href="../{{ website.link3 }}" class="nav-link">{{ website.button3 }}</a>
+                        </li>
+                        {% endif %}
+                    {% endfor %}
 
                 </ul>
 
                 {% else %}   
 
                     <ul class="navbar-nav">
+                    {% for website in globals.menu2 %}
+                        {% if website.button1 != null %}
                         <li class="nav-link">
-                            <a href="{{ path('register') }}" class="btn btn-outline-success nav-link text-white text-bold">Inscription</a>
+                            <a href="{{ website.link1 }}" class="btn btn-outline-success nav-link text-white text-bold">{{ website.button1 }}</a>
                         </li>
+                        {% endif %}
+                        {% if website.button2 != null %}
                         <li class="nav-link">
-                            <a href="{{ path('login') }}" class="btn btn-outline-info nav-link text-white text-bold">Connexion</a>
+                            <a href="{{ website.link2 }}" class="btn btn-outline-info nav-link text-white text-bold">{{ website.button2 }}</a>
                         </li>
+                        {% endif %}
+                    {% endfor %}    
                     </ul>
 
                 {% endif %}

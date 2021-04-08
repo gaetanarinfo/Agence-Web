@@ -1,0 +1,54 @@
+<div class="mt-4 mb-4 w-75 m-auto">
+	{{ form_start(form) }}
+	<div class="col-md-12">
+		<div class="row" style="justify-content: center;">
+			<div class="col-md-5">{{ form_row(form.button1) }}</div>
+			<div class="col-md-5">{{ form_row(form.button2) }}</div>
+		</div>
+
+		<div class="row" style="justify-content: center;">
+			<div class="col-md-5">{{ form_row(form.button3) }}</div>
+			<div class="col-md-5">{{ form_row(form.button4) }}</div>
+		</div>
+
+        <div class="row" style="justify-content: center;">
+			<div class="col-md-5">{{ form_row(form.button5) }}</div>
+			<div class="col-md-5">{{ form_row(form.link1) }}</div>
+		</div>
+
+		<div class="row" style="justify-content: center;">
+            <div class="col-md-5">{{ form_row(form.link2) }}</div>
+			<div class="col-md-5">{{ form_row(form.link3) }}</div>
+		</div>
+
+		<div class="row" style="justify-content: center;">
+            <div class="col-md-5">{{ form_row(form.link4) }}</div>
+			<div class="col-md-5">{{ form_row(form.link5) }}</div>
+		</div>
+
+        <div class="row" style="justify-content: center;">
+            <div class="col-md-5">{{ form_row(form.icon1) }}</div>
+			<div class="col-md-5">{{ form_row(form.icon2) }}</div>
+		</div>
+
+        <div class="row" style="justify-content: center;">
+            <div class="col-md-5">{{ form_row(form.icon3) }}</div>
+			<div class="col-md-5">{{ form_row(form.icon4) }}</div>
+		</div>
+
+        <div class="row" style="justify-content: center;">
+            <div class="col-md-5">{{ form_row(form.icon5) }}<a href="https://fontawesome.com/icons?d=gallery&p=1&m=free" target="_blank">Liste des icônes</a></div>
+		</div>
+	</div>
+
+	{{ form_rest(form) }}
+
+	<div class="row mb-4">
+		<div class="m-auto">
+			<div class="row" style="justify-content: space-around;">
+				<button class="button-submit">{{ button|default('Enregistrer') }}</button>
+			</div>
+		</div>
+	</div>	
+	{{ form_end(form) }}
+</div>
