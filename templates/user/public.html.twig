@@ -1,11 +1,11 @@
 {% extends "base.html.twig" %}
 
-{% block title 'AgenceWeb - Profil de ' ~ user.username %}
+{% block title globals.title ~ ' Profil de ' ~ user.username %}
 {% block description '' ~ user.biography %}
 {% block url '' ~ path('user.public', { username: user.username }) %}
 {% block url2 '' ~ path('user.public', { username: user.username }) %}
-{% block title2 'AgenceWeb - Profil de ' ~ user.username %}
-{% block title3 'AgenceWeb - Profil de ' ~ user.username %}
+{% block title2 globals.title ~ ' Profil de ' ~ user.username %}
+{% block title3 globals.title ~ ' Profil de ' ~ user.username %}
 {% block description2 '' ~ user.biography %}
 {% block description3 '' ~ user.biography %}
 

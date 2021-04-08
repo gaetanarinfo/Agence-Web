@@ -176,3 +176,18 @@ h2 {
 .slick-next:before {
     color: #312828;
 }
+
+
+/* MDB Message */
+
+.invalid-feedback,
+.invalid-tooltip {
+    position: relative !important;
+    font-size: .875rem !important;
+}
+
+.invalid-feedback {
+    width: auto;
+    color: #f93154;
+    margin-top: 0.25rem;
+}

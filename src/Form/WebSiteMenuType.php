@@ -2,44 +2,45 @@
 
 namespace App\Form;
 
-use App\Entity\WebSiteFooter;
+use App\Entity\WebSiteMenu;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class WebSiteFooterType extends AbstractType
+class WebSiteMenuType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('facebook', TextType::class, [
+            ->add('button1', TextType::class, [
                 'required' => false
             ])
-            ->add('twitter', TextType::class, [
+            ->add('button2', TextType::class, [
                 'required' => false
             ])
-            ->add('instagram', TextType::class, [
+            ->add('button3', TextType::class, [
                 'required' => false
             ])
-            ->add('linkedin', TextType::class, [
+            ->add('button4', TextType::class, [
                 'required' => false
             ])
-            ->add('address', TextType::class, [
+            ->add('button5', TextType::class, [
                 'required' => false
             ])
-            ->add('postalCode', IntegerType::class, [
+            ->add('link1', TextType::class, [
                 'required' => false
             ])
-            ->add('city', TextType::class, [
+            ->add('link2', TextType::class, [
                 'required' => false
             ])
-            ->add('phone', IntegerType::class, [
+            ->add('link3', TextType::class, [
                 'required' => false
             ])
-            ->add('copyright', TextType::class, [
+            ->add('link4', TextType::class, [
+                'required' => false
+            ])
+            ->add('link5', TextType::class, [
                 'required' => false
             ])
         ;
@@ -48,7 +49,7 @@ class WebSiteFooterType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => WebSiteFooter::class,
+            'data_class' => WebSiteMenu::class,
             'translation_domain' => 'forms'
         ]);
     }

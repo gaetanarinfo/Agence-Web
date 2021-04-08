@@ -6,68 +6,91 @@
 
     <div class="container mt-4 mb-4 w-50">
 
-        <p class="title-cont">Gérer le site internet</p>
+        <p class="title-cont text-center">Gérer le site internet</p>
+
+        <hr class="w-50 m-auto mb-3">
 
         {% for message in app.flashes('success') %}
-            <div class="alert alert-success text-center">
+            <div class="alert alert-success text-center m-auto mb-3 w-50">
                 <i class="fa fa-check text-success" aria-hidden="true"></i> {{ message }}
             </div>
         {% endfor %}
 
         {% for message in app.flashes('error') %}
-            <div class="alert alert-danger text-center">
+            <div class="alert alert-danger text-center m-auto mb-3 w-50">
                 <i class="fas fa-times text-danger" aria-hidden="true"></i> {{ message }}
             </div>
         {% endfor %}
-        <p class="title-cont text-center">Header</p>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Titre du site internet</th>
-                    <th>Action</th>
-                </tr>    
-            </thead>
-            <tbody>
-            {% for websites in websiteHeader %}
-                <tr>
-                    <td style="vertical-align: middle;">{{ websites.webTitle }}</td>
-                    <td style="vertical-align: middle;">
-                        <a href="{{ path('admin.website.editHeader', {id: websites.id}) }}" class="btn btn-primary">Editer</a>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
 
-        <p class="title-cont text-center">Footer</p>
-        <table class="table table-striped w-75">
-            <thead>
-                <tr>
-                    <th>Facebook</th>
-                    <th>Twitter</th>
-                    <th>Instagram</th>
-                    <th>Linkedin</th>
-                    <th>Adresse</th>
-                    <th>Téléphone</th>
-                    <th>Action</th>
-                </tr>    
-            </thead>
-            <tbody>
-            {% for websites in websiteFooter %}
-                <tr>
-                    <td style="vertical-align: middle;">{{ websites.facebook }}</td>
-                    <td style="vertical-align: middle;">{{ websites.twitter }}</td>
-                    <td style="vertical-align: middle;">{{ websites.instagram }}</td>
-                    <td style="vertical-align: middle;">{{ websites.linkedin }}</td>
-                    <td style="vertical-align: middle;">{{ websites.address }}</td>
-                    <td style="vertical-align: middle;">0{{ websites.phone }}</td>
-                    <td style="vertical-align: middle;">
-                        <a href="{{ path('admin.website.editFooter', {id: websites.id}) }}" class="btn btn-primary">Editer</a>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="title-cont text-center">Header</p>
+                    {% for websites in websiteHeader %}
+                        <ul class="list-group">
+                            <li class="list-group-item text-center"><b>Titre du site : </b><br/>{{ websites.webTitle }}</li>
+                            <li class="list-group-item text-center"><b>Description : </b><br/>{{ websites.content }}</li>
+                        </ul>
+                        <div class="m-auto text-center mt-4 mb-4">
+                            <a href="{{ path('admin.website.editHeader', {id: websites.id}) }}" class="btn btn-primary">Editer</a>
+                        </div>
+                    {% endfor %} 
+                </div>
+                <div class="col-md-6">
+                    <p class="title-cont text-center">Menu Gauche</p>
+                    {% for websites in websiteMenu %}
+                        <ul class="list-group">
+                            {% if websites.button1 != null %}<li class="list-group-item text-center"><b>Bouton 1 : </b><br/><a href="../{{ websites.link1 }}">{{ websites.button1 }}</a></li>{% endif %}
+                            {% if websites.button2 != null %}<li class="list-group-item text-center"><b>Bouton 2 : </b><br/><a href="../{{ websites.link2 }}">{{ websites.button2 }}</a></li>{% endif %}
+                            {% if websites.button3 != null %}<li class="list-group-item text-center"><b>Bouton 3 : </b><br/><a href="../{{ websites.link3 }}">{{ websites.button3 }}</a></li>{% endif %}
+                            {% if websites.button4 != null %}<li class="list-group-item text-center"><b>Bouton 4 : </b><br/><a href="../{{ websites.link4 }}">{{ websites.button4 }}</a></li>{% endif %}
+                            {% if websites.button5 != null %}<li class="list-group-item text-center"><b>Bouton 5 : </b><br/><a href="../{{ websites.link5 }}">{{ websites.button5 }}</a></li>{% endif %}
+                        </ul>
+                        <div class="m-auto text-center mt-4 mb-4">
+                            <a href="{{ path('admin.website.editMenu', {id: websites.id}) }}" class="btn btn-primary">Editer</a>
+                        </div>
+                    {% endfor %}  
+                </div>
+            </div>
+        </div>
+       
+        <hr class="w-50 m-auto mb-3">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="title-cont text-center">Menu Droite</p>
+                    {% for websites in websiteMenu2 %}
+                        <ul class="list-group">
+                            {% if websites.button1 != null %}<li class="list-group-item text-center"><b>Bouton 1 : </b><br/><a href="../{{ websites.link1 }}">{{ websites.button1 }}</a></li>{% endif %}
+                            {% if websites.button2 != null %}<li class="list-group-item text-center"><b>Bouton 2 : </b><br/><a href="../{{ websites.link2 }}">{{ websites.button2 }}</a></li>{% endif %}
+                        </ul>
+                        <div class="m-auto text-center mt-4 mb-4">
+                            <a href="{{ path('admin.website.editMenu2', {id: websites.id}) }}" class="btn btn-primary">Editer</a>
+                        </div>
+                    {% endfor %}  
+                </div>
+
+                <div class="col-md-6">
+                    <p class="title-cont text-center">Footer</p>
+                    {% for websites in websiteFooter %}
+                        <ul class="list-group m-auto">
+                            <li class="list-group-item text-center"><b>Réseau social : </b><br/>{{ websites.facebook }}</li>
+                            <li class="list-group-item text-center"><b>Réseau social : </b><br/>{{ websites.twitter }}</li>
+                            <li class="list-group-item text-center"><b>Réseau social : </b><br/>{{ websites.instagram }}</li>
+                            <li class="list-group-item text-center"><b>Adresse : </b><br/>{{ websites.address }}</li>
+                            <li class="list-group-item text-center"><b>Code postal : </b><br/>{{ websites.postalCode }}</li>
+                            <li class="list-group-item text-center"><b>Ville : </b><br/>{{ websites.city }}</li>
+                            <li class="list-group-item text-center"><b>Téléphone : </b><br/>0{{ websites.phone }}</li>
+                            <li class="list-group-item text-center"><b>Bas de page : </b><br/>{{ websites.copyright }}</li>
+                        </ul>
+                        <div class="m-auto text-center mt-4">
+                            <a href="{{ path('admin.website.editFooter', {id: websites.id}) }}" class="btn btn-primary">Editer</a>
+                        </div>
+                    {% endfor %}    
+                </div>
+            </div>        
+        </div>
 
     </div>
 {% endblock %}

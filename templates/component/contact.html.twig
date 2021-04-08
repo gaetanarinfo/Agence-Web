@@ -95,17 +95,29 @@
             <!--Grid column-->
             <div class="col-md-3 text-center">
                 <ul class="list-unstyled mb-0">
+                {% for contact in globals.contact %}
                     <li><i class="fas fa-map-marker-alt fa-2x"></i>
-                        <p>San Francisco, CA 94126, USA</p>
+                        <p>
+                        {% if contact.address != null %}
+                            {{ contact.address }}, 
+                        {% endif %}
+                         {% if contact.postalCode != null %}
+                            {{ contact.postalCode }}, 
+                        {% endif %}    
+                         {% if contact.city != null %}
+                            {{ contact.city }}
+                        {% endif %}    
+                        </p>
                     </li>
 
                     <li><i class="fas fa-phone mt-4 fa-2x"></i>
-                        <p>+ 01 234 567 89</p>
+                        <p>0{{ contact.phone }}</p>
                     </li>
 
                     <li><i class="fas fa-envelope mt-4 fa-2x"></i>
-                        <p>contact@mdbootstrap.com</p>
+                        <p>{{ contact.email }}</p>
                     </li>
+                {% endfor %}   
                 </ul>
             </div>
             <!--Grid column-->

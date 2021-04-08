@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\WebSiteFooterRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=WebSiteFooterRepository::class)
@@ -18,39 +19,63 @@ class WebSiteFooter
     private $id;
 
      /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=20)
+     * @ORM\Column(type="string", length=20, nullable=true)
      */
     private $facebook;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=20)
+     * @ORM\Column(type="string", length=20, nullable=true)
      */
     private $twitter;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=20)
+     * @ORM\Column(type="string", length=20, nullable=true)
      */
     private $instagram;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=20)
+     * @ORM\Column(type="string", length=20, nullable=true)
      */
     private $linkedin;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @Assert\Length(max=100)
+     * @ORM\Column(type="string", length=100, nullable=true)
      */
     private $address;
 
     /**
-     * @ORM\Column(type="integer")
+     * @Assert\Length(max=10)
+     * @ORM\Column(type="integer", length=10, nullable=false)
      */
     private $phone;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @Assert\Length(max=100)
+     * @ORM\Column(type="string", length=100, nullable=true)
      */
     private $email;
+
+    /**
+     * @Assert\Length(max=7)
+     * @ORM\Column(type="integer", length=7, nullable=true)
+     */
+    private $postalCode;
+
+    /**
+     * @Assert\Length(max=20)
+     * @ORM\Column(type="string", length=20, nullable=true)
+     */
+    private $city;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $copyright;
 
     public function getId(): ?int
     {
@@ -117,12 +142,12 @@ class WebSiteFooter
         return $this;
     }
 
-    public function getPhone(): ?string
+    public function getPhone(): ?int
     {
         return $this->phone;
     }
 
-    public function setPhone(string $phone): self
+    public function setPhone(int $phone): self
     {
         $this->phone = $phone;
 
@@ -137,6 +162,42 @@ class WebSiteFooter
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getPostalCode(): ?int
+    {
+        return $this->postalCode;
+    }
+
+    public function setPostalCode(?int $postalCode): self
+    {
+        $this->postalCode = $postalCode;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(?string $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getCopyright(): ?string
+    {
+        return $this->copyright;
+    }
+
+    public function setCopyright(string $copyright): self
+    {
+        $this->copyright = $copyright;
 
         return $this;
     }

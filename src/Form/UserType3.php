@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -39,7 +40,7 @@ class UserType3 extends AbstractType
                 'label' => false,
                 'required' => false
             ])
-            ->add('postalCode', NumberType::class, [
+            ->add('postalCode', IntegerType::class, [
                 'label' => false,
                 'required' => false
             ])
@@ -47,11 +48,11 @@ class UserType3 extends AbstractType
                 'label' => false,
                 'required' => false
             ])
-            ->add('phone', NumberType::class, [
+            ->add('phone', IntegerType::class, [
                 'label' => false,
                 'required' => false
             ])
-            ->add('mobile', NumberType::class, [
+            ->add('mobile', IntegerType::class, [
                 'label' => false,
                 'required' => false
             ])

@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title 'AgenceWeb - ' ~ property.title %}
+{% block title globals.title ~ property.title %}
 {% block description '' ~ property.content %}
 {% block url '' ~ path('property.show', {slug: property.slug, id: property.id}) %}
 {% block url2 '' ~ path('property.show', {slug: property.slug, id: property.id}) %}
-{% block title2 'AgenceWeb - ' ~ property.title %}
-{% block title3 'AgenceWeb - ' ~ property.title %}
+{% block title2 globals.title ~ property.title %}
+{% block title3 globals.title ~ property.title %}
 {% block description2 '' ~ property.content %}
 {% block description3 '' ~ property.content %}
 
