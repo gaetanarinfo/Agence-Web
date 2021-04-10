@@ -3,11 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Contact;
+use App\Entity\Mailbox;
 use App\Entity\Rent;
 use App\Entity\RentSearch;
 use App\Form\ContactType;
+use App\Form\MailboxType;
 use App\Form\RentSearchType;
-use App\Notification\ContactNotification;
+use App\Notification\ContactNotification2;
 use App\Repository\RentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -53,7 +55,7 @@ class RentController extends AbstractController
      * @param Rent $rent
      * @return Response
      */
-    public function show(Rent $rent, string $slug, Request $request, ContactNotification $notification): Response
+    public function show(Rent $rent, string $slug, Request $request): Response
     {
         if($rent->getSlug() !== $slug){
             return $this->redirectToRoute('rent.show', [
@@ -62,18 +64,22 @@ class RentController extends AbstractController
             ], 301);
         }
 
-        $contact = new Contact();
-        $contact->setProperty($rent);
-        $form = $this->createForm(ContactType::class, $contact);
+        $mailbox = new Mailbox();
+        $form = $this->createForm(MailboxType::class, $mailbox);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid())
         {
-            $notification->notify($contact);
+
+            $title = $rent->getTitle($mailbox, $rent->getTitle());
+            $mailbox->setSubject($title);
+            $mailbox->setCategorie('4');
+            $this->em->persist($mailbox);
+            $this->em->flush();
             $this->addFlash('success', 'Votre message a bien été envoyé');
             return $this->redirectToRoute('rent.show', [
                 'id' => $rent->getId(),
-                'slug' => $rent->getSlug()
+                'slug' => $rent->getSlug() 
             ]);
         }
 

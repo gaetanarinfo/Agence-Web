@@ -78,9 +78,14 @@ class Mailbox
     private $trash;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="integer")
      */
     private $categorie;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $phone;
 
     public function __construct()
      {
@@ -217,14 +222,26 @@ class Mailbox
         return $this;
     }
 
-    public function getCategorie(): ?bool
+    public function getCategorie(): ?int
     {
         return $this->categorie;
     }
 
-    public function setCategorie(bool $categorie): self
+    public function setCategorie(int $categorie): self
     {
         $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    public function getPhone(): ?int
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(?int $phone): self
+    {
+        $this->phone = $phone;
 
         return $this;
     }

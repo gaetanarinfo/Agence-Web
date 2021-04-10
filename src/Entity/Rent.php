@@ -101,7 +101,7 @@ class Rent
     private $updated_at;
 
     /**
-     * @var Picture|null
+     * @var PictureAppartementA|null
      */
     private $picture;
 
@@ -133,7 +133,7 @@ class Rent
     private $options;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $createdBy;
 

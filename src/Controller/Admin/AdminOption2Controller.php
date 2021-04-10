@@ -17,7 +17,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 class AdminOption2Controller extends AbstractController
 {
     /**
-     * @IsGranted("ROLE_ADMIN")
      * @Route("/", name="admin.option2.index", methods={"GET"})
      */
     public function index(OptionRentRepository $optionRepository): Response

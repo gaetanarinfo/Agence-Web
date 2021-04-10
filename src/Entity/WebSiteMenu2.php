@@ -19,50 +19,50 @@ class WebSiteMenu2
     private $id;
 
     /**
-     * @Assert\Length(max=20)
-     * @ORM\Column(type="string", length=20, nullable=true)
+     * @Assert\Length(max=40)
+     * @ORM\Column(type="string", length=40, nullable=true)
      */
     private $button1;
 
     /**
-     * @Assert\Length(max=20)
-     * @ORM\Column(type="string", length=20, nullable=true)
+     * @Assert\Length(max=40)
+     * @ORM\Column(type="string", length=40, nullable=true)
      */
     private $button2;
 
     /**
-     * @Assert\Length(max=20)
-     * @ORM\Column(type="string", length=20, nullable=true)
+     * @Assert\Length(max=40)
+     * @ORM\Column(type="string", length=40, nullable=true)
      */
     private $link1;
 
     /**
-     * @Assert\Length(max=20)
-     * @ORM\Column(type="string", length=20, nullable=true)
+     * @Assert\Length(max=40)
+     * @ORM\Column(type="string", length=40, nullable=true)
      */
     private $link2;
 
     /**
-     * @Assert\Length(max=20)
-     * @ORM\Column(type="string", length=20, nullable=true)
+     * @Assert\Length(max=40)
+     * @ORM\Column(type="string", length=40, nullable=true)
      */
     private $button3;
 
     /**
-     * @Assert\Length(max=20)
-     * @ORM\Column(type="string", length=20, nullable=true)
+     * @Assert\Length(max=40)
+     * @ORM\Column(type="string", length=40, nullable=true)
      */
     private $link3;
 
     /**
-     * @Assert\Length(max=20)
-     * @ORM\Column(type="string", length=20, nullable=true)
+     * @Assert\Length(max=40)
+     * @ORM\Column(type="string", length=40, nullable=true)
      */
     private $button4;
 
     /**
-     * @Assert\Length(max=20)
-     * @ORM\Column(type="string", length=20, nullable=true)
+     * @Assert\Length(max=40)
+     * @ORM\Column(type="string", length=40, nullable=true)
      */
     private $link4;
 

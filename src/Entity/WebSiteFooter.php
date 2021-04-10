@@ -19,26 +19,26 @@ class WebSiteFooter
     private $id;
 
      /**
-     * @Assert\Length(max=20)
-     * @ORM\Column(type="string", length=20, nullable=true)
+     * @Assert\Length(max=40)
+     * @ORM\Column(type="string", length=40, nullable=true)
      */
     private $facebook;
 
     /**
-     * @Assert\Length(max=20)
-     * @ORM\Column(type="string", length=20, nullable=true)
+     * @Assert\Length(max=40)
+     * @ORM\Column(type="string", length=40, nullable=true)
      */
     private $twitter;
 
     /**
-     * @Assert\Length(max=20)
-     * @ORM\Column(type="string", length=20, nullable=true)
+     * @Assert\Length(max=40)
+     * @ORM\Column(type="string", length=40, nullable=true)
      */
     private $instagram;
 
     /**
-     * @Assert\Length(max=20)
-     * @ORM\Column(type="string", length=20, nullable=true)
+     * @Assert\Length(max=40)
+     * @ORM\Column(type="string", length=40, nullable=true)
      */
     private $linkedin;
 
@@ -67,8 +67,8 @@ class WebSiteFooter
     private $postalCode;
 
     /**
-     * @Assert\Length(max=20)
-     * @ORM\Column(type="string", length=20, nullable=true)
+     * @Assert\Length(max=40)
+     * @ORM\Column(type="string", length=40, nullable=true)
      */
     private $city;
 

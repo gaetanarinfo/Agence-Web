@@ -295,6 +295,10 @@
 													<span class="badge bg-yellow">
 														Transaction
 													</span>		
+												{% elseif mail.categorie == 4 %}
+													<span class="badge bg-blush">
+														Annonce
+													</span>		
 												{% endif %}
 												<small class="float-right text-muted">
 													<time class="hidden-sm-down">{{ mail.createdAt|format_datetime() }}</time>

@@ -218,6 +218,133 @@ class AdminWebSiteController extends AbstractController
         ]);
     }
 
+
+     /**
+     * @Route("/admin/website/menu/pro/create", name="admin.website.newMenuPro")
+     * @param WebSiteMenuPro $website
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function newMenuPro(Request $request)
+    {
+        $website = new WebSiteMenuPro();
+        $form = $this->createForm(WebSiteMenuProType::class, $website);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted())
+        {
+            if($form->isValid())
+            {
+                $this->em->persist($website);
+                $this->em->flush();
+                $this->addFlash('success', 'Bouton crée avec succès');
+                return $this->redirectToRoute('admin.website.index');
+            }else{
+                $this->addFlash('error', 'Une erreur est survenue');
+                return $this->redirectToRoute('admin.website.index');
+            }
+        }
+
+        return $this->render('admin/website/newMenuPro.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/admin/website/menu/admin/create", name="admin.website.newMenuAdmin")
+     * @param WebSiteMenuAdmin $website
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function newMenuAdmin(Request $request)
+    {
+        $website = new WebSiteMenuAdmin();
+        $form = $this->createForm(WebSiteMenuAdminType::class, $website);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted())
+        {
+            if($form->isValid())
+            {
+                $this->em->persist($website);
+                $this->em->flush();
+                $this->addFlash('success', 'Bouton crée avec succès');
+                return $this->redirectToRoute('admin.website.index');
+            }else{
+                $this->addFlash('error', 'Une erreur est survenue');
+                return $this->redirectToRoute('admin.website.index');
+            }
+        }
+
+        return $this->render('admin/website/newMenuAdmin.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+        /**
+     * @Route("/admin/website/menu/create", name="admin.website.newMenu")
+     * @param WebSiteMenu $website
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function newMenu(Request $request)
+    {
+        $website = new WebSiteMenu();
+        $form = $this->createForm(WebSiteMenuType::class, $website);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted())
+        {
+            if($form->isValid())
+            {
+                $this->em->persist($website);
+                $this->em->flush();
+                $this->addFlash('success', 'Bouton crée avec succès');
+                return $this->redirectToRoute('admin.website.index');
+            }else{
+                $this->addFlash('error', 'Une erreur est survenue');
+                return $this->redirectToRoute('admin.website.index');
+            }
+        }
+
+        return $this->render('admin/website/newMenu.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/admin/website/menu/pro/delete/{id}", name="admin.website.deleteMenuPro")
+     */
+    public function deleteMenuPro(WebSiteMenuPro $website)
+    {
+            $this->em->remove($website);
+            $this->em->flush();
+            $this->addFlash('success', 'Bouton supprimé avec succès');
+            return $this->redirectToRoute('admin.website.index');
+    }
+
+    /**
+     * @Route("/admin/website/menu/admin/delete/{id}", name="admin.website.deleteMenuAdmin")
+     */
+    public function deleteMenuAdmin(WebSiteMenuAdmin $website)
+    {
+            $this->em->remove($website);
+            $this->em->flush();
+            $this->addFlash('success', 'Bouton supprimé avec succès');
+            return $this->redirectToRoute('admin.website.index');
+    }
+
+        /**
+     * @Route("/admin/website/menu/delete/{id}", name="admin.website.deleteMenu")
+     */
+    public function deleteMenu(WebSiteMenu $website)
+    {
+            $this->em->remove($website);
+            $this->em->flush();
+            $this->addFlash('success', 'Bouton supprimé avec succès');
+            return $this->redirectToRoute('admin.website.index');
+    }
+
 }
 
 ?>

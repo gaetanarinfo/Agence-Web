@@ -4,10 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Mailbox;
 use App\Form\ContactHomeType;
-use App\Repository\GalerieRepository;
+use App\Repository\AppartementARepository;
 use App\Repository\PropertyRepository;
 use App\Repository\RentRepository;
-use App\Repository\SliderRepository;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,11 +25,12 @@ class HomeController extends AbstractController
      * @return Responce
     */
 
-    public function index (PropertyRepository $repository, RentRepository $repositoryRent, SessionInterface $session, UserRepository $repositoryUser, Request $request):Response{
+    public function index (PropertyRepository $repository, RentRepository $repositoryRent, SessionInterface $session, UserRepository $repositoryUser, AppartementARepository $repositoryAppartementA, Request $request):Response{
 
         $properties = $repository->findLatest();
         $rent = $repositoryRent->findLatest();
         $user = $repositoryUser->findLatest();
+        $appartementA = $repositoryAppartementA->findLatest();
         $mailbox = new Mailbox();
         $form = $this->createForm(ContactHomeType::class, $mailbox);
         $form->handleRequest($request);
@@ -45,6 +45,7 @@ class HomeController extends AbstractController
                     'properties' => $properties,
                     'rent' => $rent,
                     'user' => $user,
+                    'appartementAs' => $appartementA,
                     'form' => $form->createView()
                 ]);
             }else{
@@ -62,6 +63,7 @@ class HomeController extends AbstractController
             'properties' => $properties,
             'rent' => $rent,
             'user' => $user,
+            'appartementAs' => $appartementA,
             'form' => $form->createView()
         ]);
 

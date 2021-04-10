@@ -23,7 +23,7 @@
 	{{ include('component/team.html.twig') }}
 
 	<div class="container">
-		<h2 class="text-center">Les derniers biens</h2>
+		<h2 class="text-center">Derniers biens</h2>
 		<hr/>
 		<div class="row flex">
 			{% for property in properties %}
@@ -36,12 +36,25 @@
 	</div>
 
 	<div class="container">
-		<h2 class="text-center">Les dernières locations</h2>
+		<h2 class="text-center">Dernières locations</h2>
 		<hr/>
 		<div class="row flex">
 			{% for rents in rent %}
 				<div class="col-4 mb-4">
 					{% include 'rent/_rent.html.twig' %}
+				</div>
+			{% endfor %}
+		</div>
+		<hr/>
+	</div>
+
+	<div class="container">
+		<h2 class="text-center">Derniers appartements en vente</h2>
+		<hr/>
+		<div class="row flex">
+			{% for appartementA in appartementAs %}
+				<div class="col-4 mb-4">
+					{% include 'appartementA/_appartementA.html.twig' %}
 				</div>
 			{% endfor %}
 		</div>

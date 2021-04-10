@@ -3,11 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Contact;
+use App\Entity\Mailbox;
 use App\Entity\Property;
 use App\Entity\PropertySearch;
 use App\Form\ContactType;
+use App\Form\MailboxType;
 use App\Form\PropertySearchType;
-use App\Notification\ContactNotification;
 use App\Repository\PropertyRepository;
 //use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -58,17 +59,21 @@ class PropertyController extends AbstractController
      * @param Property $property
      * @return Response
      */
-    public function show(Property $property, string $slug, Request $request, ContactNotification $notification): Response
+    public function show(Property $property, string $slug, Request $request): Response
     {
 
-        $contact = new Contact();
-        $contact->setProperty($property);
-        $form = $this->createForm(ContactType::class, $contact);
+        $mailbox = new Mailbox();
+        $form = $this->createForm(MailboxType::class, $mailbox);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid())
         {
-            $notification->notify($contact);
+
+            $title = $property->getTitle($mailbox, $property->getTitle());
+            $mailbox->setSubject($title);
+            $mailbox->setCategorie('4');
+            $this->em->persist($mailbox);
+            $this->em->flush();
             $this->addFlash('success', 'Votre message a bien été envoyé');
             return $this->redirectToRoute('property.show', [
                 'id' => $property->getId(),

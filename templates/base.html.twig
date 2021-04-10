@@ -21,6 +21,9 @@
         <meta property="twitter:description" content="{% block description3 %}{{ globals.description }}{% endblock %}">
         <meta property="twitter:image" content="{{ '/images/ban.jpg' }}">
         
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" href="images/favicon.png" />
+
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
         <!-- Google Fonts -->
@@ -53,31 +56,9 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     {% for website in globals.menu %}
-                    {% if website.button1 != null %}
-                    <li class="nav-item {% if app.request.requesturi == '/' ~ website.link1 %}active{% endif %}">
-                        <a class="nav-link" href="{{ website.link1 }}">{{ website.button1 }}</a>
+                    <li class="nav-item {% if app.request.requesturi == '/' ~ website.link %}active{% endif %}">
+                        <a class="nav-link" href="../{{ website.link }}">{{ website.button }}</a>
                     </li>
-                    {% endif %}
-                    {% if website.button2 != null %}
-                    <li class="nav-item {% if app.request.requesturi == '/' ~ website.link2 %}active{% endif %}">
-                        <a class="nav-link" href="{{ website.link2 }}">{{ website.button2 }}</a>
-                    </li>
-                    {% endif %}
-                    {% if website.button3 != null %}
-                    <li class="nav-item {% if app.request.requesturi == '/' ~ website.link3 %}active{% endif %}">
-                        <a class="nav-link" href="{{ website.link3 }}">{{ website.button3 }}</a>
-                    </li>
-                    {% endif %}
-                    {% if website.button4 != null %}
-                    <li class="nav-item {% if app.request.requesturi == '/' ~ website.link4 %}active{% endif %}">
-                        <a class="nav-link" href="{{ website.link4 }}">{{ website.button4 }}</a>
-                    </li>
-                    {% endif %}
-                    {% if website.button5 != null %}
-                    <li class="nav-item {% if app.request.requesturi == '/' ~ website.link5 %}active{% endif %}">
-                        <a class="nav-link" href="{{ website.link5 }}">{{ website.button5 }}</a>
-                    </li>
-                    {% endif %}
                     {% endfor %}
                 </ul>
                 {% if app.user %}
@@ -92,33 +73,8 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         {% for website in globals.menuAdmin %}
-                        {% if website.button1 != null %}
-                        <a class="dropdown-item" href="../../../../{{ website.link1 }}"><i class="fas {{ website.icon1 }} mr-2"></i>{{ website.button1 }}</a>
+                        <a class="dropdown-item" href="../../../../{{ website.link }}"><i class="fas {{ website.icon }} mr-2"></i>{{ website.button }}</a>
                         <div class="dropdown-divider"></div>
-                        {% endif %}
-                        {% if website.button2 != null %}
-                            <a class="dropdown-item" href="../../../../{{ website.link2 }}"><i class="fas {{ website.icon2 }} mr-2"></i>{{ website.button2 }}</a>
-                        <div class="dropdown-divider"></div>
-                        {% endif %}
-                        {% if website.button3 != null %}
-                            <a class="dropdown-item" href="../../../../{{ website.link3 }}"><i class="fas {{ website.icon3 }} mr-2"></i>{{ website.button3 }}</a>
-                        {% endif %}
-                        {% if website.button4 != null %}
-                        <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="../../../../{{ website.link4 }}"><i class="fas {{ website.icon4 }} mr-2"></i>{{ website.button4 }}</a>
-                        {% endif %}
-                        {% if website.button5 != null %}
-                        <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="../../../../{{ website.link5 }}"><i class="fas {{ website.icon5 }} mr-2"></i>{{ website.button5 }}</a>
-                        {% endif %}
-                        {% if website.button6 != null %}
-                        <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="../../../../{{ website.link6 }}"><i class="fas {{ website.icon6 }} mr-2"></i>{{ website.button6 }}</a>
-                        {% endif %}
-                        {% if website.button7 != null %}
-                        <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="../../../../{{ website.link7 }}"><i class="fas {{ website.icon7 }} mr-2"></i>{{ website.button7 }}</a>    
-                        {% endif %}
                         {% endfor %}
                         </div>  
                     </li>
@@ -133,25 +89,8 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         {% for website in globals.menuPro %}
-                        {% if website.button1 != null %}
-                        <a class="dropdown-item" href="../../../../{{ website.link1 }}"><i class="fas {{ website.icon1 }} mr-2"></i>{{ website.button1 }}</a>
+                        <a class="dropdown-item" href="../../../../{{ website.link }}"><i class="fas {{ website.icon }} mr-2"></i>{{ website.button }}</a>
                         <div class="dropdown-divider"></div>
-                        {% endif %}
-                        {% if website.button2 != null %}
-                            <a class="dropdown-item" href="../../../../{{ website.link2 }}"><i class="fas {{ website.icon2 }} mr-2"></i>{{ website.button2 }}</a>
-                        <div class="dropdown-divider"></div>
-                        {% endif %}
-                        {% if website.button3 != null %}
-                            <a class="dropdown-item" href="../../../../{{ website.link3 }}"><i class="fas {{ website.icon3 }} mr-2"></i>{{ website.button3 }}</a>
-                        {% endif %}
-                        {% if website.button4 != null %}
-                        <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="../../../../{{ website.link4 }}"><i class="fas {{ website.icon4 }} mr-2"></i>{{ website.button4 }}</a>
-                        {% endif %}
-                        {% if website.button5 != null %}
-                        <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="../../../../{{ website.link5 }}"><i class="fas {{ website.icon5 }} mr-2"></i>{{ website.button5 }}</a>
-                        {% endif %}
                         {% endfor %}
                         </div>  
                     </li>
@@ -247,7 +186,13 @@
 
         <!-- Copyright -->
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+
+        <a href="#contact" class="link-footer">Contactez-nous</a> | <a href="" class="link-footer">Mentions légales</a> | <a href="" class="link-footer">CGU</a> | <a href="" class="link-footer">Données personnelles</a>
+
+        <hr class="w-50 m-auto mb-3 mt-3">
+
             {{ globals.copyright }}
+
         </div>
         <!-- Copyright -->
         </footer>

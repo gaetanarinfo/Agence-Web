@@ -2,6 +2,7 @@
 namespace App\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\ORM\Mapping as ORM;
 
 class Contact
 {
@@ -21,10 +22,7 @@ class Contact
 
     /**
      * @var string|null
-     * @Assert\NotBlank()
-     * @Assert\Regex(
-     * pattern="/[0-9]{10}/"
-     * )
+     * @ORM\Column(type="integer", length=10, nullable=true)
      */
     private $phone;
 
@@ -46,6 +44,16 @@ class Contact
      * @var Property|null
      */
     private $property;
+
+    /**
+     * @var Rent|null
+     */
+    private $rent;
+
+    /**
+     * @var AppartementA|null
+     */
+    private $appartementA;
 
     /**
      * Get the value of content
@@ -95,24 +103,12 @@ class Contact
         return $this;
     }
 
-    /**
-     * Get pattern="/[0-9]{10}/"
-     *
-     * @return  string|null
-     */ 
-    public function getPhone()
+    public function getPhone(): ?int
     {
         return $this->phone;
     }
 
-    /**
-     * Set pattern="/[0-9]{10}/"
-     *
-     * @param  string|null  $phone  pattern="/[0-9]{10}/"
-     *
-     * @return  self
-     */ 
-    public function setPhone($phone)
+    public function setPhone($phone): self
     {
         $this->phone = $phone;
 
@@ -180,13 +176,61 @@ class Contact
     /**
      * Set the value of property
      *
-     * @param  Property|null  $property
+     * @param Property|null  $property
      *
-     * @return  self
+     * @return self
      */ 
     public function setProperty($property)
     {
         $this->property = $property;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of rent
+     *
+     * @return Rent|null
+     */ 
+    public function getRent()
+    {
+        return $this->rent;
+    }
+
+    /**
+     * Set the value of rent
+     *
+     * @param  Rent|null  $rent
+     *
+     * @return  self
+     */ 
+    public function setRent($rent)
+    {
+        $this->rent = $rent;
+
+        return $this;
+    }
+
+        /**
+     * Get the value of appartementA
+     *
+     * @return AppartementA|null
+     */ 
+    public function getAppartementA()
+    {
+        return $this->appartementA;
+    }
+
+    /**
+     * Set the value of appartementA
+     *
+     * @param  AppartementA|null $appartementA
+     *
+     * @return  self
+     */ 
+    public function setAppartementA($appartementA)
+    {
+        $this->appartementA = $appartementA;
 
         return $this;
     }

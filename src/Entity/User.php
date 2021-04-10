@@ -159,7 +159,7 @@ class User implements UserInterface,\Serializable
     private $updated_at;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $biography;
 

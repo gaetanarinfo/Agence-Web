@@ -106,7 +106,10 @@
 												<span class="media-meta float-right">{{ mailbox.createdAt|format_datetime() }}</span>
 												<h4 class="text-primary m-0">{{ mailbox.lastname }} - {{ mailbox.firstname }}</h4>
                                                 <small class="text-muted">Sujet : {{ mailbox.subject }}</small><br/>
-												<small class="text-muted">De : {{ mailbox.email }}</small>
+												<small class="text-muted">De : {{ mailbox.email }}</small><br/>
+												{% if mailbox.phone != null %}
+													<small class="text-muted">Téléphone : 0{{ mailbox.phone }}</small>
+												{% endif %}
 											</div>
 										</div>
 										<!-- media -->
