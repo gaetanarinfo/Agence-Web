@@ -70,7 +70,7 @@ class AppartementAController extends AbstractController
         {
                 $title = $appartementA->getTitle($mailbox, $appartementA->getTitle());
                 $mailbox->setSubject($title);
-                $mailbox->setCategorie('4');
+                $mailbox->setCategorie('5');
                 $this->em->persist($mailbox);
                 $this->em->flush();
                 $this->addFlash('success', 'Votre message a bien été envoyé');
@@ -82,7 +82,7 @@ class AppartementAController extends AbstractController
 
         return $this->render('appartementA/show.html.twig', [
             'appartementA' => $appartementA,
-            'available' => $appartementA->getAvailable(),
+            'sold' => $appartementA->getSold(),
             'current_menu' => 'appartementA',
             'form' => $form->createView()
         ]);

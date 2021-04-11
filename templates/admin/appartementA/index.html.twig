@@ -32,7 +32,7 @@
             {% for appartementAs in appartementA %}
                 <tr>
                     <td style="vertical-align: middle;">{{ appartementAs.title }}</td>
-                    <td style="vertical-align: middle;">{% if appartementAs.available == 0 %}<i class="fas fa-check text-success"></i> Disponible{% else %}<i class="fas fa-times text-danger"></i> Acheter{% endif %}</td>
+                    <td style="vertical-align: middle;">{% if appartementAs.sold == 0 %}<i class="fas fa-check text-success"></i> Disponible{% else %}<i class="fas fa-times text-danger"></i> Vendu{% endif %}</td>
                     <td style="vertical-align: middle;">
                         <a href="{{ path('admin.appartementA.edit', {id: appartementAs.id}) }}" class="btn btn-secondary">Editer</a>
                         <form method="post" action="{{ path('admin.appartementA.delete', {id: appartementAs.id}) }}" style="display: inline-block;">

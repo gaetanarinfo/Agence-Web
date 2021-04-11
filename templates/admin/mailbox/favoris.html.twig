@@ -24,9 +24,13 @@
 			background-color: #ff758e !important;
 			color: #fff;
 		}
-		.bg-amber {
-			background-color: #FFC107 !important;
+		.bg-brown {
+			background-color: #A0522D !important;
 			color: #fff;
+		}
+		.bg-amber {
+			background-color: #FFFF00 !important;
+			color: #000;
 		}
 		.bg-red {
 			background-color: #ec3b57 !important;
@@ -34,6 +38,10 @@
 		}
 		.bg-blue {
 			background-color: #60bafd !important;
+			color: #fff;
+		}
+		.bg-orange {
+			background-color: #FF8C00 !important;
 			color: #fff;
 		}
 		.card {
@@ -168,47 +176,86 @@
 						<div class="row">
 							<!-- Left sidebar -->
 							<div class="col-lg-3 col-md-4">
-								
 								<div class="card shadow-none">
+									{% if is_granted('ROLE_SUPER_ADMIN') %}
 									<div class="list-group shadow-none">
-										<a href="{{ path('admin.mailbox.index') }}" class="list-group-item">
+										<a href="{{ path('admin.mailbox.index') }}" class="list-group-item active">
 										<i class="fa fa-inbox mr-2"></i>Boîte de réception
 											<b>
-												{% if reception == false %}
+												{% if receptionAdmin == false %}
 													(0)
 												{% else %}
-													({{ reception }})
+													({{ receptionAdmin }})
 												{% endif %}
 											</b>
 										</a>
-										<a href="{{ path('admin.mailbox.favoris') }}" class="list-group-item active">
+										<a href="{{ path('admin.mailbox.favoris') }}" class="list-group-item">
 											<i class="fa fa-star-o mr-2"></i>Favoris
-											{% if favorite == false %}
+											{% if favoriteAdmin == false %}
 												(0)
 											{% else %}
-												<b>({{ favorite }})
+												<b>({{ favoriteAdmin }})
 												</b>
 											{% endif %}
 										</a>
-										
 										<a href="{{ path('admin.mailbox.trash') }}" class="list-group-item">
 											<i class="fa fa-trash-o mr-2"></i>Corbeille
-											{% if trash == false %}
+											{% if trashAdmin == false %}
 												(0)
 											{% else %}
-												<b>({{ trash }})</b>
+												<b>({{ trashAdmin }})</b>
 											{% endif %}
 										</a>
 										<a href="{{ path('admin.mailbox.importants') }}" class="list-group-item">
 											<i class="fa fa-bookmark mr-2"></i>Important
-											{% if important == false %}
+											{% if importantAdmin == false %}
 												(0)
 											{% else %}
-												<b>({{ important }})</b>
+												<b>({{ importantAdmin }})</b>
 											{% endif %}
 										</a>
 									</div>
 								</div>
+								{% elseif is_granted('ROLE_PRO') %}
+									<div class="list-group shadow-none">
+										<a href="{{ path('admin.mailbox.index') }}" class="list-group-item active">
+										<i class="fa fa-inbox mr-2"></i>Boîte de réception
+											<b>
+												{% if receptionPro == false %}
+													(0)
+												{% else %}
+													({{ receptionPro }})
+												{% endif %}
+											</b>
+										</a>
+										<a href="{{ path('admin.mailbox.favoris') }}" class="list-group-item">
+											<i class="fa fa-star-o mr-2"></i>Favoris
+											{% if favoritePro == false %}
+												(0)
+											{% else %}
+												<b>({{ favoritePro }})
+												</b>
+											{% endif %}
+										</a>
+										<a href="{{ path('admin.mailbox.trash') }}" class="list-group-item">
+											<i class="fa fa-trash-o mr-2"></i>Corbeille
+											{% if trashPro == false %}
+												(0)
+											{% else %}
+												<b>({{ trashPro }})</b>
+											{% endif %}
+										</a>
+										<a href="{{ path('admin.mailbox.importants') }}" class="list-group-item">
+											<i class="fa fa-bookmark mr-2"></i>Important
+											{% if importantPro == false %}
+												(0)
+											{% else %}
+												<b>({{ importantPro }})</b>
+											{% endif %}
+										</a>
+									</div>
+								</div>
+								{% endif %}
 
 							</div>
 							<!-- End Left sidebar -->
@@ -236,10 +283,17 @@
 				<div class="row clearfix">
 
 				<div class="col-md-9 m-auto">
-					{% if favorite == false %}
+				{% if is_granted('ROLE_SUPER_ADMIN') %}
+					{% if favoriteAdmin == false %}
 						<img src="../../images/empty-notification-email-mail-icon.svg" width="100px" class="m-auto mb-2" style="display: block;position: relative;" />
 						<h4 class="text-center">Pas de message dans favoris</h4>
 					{% endif %}
+				{% elseif is_granted('ROLE_PRO') %}
+					{% if favoriteAdmin == false %}
+						<img src="../../images/empty-notification-email-mail-icon.svg" width="100px" class="m-auto mb-2" style="display: block;position: relative;" />
+						<h4 class="text-center">Pas de message dans important</h4>
+					{% endif %}
+				{% endif %}	
 				</div>
              
 					<div class="col-md-12 col-lg-12 col-xl-12 m-auto">
@@ -269,24 +323,32 @@
 										<div class="media-heading">
 											<a href="{{ path('admin.mailbox.show', {slug: mail.subject, id: mail.id}) }}" class="m-r-10">{{ mail.lastname }} - {{ mail.firstname }}</a>
 											{% if mail.categorie == 0 %}
-												<span class="badge bg-blue">
-													Bien
-												</span>
-											{% elseif mail.categorie == 1 %}
-												<span class="badge bg-red">
-													Location
-												</span>
-											{% elseif mail.categorie == 2 %}
-												<span class="badge bg-green">
-													Gérance
-												</span>	
-											{% elseif mail.categorie == 3 %}
-												<span class="badge bg-yellow">
-													Transaction
-												</span>		
-											{% elseif mail.categorie == 4 %}
+													<span class="badge bg-blue">
+														Bien à vendre
+													</span>
+												{% elseif mail.categorie == 1 %}
+													<span class="badge bg-red">
+														Location
+													</span>
+												{% elseif mail.categorie == 2 %}
+													<span class="badge bg-green">
+														Gérance
+													</span>	
+												{% elseif mail.categorie == 3 %}
+													<span class="badge bg-brown">
+														Transaction
+													</span>		
+												{% elseif mail.categorie == 4 %}
 													<span class="badge bg-blush">
 														Annonce
+													</span>		
+												{% elseif mail.categorie == 5 %}
+													<span class="badge bg-amber">
+														Appartement à vendre
+													</span>		
+												{% elseif mail.categorie == 6 %}
+													<span class="badge bg-orange">
+														Bug rencontré
 													</span>		
 												{% endif %}
 											<small class="float-right text-muted">

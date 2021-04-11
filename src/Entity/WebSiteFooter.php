@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\WebSiteFooterRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Validator\Constraints as AppAssert;
 
 /**
  * @ORM\Entity(repositoryClass=WebSiteFooterRepository::class)
@@ -49,8 +50,10 @@ class WebSiteFooter
     private $address;
 
     /**
-     * @Assert\Length(max=10)
-     * @ORM\Column(type="integer", length=10, nullable=false)
+     * @var string
+     * @ORM\Column(name="phone", type="string", length=10)
+     * @Assert\NotBlank()
+     * @AppAssert\Telephone()
      */
     private $phone;
 
@@ -142,18 +145,26 @@ class WebSiteFooter
         return $this;
     }
 
-    public function getPhone(): ?int
+    /**
+     * Get phone
+     *
+     * @return string
+     */
+    public function getPhone()
     {
         return $this->phone;
     }
 
-    public function setPhone(int $phone): self
+    /**
+     * Set phone
+     * @param string $phone
+    */
+    public function setPhone($phone)
     {
         $this->phone = $phone;
 
         return $this;
     }
-
     public function getEmail(): ?string
     {
         return $this->email;

@@ -71,7 +71,7 @@ class PropertyController extends AbstractController
 
             $title = $property->getTitle($mailbox, $property->getTitle());
             $mailbox->setSubject($title);
-            $mailbox->setCategorie('4');
+            $mailbox->setCategorie('0');
             $this->em->persist($mailbox);
             $this->em->flush();
             $this->addFlash('success', 'Votre message a bien été envoyé');

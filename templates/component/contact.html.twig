@@ -49,10 +49,17 @@
                     <!--Grid row-->
 
                     <!--Grid row-->
-                    <div class="row">
+                    <div class="row" style="justify-content: center;">
+
+                         <div class="col-md-3">
+                            <div class="md-form mb-0">
+                                <label for="subject" class="">Votre téléphone</label>
+                                {{ form_row(form.phone) }}
+                            </div>
+                        </div>
 
                         <!--Grid column-->
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="md-form mb-0">
                                 <label for="email" class="">Votre adresse email</label>
                                 {{ form_row(form.email) }}
@@ -60,7 +67,7 @@
                         </div>
                         <!--Grid column-->
 
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="md-form mb-0">
                                 <label for="subject" class="">Votre sujet</label>
                                 {{ form_row(form.subject) }}
@@ -111,7 +118,7 @@
                     </li>
 
                     <li><i class="fas fa-phone mt-4 fa-2x"></i>
-                        <p>0{{ contact.phone }}</p>
+                        <p>{{ contact.phone }}</p>
                     </li>
 
                     <li><i class="fas fa-envelope mt-4 fa-2x"></i>

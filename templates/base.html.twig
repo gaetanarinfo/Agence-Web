@@ -100,12 +100,12 @@
                     {% for website in globals.menu2 %}
                         {% if website.button4 != null %}
                         <li class="nav-item {% if app.request.requesturi == '/' ~ website.link4 %}active{% endif %}">
-                            <a href="../{{ website.link4 }}" class="nav-link">{{ website.button4 }}</a>
+                            <a href="../../../{{ website.link4 }}" class="nav-link">{{ website.button4 }}</a>
                         </li>
                         {% endif %}
                         {% if website.button3 != null %}    
                         <li class="nav-item">
-                            <a href="../{{ website.link3 }}" class="nav-link">{{ website.button3 }}</a>
+                            <a href="../../../{{ website.link3 }}" class="nav-link">{{ website.button3 }}</a>
                         </li>
                         {% endif %}
                     {% endfor %}

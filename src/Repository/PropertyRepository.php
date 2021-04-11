@@ -35,7 +35,7 @@ class PropertyRepository extends ServiceEntityRepository
      */
     public function paginateAllVisible(PropertySearch $search, int $page): PaginationInterface
     {
-        $query = $this->findVisibleQuery();
+        $query = $this->findVisibleQuery('p');
 
         if ($search->getMaxPrice()) {
             $query = $query
@@ -68,7 +68,9 @@ class PropertyRepository extends ServiceEntityRepository
         }
 
         $properties = $this->paginator->paginate(
-            $query->getQuery(),
+            $query
+            ->orderBy('p.id', 'DESC')
+            ->getQuery(),
             $page,
             12
         );
@@ -84,10 +86,12 @@ class PropertyRepository extends ServiceEntityRepository
      */
     public function paginateAllVisible2(int $page): PaginationInterface
     {
-        $query = $this->findVisibleQuery();
+        $query = $this->findVisibleQuery('p');
 
         $properties = $this->paginator->paginate(
-            $query->getQuery(),
+            $query
+            ->orderBy('p.id', 'DESC')
+            ->getQuery(),
             $page,
             12
         );
@@ -103,8 +107,9 @@ class PropertyRepository extends ServiceEntityRepository
      */
     public function findLatest(): array
     {
-        $properties = $this->findVisibleQuery()
+        $properties = $this->findVisibleQuery('p')
             ->setMaxResults(6)
+            ->orderBy('p.id', 'DESC')
             ->getQuery()
             ->getResult();
         $this->hydratePicture($properties);

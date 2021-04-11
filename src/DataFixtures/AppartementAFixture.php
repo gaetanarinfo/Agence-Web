@@ -1,0 +1,37 @@
+<?php
+
+namespace App\DataFixtures;
+
+use App\Entity\AppartementA;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Persistence\ObjectManager;
+use Faker\Factory;
+
+class AppartementAFixture extends Fixture
+{
+    public function load(ObjectManager $manager)
+    {
+        $faker = Factory::create('fr_FR');
+        for($i = 0; $i < 250; $i++)
+        {
+            $rent = new AppartementA();
+            $rent
+                ->setTitle($faker->word(100, true))
+                ->setContent($faker->sentence(255, true))
+                ->setSurface($faker->numberBetween(20, 350))
+                ->setRooms($faker->numberBetween(2, 10))
+                ->setBedrooms($faker->numberBetween(1, 9))
+                ->setFloor($faker->numberBetween(0, 15))
+                ->setPrice($faker->numberBetween(100000, 1000000))
+                ->setHeat($faker->numberBetween(0, count(AppartementA::HEAT) - 1))
+                ->setCity($faker->city)
+                ->setAddress($faker->address)
+                ->setPostalCode($faker->postcode)
+                ->setSold(false)
+                ->setLat($faker->latitude())
+                ->setLng($faker->longitude());
+            $manager->persist($rent);    
+        }
+        $manager->flush();
+    }
+}

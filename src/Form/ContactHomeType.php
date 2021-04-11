@@ -37,6 +37,10 @@ class ContactHomeType extends AbstractType
                 'required' => true,
                 'label' => false
             ])
+            ->add('phone', TextType::class, [
+                'required' => true,
+                'label' => false
+            ])
             ->add('content', TextareaType::class, [
                 'required' => true,
                 'label' => false

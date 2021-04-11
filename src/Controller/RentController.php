@@ -73,7 +73,7 @@ class RentController extends AbstractController
 
             $title = $rent->getTitle($mailbox, $rent->getTitle());
             $mailbox->setSubject($title);
-            $mailbox->setCategorie('4');
+            $mailbox->setCategorie('1');
             $this->em->persist($mailbox);
             $this->em->flush();
             $this->addFlash('success', 'Votre message a bien été envoyé');

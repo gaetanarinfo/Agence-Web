@@ -50,11 +50,11 @@ class UserType2 extends AbstractType
                 'required' => false
             ])
             ->add('country', CountryType::class, array())
-            ->add('phone', IntegerType::class, [
+            ->add('phone', TextType::class, [
                 'label' => false,
                 'required' => false
             ])
-            ->add('mobile', IntegerType::class, [
+            ->add('mobile', TextType::class, [
                 'label' => false,
                 'required' => false
             ])

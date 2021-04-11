@@ -111,6 +111,12 @@
     "fzaninotto/faker": {
         "version": "v1.9.2"
     },
+    "giggsey/libphonenumber-for-php": {
+        "version": "8.12.21"
+    },
+    "giggsey/locale": {
+        "version": "1.9"
+    },
     "google/recaptcha": {
         "version": "1.1",
         "recipe": {

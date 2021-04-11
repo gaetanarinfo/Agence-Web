@@ -49,7 +49,7 @@ Picture: Image du profil
 Picture url: Lien de l'image
 Subject: Sujet
 Bien: Les biens
-Location: Les locations
+Bien en Location: Bien en Location
 Gérance: La gérance
 Transaction: Les transactions
 Linkedin: Linkedin
@@ -78,3 +78,7 @@ Icon5: Icône 5
 Icon6: Icône 6
 Icon7: Icône 7
 Button: Bouton
+Bien à vendre: Bien à vendre
+Appartement à vendre: Appartement à vendre
+Bug rencontré: Bug rencontré
+Icon: Icône

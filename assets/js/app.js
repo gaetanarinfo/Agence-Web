@@ -32,6 +32,19 @@ if (inputAddress2 !== null) {
     })
 }
 
+let inputAddress3 = document.querySelector('#appartement_a_address')
+if (inputAddress3 !== null) {
+    let place = Places({
+        container: inputAddress3
+    })
+    place.on('change', e => {
+        document.querySelector('#appartement_a_city').value = e.suggestion.city
+        document.querySelector('#appartement_a_postal_code').value = e.suggestion.postcode
+        document.querySelector('#appartement_a_lat').value = e.suggestion.latlng.lat
+        document.querySelector('#appartement_a_lng').value = e.suggestion.latlng.lng
+    })
+}
+
 let searchAddress = document.querySelector('#search_address')
 if (searchAddress !== null) {
     let place = Places({
@@ -51,7 +64,9 @@ $('[data-slider]').slick({
     dots: true,
     arrows: true
 })
+
 $('select').select2()
+$('appartement_a_heat').select2()
 $('property_heat').select2()
 $('rent_heat').select2()
 let $contactButton = $('#contactButton')

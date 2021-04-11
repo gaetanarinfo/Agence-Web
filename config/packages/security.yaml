@@ -50,8 +50,10 @@ security:
         - { path: ^/admin/website/, roles: ROLE_SUPER_ADMIN }
         - { path: /admin/biens, roles: ROLE_PRO }
         - { path: /admin/louer, roles: ROLE_PRO }
+        - { path: /admin/appartementA, roles: ROLE_PRO }
         - { path: /admin/option, roles: ROLE_PRO }
         - { path: /admin/option2, roles: ROLE_PRO }
+        - { path: /admin/option3, roles: ROLE_PRO }
         - { path: ^/admin/mailbox, roles: ROLE_PRO }
         - { path: ^/user, roles: ROLE_USER }
 

@@ -35,7 +35,7 @@ class RentRepository extends ServiceEntityRepository
      */
     public function paginateAllVisible(RentSearch $search, int $page): PaginationInterface
     {
-        $query = $this->findVisibleQuery();
+        $query = $this->findVisibleQuery('p');
 
         if ($search->getMaxPrice()) {
             $query = $query
@@ -70,7 +70,9 @@ class RentRepository extends ServiceEntityRepository
         }
 
         $rent = $this->paginator->paginate(
-            $query->getQuery(),
+            $query
+            ->orderBy('p.id', 'DESC')
+            ->getQuery(),
             $page,
             12
         );
@@ -85,10 +87,12 @@ class RentRepository extends ServiceEntityRepository
      */
     public function paginateAllVisible2(int $page): PaginationInterface
     {
-        $query = $this->findVisibleQuery();
+        $query = $this->findVisibleQuery('p');
 
         $properties = $this->paginator->paginate(
-            $query->getQuery(),
+            $query
+            ->orderBy('p.id', 'DESC')
+            ->getQuery(),
             $page,
             12
         );
@@ -104,8 +108,9 @@ class RentRepository extends ServiceEntityRepository
      */
     public function findLatest(): array
     {
-        $rent = $this->findVisibleQuery()
+        $rent = $this->findVisibleQuery('p')
             ->setMaxResults(6)
+            ->orderBy('p.id', 'DESC')
             ->getQuery()
             ->getResult();
         $this->hydratePicture($rent);

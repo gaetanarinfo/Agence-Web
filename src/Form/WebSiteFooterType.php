@@ -36,7 +36,7 @@ class WebSiteFooterType extends AbstractType
             ->add('city', TextType::class, [
                 'required' => false
             ])
-            ->add('phone', IntegerType::class, [
+            ->add('phone', TextType::class, [
                 'required' => false
             ])
             ->add('copyright', TextType::class, [

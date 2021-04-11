@@ -48,11 +48,11 @@ class UserType3 extends AbstractType
                 'label' => false,
                 'required' => false
             ])
-            ->add('phone', IntegerType::class, [
+            ->add('phone', TextType::class, [
                 'label' => false,
                 'required' => false
             ])
-            ->add('mobile', IntegerType::class, [
+            ->add('mobile', TextType::class, [
                 'label' => false,
                 'required' => false
             ])

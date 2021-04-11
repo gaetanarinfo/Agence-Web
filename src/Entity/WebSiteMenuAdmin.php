@@ -54,7 +54,7 @@ class WebSiteMenuAdmin
      *
      * @return  self
      */ 
-    public function setButton1($button)
+    public function setButton($button)
     {
         $this->button = $button;
 

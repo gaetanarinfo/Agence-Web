@@ -88,7 +88,7 @@ class AppartementA
     /**
      * @ORM\Column(type="boolean", options={"default": false})
      */
-    private $available = false;
+    private $sold = false;
 
     /**
      * @ORM\Column(type="datetime")
@@ -286,14 +286,14 @@ class AppartementA
         return $this;
     }
 
-    public function getAvailable(): ?bool
+    public function getSold(): ?bool
     {
-        return $this->available;
+        return $this->sold;
     }
 
-    public function setAvailable(bool $available): self
+    public function setSold(bool $sold): self
     {
-        $this->available = $available;
+        $this->sold = $sold;
 
         return $this;
     }

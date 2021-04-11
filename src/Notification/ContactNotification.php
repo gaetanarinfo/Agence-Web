@@ -1,7 +1,7 @@
 <?php
 namespace App\Notification;
 
-use App\Entity\Contact;
+use App\Entity\Mailbox;
 use Twig\Environment;
 
 class ContactNotification
@@ -22,11 +22,11 @@ class ContactNotification
         $this->renderer = $renderer;
     }
 
-    public function notify(Contact $contact)
+    public function notify(Mailbox $contact)
     {
-        $message = (new \Swift_Message('Agence Web - ' . $contact->getProperty()->getTitle()))
-            ->setFrom('no-reply@agence-web.website')
-            ->setTo('contact@agence-web.website')
+        $message = (new \Swift_Message('Agence Web - Réponse à votre demande pour ' . $contact->getSubject()))
+            ->setFrom('no-reply@agence-web.website', 'AgenceWeb - Le mans')
+            ->setTo($contact->getEmail())
             ->setReplyTo($contact->getEmail())
             ->setBody($this->renderer->render('emails/contact.html.twig', [
                 'contact' => $contact

@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\MailboxRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Validator\Constraints as AppAssert;
 
 /**
  * @ORM\Entity(repositoryClass=MailboxRepository::class)
@@ -13,10 +14,12 @@ class Mailbox
 {
 
     const CAT = [
-        0 => 'Bien',
-        1 => 'Location',
+        0 => 'Bien à vendre',
+        1 => 'Bien en Location',
         2 => 'Gérance',
-        3 => 'Transaction'
+        3 => 'Transaction',
+        5 => 'Appartement à vendre',
+        6 => 'Bug rencontré'
     ];
 
     /**
@@ -83,7 +86,10 @@ class Mailbox
     private $categorie;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @var string
+     * @ORM\Column(name="phone", type="string", length=10)
+     * @Assert\NotBlank()
+     * @AppAssert\Telephone()
      */
     private $phone;
 
@@ -234,15 +240,25 @@ class Mailbox
         return $this;
     }
 
-    public function getPhone(): ?int
+    /**
+     * Get phone
+     *
+     * @return string
+     */
+    public function getPhone()
     {
         return $this->phone;
     }
 
-    public function setPhone(?int $phone): self
+    /**
+     * Set phone
+     * @param string $phone
+    */
+    public function setPhone($phone)
     {
         $this->phone = $phone;
 
         return $this;
     }
+
 }

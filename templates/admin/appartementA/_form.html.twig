@@ -26,7 +26,7 @@
 
 	<div class="col-md-12">
 		<div class="row" style="justify-content: center;">
-			<div class="col-md-2 mt-2 mb-2">{{ form_row(form.available) }}</div>
+			<div class="col-md-2 mt-2 mb-2">{{ form_row(form.sold) }}</div>
 		</div>
 	</div>
 
@@ -47,11 +47,11 @@
 	<div class="row mb-4">
 		<div class="col-md-12">
 			<div class="row" style="justify-content: center;">
-				{% for picture in rent.pictures %}
+				{% for picture in appartementA.pictures %}
 					<div class="" style="width: 300px; margin: 5px;">
 						<img class="img-thumbnail" src="{{ vich_uploader_asset(picture, 'imageFile') }}" width="100%" alt="">
 						<div style="position: relative;display: flex;margin: 0 auto;justify-content: space-around;">
-							<a href="{{ path('admin.picture2.delete', {id: picture.id}) }}" class="btn btn-danger mt-2" data-delete data-token="{{ csrf_token('delete' ~ picture.id) }}">Supprimer</a>
+							<a href="{{ path('admin.picture3.delete', {id: picture.id}) }}" class="btn btn-danger mt-2" data-delete data-token="{{ csrf_token('delete' ~ picture.id) }}">Supprimer</a>
 						</div>
 					</div>
 				{% endfor %}

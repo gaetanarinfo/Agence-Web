@@ -44,7 +44,7 @@ class AppartementAType extends AbstractType
             ->add('postal_code', IntegerType::class)
             ->add('lat', HiddenType::class)
             ->add('lng', HiddenType::class)
-            ->add('available')
+            ->add('sold')
         ;
     }
 

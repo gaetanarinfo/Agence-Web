@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title globals.title ~ property.title %}
+{% block title globals.title ~ ' - ' ~ property.title %}
 {% block description '' ~ property.content %}
 {% block url '' ~ path('property.show', {slug: property.slug, id: property.id}) %}
 {% block url2 '' ~ path('property.show', {slug: property.slug, id: property.id}) %}
-{% block title2 globals.title ~ property.title %}
-{% block title3 globals.title ~ property.title %}
+{% block title2 globals.title ~ ' - ' ~ property.title %}
+{% block title3 globals.title ~ ' - ' ~ property.title %}
 {% block description2 '' ~ property.content %}
 {% block description3 '' ~ property.content %}
 
@@ -43,7 +43,7 @@
 							<img src="{{ '/images/empty.jpg' }}" alt="card-img-top" style="width: 100%; height:auto;">
 						{% else %}
 							{% for picture in property.pictures %}
-								<div style="background: url('{{ vich_uploader_asset(picture, 'imageFile') }}'); background-position: center; width: 100%; height:210px;"></div>
+								<img src="{{ vich_uploader_asset(picture, 'imageFile') }}"  style="width: 100%; height:auto;" />
 							{% endfor %}
 						{% endif %}
 					</div>

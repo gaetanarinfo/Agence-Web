@@ -10,6 +10,8 @@ use phpDocumentor\Reflection\Types\Boolean;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use App\Validator\Constraints as AppAssert;
+use App\Validator\Constraints as AppAssertMobile;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -107,12 +109,18 @@ class User implements UserInterface,\Serializable
     private $country;
 
     /**
-     * @ORM\Column(type="integer", length=10, nullable=true)
+     * @var string
+     * @ORM\Column(name="phone", type="string", length=10)
+     * @Assert\NotBlank()
+     * @AppAssert\Telephone()
      */
     private $phone;
 
     /**
-     * @ORM\Column(type="integer", length=10, nullable=true)
+     * @var string
+     * @ORM\Column(name="mobile", type="string", length=10)
+     * @Assert\NotBlank()
+     * @AppAssertMobile\TelephoneMobile()
      */
     private $mobile;
 
@@ -417,23 +425,41 @@ class User implements UserInterface,\Serializable
         return $this;
     }
 
-    public function getPhone(): ?int
+    /**
+     * Get phone
+     *
+     * @return string
+     */
+    public function getPhone()
     {
         return $this->phone;
     }
 
-    public function setPhone(int $phone): self
+    /**
+     * Set phone
+     * @param string $phone
+    */
+    public function setPhone($phone)
     {
         $this->phone = $phone;
 
         return $this;
     }
 
+    /**
+     * Get mobile
+     *
+     * @return string
+     */
     public function getMobile(): ?int
     {
         return $this->mobile;
     }
 
+     /**
+     * Set mobile
+     * @param string $mobile
+    */
     public function setMobile(int $mobile): self
     {
         $this->mobile = $mobile;

@@ -3,6 +3,7 @@ namespace App\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use App\Validator\Constraints as AppAssert;
 
 class Contact
 {
@@ -21,8 +22,10 @@ class Contact
     private $lastname;
 
     /**
-     * @var string|null
-     * @ORM\Column(type="integer", length=10, nullable=true)
+     * @var string
+     * @ORM\Column(name="phone", type="string", length=10)
+     * @Assert\NotBlank()
+     * @AppAssert\Telephone()
      */
     private $phone;
 
@@ -103,12 +106,21 @@ class Contact
         return $this;
     }
 
-    public function getPhone(): ?int
+    /**
+     * Get phone
+     *
+     * @return string
+     */
+    public function getPhone()
     {
         return $this->phone;
     }
 
-    public function setPhone($phone): self
+    /**
+     * Set phone
+     * @param string $phone
+    */
+    public function setPhone($phone)
     {
         $this->phone = $phone;
 

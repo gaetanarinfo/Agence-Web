@@ -18,7 +18,7 @@ class MailboxType extends AbstractType
         $builder
             ->add('firstname', TextType::class)
             ->add('lastname', TextType::class)
-            ->add('phone', IntegerType::class)
+            ->add('phone', TextType::class)
             ->add('email', EmailType::class)
             ->add('content', TextareaType::class)
             ;

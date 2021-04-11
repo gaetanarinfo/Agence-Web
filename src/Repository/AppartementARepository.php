@@ -35,7 +35,7 @@ class AppartementARepository extends ServiceEntityRepository
      */
     public function paginateAllVisible(AppartementASearch $search, int $page): PaginationInterface
     {
-        $query = $this->findVisibleQuery();
+        $query = $this->findVisibleQuery('p');
 
         if ($search->getMaxPrice()) {
             $query = $query
@@ -70,7 +70,9 @@ class AppartementARepository extends ServiceEntityRepository
         }
 
         $appartementA = $this->paginator->paginate(
-            $query->getQuery(),
+            $query
+            ->orderBy('p.id', 'DESC')
+            ->getQuery(),
             $page,
             12
         );
@@ -85,10 +87,12 @@ class AppartementARepository extends ServiceEntityRepository
      */
     public function paginateAllVisible2(int $page): PaginationInterface
     {
-        $query = $this->findVisibleQuery();
+        $query = $this->findVisibleQuery('p');
 
         $appartementA = $this->paginator->paginate(
-            $query->getQuery(),
+            $query
+            ->orderBy('p.id', 'DESC')
+            ->getQuery(),
             $page,
             12
         );
@@ -104,8 +108,9 @@ class AppartementARepository extends ServiceEntityRepository
      */
     public function findLatest(): array
     {
-        $appartementA = $this->findVisibleQuery()
+        $appartementA = $this->findVisibleQuery('p')
             ->setMaxResults(6)
+            ->orderBy('p.id', 'DESC')
             ->getQuery()
             ->getResult();
         $this->hydratePicture($appartementA);
@@ -115,7 +120,7 @@ class AppartementARepository extends ServiceEntityRepository
     private function findVisibleQuery(): QueryBuilder
     {
         return $this->createQueryBuilder('p')
-            ->where('p.available = false');
+            ->where('p.sold = false');
     }
 
     private function hydratePicture($appartementA) {
@@ -137,10 +142,10 @@ class AppartementARepository extends ServiceEntityRepository
     public function findAllAppartementA(string $username): array
     {
         $appartementA = $this->findVisibleQuery('p')
-            ->orderBy('p.id', 'DESC')
             ->where('p.createdBy = :username')
             ->setParameter('username', $username)
             ->setMaxResults(5)
+            ->orderBy('p.id', 'DESC')
             ->getQuery()
             ->getResult();
 

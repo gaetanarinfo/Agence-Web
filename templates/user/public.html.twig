@@ -81,7 +81,7 @@
                                 <p class="text-secondary mb-1">Utilisateur</p>
                             {% elseif role == "ROLE_PRO" %}
                                 <p class="text-secondary mb-1">Professionnel</p>
-                            {% elseif role == "ROLE_ADMIN" %}
+                            {% elseif role == "ROLE_SUPER_ADMIN" %}
                                 <p class="text-secondary mb-1">Administrateur</p>
                             {% endif %}
                         {% endfor %}
@@ -128,7 +128,7 @@
                       <h6 class="mb-0">Téléphone</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      0{{ user.phone }}
+                      {{ user.phone }}
                     </div>
                   </div>
                   <hr>
@@ -137,7 +137,7 @@
                       <h6 class="mb-0">Mobile</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      0{{ user.mobile }}
+                      {{ user.mobile }}
                     </div>
                   </div>
                 </div>

@@ -2,6 +2,11 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Mailbox;
+use App\Form\ReplyMessageType;
+use App\Notification\ContactNotification3;
+use App\Notification\ContactNotification4;
+use App\Notification\ContactNotification2;
+use App\Notification\ContactNotification;
 use App\Repository\MailboxRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,17 +37,26 @@ class AdminMailboxController extends AbstractController
      */
     public function index(PaginatorInterface $paginator, Request $request)
     {
-        $mailboxCount = $this->repository->findCount();
-        $favorite = $this->repository->findCountFavorite();
-        $important = $this->repository->findCountImportant();
-        $trash = $this->repository->findCountTrash();
+        $mailboxCountAdmin = $this->repository->findCountAdmin();
+        $favoriteAdmin = $this->repository->findCountFavoriteAdmin();
+        $importantAdmin = $this->repository->findCountImportantAdmin();
+        $trashAdmin = $this->repository->findCountTrashAdmin();
+
+        $mailboxCountPro = $this->repository->findCountPro();
+        $favoritePro = $this->repository->findCountFavoritePro();
+        $importantPro = $this->repository->findCountImportantPro();
+        $trashPro = $this->repository->findCountTrashPro();
 
         return $this->render('admin/mailbox/index.html.twig', [
             'mails' => $this->repository->paginateAllVisible($request->query->getInt('page', 1)),
-            'reception' => $mailboxCount,
-            'favorite' => $favorite,
-            'important' => $important,
-            'trash' => $trash
+            'receptionAdmin' => $mailboxCountAdmin,
+            'favoriteAdmin' => $favoriteAdmin,
+            'importantAdmin' => $importantAdmin,
+            'trashAdmin' => $trashAdmin,
+            'receptionPro' => $mailboxCountPro,
+            'favoritePro' => $favoritePro,
+            'importantPro' => $importantPro,
+            'trashPro' => $trashPro
         ]);
     }
 
@@ -66,17 +80,26 @@ class AdminMailboxController extends AbstractController
      */
     public function favoriteIndex(PaginatorInterface $paginator, Request $request)
     {
-        $mailboxCount = $this->repository->findCount();
-        $favorite = $this->repository->findCountFavorite();
-        $important = $this->repository->findCountImportant();
-        $trash = $this->repository->findCountTrash();
+        $mailboxCountAdmin = $this->repository->findCountAdmin();
+        $favoriteAdmin = $this->repository->findCountFavoriteAdmin();
+        $importantAdmin = $this->repository->findCountImportantAdmin();
+        $trashAdmin = $this->repository->findCountTrashAdmin();
+
+        $mailboxCountPro = $this->repository->findCountPro();
+        $favoritePro = $this->repository->findCountFavoritePro();
+        $importantPro = $this->repository->findCountImportantPro();
+        $trashPro = $this->repository->findCountTrashPro();
 
         return $this->render('admin/mailbox/favoris.html.twig', [
             'mails' => $this->repository->paginateAllVisible2($request->query->getInt('page', 1)),
-            'reception' => $mailboxCount,
-            'favorite' => $favorite,
-            'important' => $important,
-            'trash' => $trash
+            'receptionAdmin' => $mailboxCountAdmin,
+            'favoriteAdmin' => $favoriteAdmin,
+            'importantAdmin' => $importantAdmin,
+            'trashAdmin' => $trashAdmin,
+            'receptionPro' => $mailboxCountPro,
+            'favoritePro' => $favoritePro,
+            'importantPro' => $importantPro,
+            'trashPro' => $trashPro
         ]);
     }
 
@@ -86,17 +109,26 @@ class AdminMailboxController extends AbstractController
      */
     public function trashIndex(PaginatorInterface $paginator, Request $request)
     {
-        $mailboxCount = $this->repository->findCount();
-        $favorite = $this->repository->findCountFavorite();
-        $important = $this->repository->findCountImportant();
-        $trash = $this->repository->findCountTrash();
+        $mailboxCountAdmin = $this->repository->findCountAdmin();
+        $favoriteAdmin = $this->repository->findCountFavoriteAdmin();
+        $importantAdmin = $this->repository->findCountImportantAdmin();
+        $trashAdmin = $this->repository->findCountTrashAdmin();
+
+        $mailboxCountPro = $this->repository->findCountPro();
+        $favoritePro = $this->repository->findCountFavoritePro();
+        $importantPro = $this->repository->findCountImportantPro();
+        $trashPro = $this->repository->findCountTrashPro();
 
         return $this->render('admin/mailbox/importants.html.twig', [
             'mails' => $this->repository->paginateAllVisible3($request->query->getInt('page', 1)),
-            'reception' => $mailboxCount,
-            'favorite' => $favorite,
-            'important' => $important,
-            'trash' => $trash
+            'receptionAdmin' => $mailboxCountAdmin,
+            'favoriteAdmin' => $favoriteAdmin,
+            'importantAdmin' => $importantAdmin,
+            'trashAdmin' => $trashAdmin,
+            'receptionPro' => $mailboxCountPro,
+            'favoritePro' => $favoritePro,
+            'importantPro' => $importantPro,
+            'trashPro' => $trashPro
         ]);
     }
 
@@ -106,17 +138,26 @@ class AdminMailboxController extends AbstractController
      */
     public function importantIndex(PaginatorInterface $paginator, Request $request)
     {
-        $mailboxCount = $this->repository->findCount();
-        $favorite = $this->repository->findCountFavorite();
-        $important = $this->repository->findCountImportant();
-        $trash = $this->repository->findCountTrash();
+        $mailboxCountAdmin = $this->repository->findCountAdmin();
+        $favoriteAdmin = $this->repository->findCountFavoriteAdmin();
+        $importantAdmin = $this->repository->findCountImportantAdmin();
+        $trashAdmin = $this->repository->findCountTrashAdmin();
+
+        $mailboxCountPro = $this->repository->findCountPro();
+        $favoritePro = $this->repository->findCountFavoritePro();
+        $importantPro = $this->repository->findCountImportantPro();
+        $trashPro = $this->repository->findCountTrashPro();
 
         return $this->render('admin/mailbox/trash.html.twig', [
             'mails' => $this->repository->paginateAllVisible4($request->query->getInt('page', 1)),
-            'reception' => $mailboxCount,
-            'favorite' => $favorite,
-            'important' => $important,
-            'trash' => $trash
+            'receptionAdmin' => $mailboxCountAdmin,
+            'favoriteAdmin' => $favoriteAdmin,
+            'importantAdmin' => $importantAdmin,
+            'trashAdmin' => $trashAdmin,
+            'receptionPro' => $mailboxCountPro,
+            'favoritePro' => $favoritePro,
+            'importantPro' => $importantPro,
+            'trashPro' => $trashPro
         ]);
     }
 
@@ -178,21 +219,74 @@ class AdminMailboxController extends AbstractController
     /**
      * @Route("/admin/mailbox/message/{slug}:{id}", name="admin.mailbox.show") requirements={"slug": [a-z0-9\-]""}
      */
-    public function show(Mailbox $mailbox, string $slug)
+    public function show(Request $request, Mailbox $mailbox, string $slug, ContactNotification3 $notif3, ContactNotification2 $notif2, ContactNotification $notif, ContactNotification4 $notif4)
     {
         
-        $mailboxCount = $this->repository->findCount();
-        $favorite = $this->repository->findCountFavorite();
-        $important = $this->repository->findCountImportant();
-        $trash = $this->repository->findCountTrash();
+        $mailboxCountAdmin = $this->repository->findCountAdmin();
+        $favoriteAdmin = $this->repository->findCountFavoriteAdmin();
+        $importantAdmin = $this->repository->findCountImportantAdmin();
+        $trashAdmin = $this->repository->findCountTrashAdmin();
+
+        $mailboxCountPro = $this->repository->findCountPro();
+        $favoritePro = $this->repository->findCountFavoritePro();
+        $importantPro = $this->repository->findCountImportantPro();
+        $trashPro = $this->repository->findCountTrashPro();
+
+        $formAppartementA = $this->createForm(ReplyMessageType::class, $mailbox);
+        $formAppartementA->handleRequest($request);
+
+        if($formAppartementA->isSubmitted() && $formAppartementA->isValid() && $mailbox->getCategorie() == 5)
+        {
+            $notif3->notify($mailbox);
+            $this->addFlash('success', 'Message envoyer');
+            return $this->redirectToRoute('admin.mailbox.index');
+        }
+
+        $formRent = $this->createForm(ReplyMessageType::class, $mailbox);
+        $formRent->handleRequest($request);
+
+        if($formRent->isSubmitted() && $formRent->isValid() && $mailbox->getCategorie() == 1)
+        {
+            $notif2->notify($mailbox);
+            $this->addFlash('success', 'Message envoyer');
+            return $this->redirectToRoute('admin.mailbox.index');
+        }
+
+        $formProperty = $this->createForm(ReplyMessageType::class, $mailbox);
+        $formProperty->handleRequest($request);
+
+        if($formProperty->isSubmitted() && $formProperty->isValid() && $mailbox->getCategorie() == 0)
+        {
+            $notif->notify($mailbox);
+            $this->addFlash('success', 'Message envoyer');
+            return $this->redirectToRoute('admin.mailbox.index');
+        }
+
+        $formAdmin = $this->createForm(ReplyMessageType::class, $mailbox);
+        $formAdmin->handleRequest($request);
+
+        if($formAdmin->isSubmitted() && $formAdmin->isValid() && $mailbox->getCategorie() == 6)
+        {
+            $notif4->notify($mailbox);
+            $this->addFlash('success', 'Message envoyer');
+            return $this->redirectToRoute('admin.mailbox.index');
+        }
 
         return $this->render('admin/mailbox/show.html.twig', [
             'mailbox' => $mailbox,
             'slug' => $mailbox->getSubject(),
-            'reception' => $mailboxCount,
-            'favorite' => $favorite,
-            'important' => $important,
-            'trash' => $trash
+            'receptionAdmin' => $mailboxCountAdmin,
+            'favoriteAdmin' => $favoriteAdmin,
+            'importantAdmin' => $importantAdmin,
+            'trashAdmin' => $trashAdmin,
+            'receptionPro' => $mailboxCountPro,
+            'favoritePro' => $favoritePro,
+            'importantPro' => $importantPro,
+            'trashPro' => $trashPro,
+            'formAppartementA' => $formAppartementA->createView(),
+            'formRent' => $formRent->createView(),
+            'formProperty' => $formProperty->createView(),
+            'formAdmin' => $formAdmin->createView()
         ]);
     }
 

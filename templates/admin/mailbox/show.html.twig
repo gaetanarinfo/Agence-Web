@@ -25,37 +25,37 @@
 										<a href="{{ path('admin.mailbox.index') }}" class="list-group-item">
 										<i class="fa fa-inbox mr-2"></i>Boîte de réception
 											<b>
-												{% if reception == false %}
+												{% if receptionAdmin == false %}
 													(0)
 												{% else %}
-													({{ reception }})
+													({{ receptionAdmin }})
 												{% endif %}
 											</b>
 										</a>
 										<a href="{{ path('admin.mailbox.favoris') }}" class="list-group-item">
 											<i class="fa fa-star-o mr-2"></i>Favoris
-											{% if favorite == false %}
+											{% if favoriteAdmin == false %}
 												(0)
 											{% else %}
-												<b>({{ favorite }})
+												<b>({{ favoriteAdmin }})
 												</b>
 											{% endif %}
 										</a>
 										
 										<a href="{{ path('admin.mailbox.trash') }}" class="list-group-item">
 											<i class="fa fa-trash-o mr-2"></i>Corbeille
-											{% if trash == false %}
+											{% if trashAdmin == false %}
 												(0)
 											{% else %}
-												<b>({{ trash }})</b>
+												<b>({{ trashAdmin }})</b>
 											{% endif %}
 										</a>
 										<a href="{{ path('admin.mailbox.importants') }}" class="list-group-item">
 											<i class="fa fa-bookmark mr-2"></i>Important
-											{% if important == false %}
+											{% if importantAdmin == false %}
 												(0)
 											{% else %}
-												<b>({{ important }})</b>
+												<b>({{ importantAdmin }})</b>
 											{% endif %}
 										</a>
 									</div>
@@ -108,7 +108,7 @@
                                                 <small class="text-muted">Sujet : {{ mailbox.subject }}</small><br/>
 												<small class="text-muted">De : {{ mailbox.email }}</small><br/>
 												{% if mailbox.phone != null %}
-													<small class="text-muted">Téléphone : 0{{ mailbox.phone }}</small>
+													<small class="text-muted">Téléphone : {{ mailbox.phone }}</small>
 												{% endif %}
 											</div>
 										</div>
@@ -120,6 +120,60 @@
 											<b>Bonjour {{ app.user.username }},</b>
 										</p>
 										<p>{{ mailbox.content }}</p>
+
+										<hr/>
+
+										{% if is_granted('ROLE_SUPER_ADMIN') %}
+
+											{% if mailbox.categorie == 6 %}
+													{{ form_start(formAdmin) }}
+													<div class="col-md-12">
+														<div class="row" style="justify-content: center;">
+															<div class="col-md-10">{{ form_row(formAdmin.content) }}</div>
+														</div>
+													</div>	
+													<div style="text-align: center;">
+														<button class="btn btn-primary">Envoyer le message</button>    
+													</div>    
+													{{ form_end(formAdmin) }}
+											{% endif %}	
+											
+										{% elseif is_granted('ROLE_PRO') %}
+											{% if mailbox.categorie == 5 %}
+												{{ form_start(formAppartementA) }}
+												<div class="col-md-12">
+													<div class="row" style="justify-content: center;">
+														<div class="col-md-10">{{ form_row(formAppartementA.content) }}</div>
+													</div>
+												</div>	
+												<div style="text-align: center;">
+													<button class="btn btn-primary">Envoyer le message</button>    
+												</div>    
+												{{ form_end(formAppartementA) }}
+											{% elseif mailbox.categorie == 1 %}
+												{{ form_start(formRent) }}
+												<div class="col-md-12">
+													<div class="row" style="justify-content: center;">
+														<div class="col-md-10">{{ form_row(formRent.content) }}</div>
+													</div>
+												</div>	
+												<div style="text-align: center;">
+													<button class="btn btn-primary">Envoyer le message</button>    
+												</div>    
+												{{ form_end(formRent) }}
+											{% elseif mailbox.categorie == 0 %}
+												{{ form_start(formProperty) }}
+												<div class="col-md-12">
+													<div class="row" style="justify-content: center;">
+														<div class="col-md-10">{{ form_row(formProperty.content) }}</div>
+													</div>
+												</div>	
+												<div style="text-align: center;">
+													<button class="btn btn-primary">Envoyer le message</button>    
+												</div>    
+												{{ form_end(formProperty) }}
+											{% endif %}	
+										{% endif %}	
 
 									</div>
 								</div>

@@ -35,35 +35,22 @@ class HomeController extends AbstractController
         $form = $this->createForm(ContactHomeType::class, $mailbox);
         $form->handleRequest($request);
         
-        if ($form->isSubmitted()) {
-            if($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
+           
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($mailbox);
                 $entityManager->flush();
                 $this->addFlash('success', 'Votre message à bien été transmis');
-                return $this->render('pages/home.html.twig', [
-                    'properties' => $properties,
-                    'rent' => $rent,
-                    'user' => $user,
-                    'appartementAs' => $appartementA,
-                    'form' => $form->createView()
-                ]);
-            }else{
-                $this->addFlash('error', 'Une erreur est survenue');
-                return $this->render('pages/home.html.twig', [
-                    'properties' => $properties,
-                    'rent' => $rent,
-                    'user' => $user,
-                    'form' => $form->createView()
-                ]);
-            }
+                return $this->redirectToRoute('home');
+
+    
         }
 
         return $this->render('pages/home.html.twig', [
             'properties' => $properties,
             'rent' => $rent,
             'user' => $user,
-            'appartementAs' => $appartementA,
+            'appartementa' => $appartementA,
             'form' => $form->createView()
         ]);
 

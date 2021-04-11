@@ -12,7 +12,7 @@
     </h5>
     <p class="card-text">{{ appartementA.surface }} m² - {{ appartementA.city }} ({{ appartementA.postalCode }})</p>
     <p>Mise en ligne par {{ appartementA.createdBy }}</p>
-    <p>{% if appartementA.available == 0 %}<i class="fas fa-check text-success"></i> Disponible{% else %}<i class="fas fa-times text-danger"></i> Louer{% endif %}</p>
+    <p>{% if appartementA.sold == 0 %}<i class="fas fa-check text-success"></i> Disponible{% else %}<i class="fas fa-times text-danger"></i> Louer{% endif %}</p>
     <div class="text-success card-foot mb-3">
       {{ appartementA.formattedPrice }} €
     </div>

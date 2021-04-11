@@ -57,6 +57,7 @@ class MailboxRepository extends ServiceEntityRepository
         $mailbox = $this->paginator->paginate(
             $query
             ->where('p.trash = 0')
+            ->orderBy('p.createdAt', 'DESC')
             ->getQuery(),
             $page,
             12
@@ -76,6 +77,7 @@ class MailboxRepository extends ServiceEntityRepository
             $query
             ->where('p.favorite = 1')
             ->andWhere('p.trash = 0')
+            ->orderBy('p.createdAt', 'DESC')
             ->getQuery(),
             $page,
             12
@@ -95,6 +97,7 @@ class MailboxRepository extends ServiceEntityRepository
             $query
             ->where('p.important = 1')
             ->andWhere('p.trash = 0')
+            ->orderBy('p.createdAt', 'DESC')
             ->getQuery(),
             $page,
             12
@@ -113,6 +116,7 @@ class MailboxRepository extends ServiceEntityRepository
         $mailbox = $this->paginator->paginate(
             $query
             ->where('p.trash = 1')
+            ->orderBy('p.createdAt', 'DESC')
             ->getQuery(),
             $page,
             12
@@ -124,13 +128,14 @@ class MailboxRepository extends ServiceEntityRepository
     /**
      * @return Mailbox[]
      */
-    public function findCount()
+    public function findCountAdmin()
     {
         $qb = $this->createQueryBuilder('p');
 
         return $qb
         ->select('count(p.id)')
         ->where('p.trash = 0')
+        ->andWhere('p.categorie = 6')
         ->getQuery()
         ->getSingleScalarResult();
 
@@ -139,7 +144,7 @@ class MailboxRepository extends ServiceEntityRepository
     /**
      * @return Mailbox[]
      */
-    public function findCountFavorite()
+    public function findCountFavoriteAdmin()
     {
         $qb = $this->createQueryBuilder('p');
         
@@ -147,6 +152,7 @@ class MailboxRepository extends ServiceEntityRepository
         ->select('count(p.favorite)')
         ->where('p.favorite = 1')
         ->andWhere('p.trash = 0')
+        ->andWhere('p.categorie = 6')        
         ->getQuery()
         ->getSingleScalarResult();
     }
@@ -154,7 +160,7 @@ class MailboxRepository extends ServiceEntityRepository
     /**
      * @return Mailbox[]
      */
-    public function findCountImportant()
+    public function findCountImportantAdmin()
     {
         $qb = $this->createQueryBuilder('p');
     
@@ -162,17 +168,79 @@ class MailboxRepository extends ServiceEntityRepository
         ->select('count(p.important)')
         ->where('p.important = 1')
         ->andWhere('p.trash = 0')
+        ->andWhere('p.categorie = 6')         
         ->getQuery()
         ->getSingleScalarResult();
     }
 
-    public function findCountTrash()
+    public function findCountTrashAdmin()
     {
         $qb = $this->createQueryBuilder('p');
     
         return $qb
         ->select('count(p.trash)')
         ->where('p.trash = 1')
+        ->andWhere('p.categorie = 6')         
+        ->getQuery()
+        ->getSingleScalarResult();
+    }
+
+      /**
+     * @return Mailbox[]
+     */
+    public function findCountPro()
+    {
+        $qb = $this->createQueryBuilder('p');
+
+        return $qb
+        ->select('count(p.id)')
+        ->where('p.trash = 0')
+        ->andWhere('p.categorie != 6')
+        ->getQuery()
+        ->getSingleScalarResult();
+
+    }
+
+    /**
+     * @return Mailbox[]
+     */
+    public function findCountFavoritePro()
+    {
+        $qb = $this->createQueryBuilder('p');
+        
+        return $qb
+        ->select('count(p.favorite)')
+        ->where('p.favorite = 1')
+        ->andWhere('p.trash = 0')
+        ->andWhere('p.categorie != 6')        
+        ->getQuery()
+        ->getSingleScalarResult();
+    }
+
+    /**
+     * @return Mailbox[]
+     */
+    public function findCountImportantPro()
+    {
+        $qb = $this->createQueryBuilder('p');
+    
+        return $qb
+        ->select('count(p.important)')
+        ->where('p.important = 1')
+        ->andWhere('p.trash = 0')
+        ->andWhere('p.categorie != 6')         
+        ->getQuery()
+        ->getSingleScalarResult();
+    }
+
+    public function findCountTrashPro()
+    {
+        $qb = $this->createQueryBuilder('p');
+    
+        return $qb
+        ->select('count(p.trash)')
+        ->where('p.trash = 1')
+        ->andWhere('p.categorie != 6')         
         ->getQuery()
         ->getSingleScalarResult();
     }
