@@ -5,8 +5,8 @@ namespace App\Controller\User;
 use App\Entity\Avatar;
 use App\Entity\User;
 use App\Form\UserType3;
-use App\Form\UserType4;
 use App\Repository\PropertyRepository;
+use App\Repository\AppartementARepository;
 use App\Repository\RentRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -35,14 +35,17 @@ class ProfilController extends AbstractController
      * @Route("/profil", name="profil", methods="GET|POST")
     */
 
-    public function index(PropertyRepository $propertyRepository, RentRepository $rentRepository)
+    public function index(PropertyRepository $propertyRepository, RentRepository $rentRepository, AppartementARepository $appartementARepository)
     {
         $username = $this->getUser('username')->getUsername();
         $properties = $propertyRepository->findAllProperty($username);
         $rents = $rentRepository->findAllRent($username);
+        $appartementAs = $appartementARepository->findAllAppartementA($username);
+
         return $this->render('user/index.html.twig', [
             'properties' => $properties,
-            'rents' => $rents
+            'rents' => $rents,
+            'appartementAs' => $appartementAs
         ]);
     }
 
@@ -105,16 +108,35 @@ class ProfilController extends AbstractController
     /**
      * @Route("/profil/{username}", name="user.public", methods="GET|POST")
      */
-    public function show(User $user, PropertyRepository $propertyRepository, RentRepository $rentRepository)
+    public function show(User $user, PropertyRepository $propertyRepository, RentRepository $rentRepository, AppartementARepository $appartementARepository)
     {
         $username = $user->getUsername();
         $properties = $propertyRepository->findAllProperty($username);
+        $username_role = $user->getRoles();
         $rents = $rentRepository->findAllRent($username);
-        return $this->render('user/public.html.twig', [
-            'user' => $user,
-            'properties' => $properties,
-            'rents' => $rents
-        ]);
+        $appartementAs = $appartementARepository->findAllAppartementA($username);
+
+        if($username == null || $username != $user->getUsername()){
+
+            return $this->redirectToRoute('home');
+
+        }else{
+
+            if($username_role[0] == 'ROLE_ADMIN' || $username_role[0] == 'ROLE_SUPER_ADMIN') {
+
+                return $this->redirectToRoute('home');
+
+            }else{
+
+                return $this->render('user/public.html.twig', [
+                    'user' => $user,
+                    'properties' => $properties,
+                    'rents' => $rents,
+                    'appartementAs' => $appartementAs
+                ]);
+
+            }
+        }
     }
 
 }

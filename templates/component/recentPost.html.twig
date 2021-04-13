@@ -1,0 +1,58 @@
+<!--Section: Content-->
+<section>
+
+    <!-- Section heading -->
+    <h3 class="text-center mb-4">Dernières actualités</h3>
+
+  	<!-- Grid row -->
+    <div class="row">
+
+      {% for blogs in blogRecent %}
+      <!-- Grid column -->
+      <div class="col-lg-4 col-md-12 mb-lg-0 mb-4">
+
+        <!-- Card -->
+        <div class="card hoverable">
+
+          <!-- Card image -->
+          {% if blog.pictures is empty %}
+							<img src="{{ '/images/empty.jpg' }}" class="card-img-top" alt="{{ blog.title }}">
+						{% else %}
+							{% for picture in blog.pictures %}
+								<img src="{{ vich_uploader_asset(picture, 'imageFile') }}" class="card-img-top" alt="{{ blog.title }}"/>
+							{% endfor %}
+					{% endif %}
+
+          <!-- Card content -->
+          <div class="card-body">
+
+            <!-- Title -->
+            <a href="{{ path('blog.show', {id: blogs.id}) }}" class="black-text">{{ blogs.title }}</a>
+            <!-- Text -->
+            <p class="card-title text-muted font-small mt-3 mb-2">{{ blogs.smallContent }}</p>
+						
+            <a href="{{ path('blog.show', {id: blogs.id}) }}" class="btn btn-flat text-primary p-0 mx-0">Lire la suite<i class="fa fa-angle-right ml-2"></i></a>
+            
+          </div>
+
+        </div>
+        <!-- Card -->
+
+      </div>
+      <!-- Grid column -->
+      {% endfor %}
+
+    </div>
+    <!-- Grid row -->
+    
+    <div class="text-center mt-4">
+    	<a href="{{ path('blog.index') }}">Parcourir tous les articles du blog</a>
+    </div>
+
+  </section>
+  <!--Section: Content-->
+
+
+</div>
+
+<hr class="mb-4 mt-4" />

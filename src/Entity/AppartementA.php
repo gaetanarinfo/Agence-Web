@@ -101,7 +101,7 @@ class AppartementA
     private $updated_at;
 
     /**
-     * @var Picture|null
+     * @var PictureAppartementA|null
      */
     private $picture;
 

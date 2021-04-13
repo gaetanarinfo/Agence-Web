@@ -1,0 +1,55 @@
+<!--Section: Content-->
+<section class="text-lg-left dark-grey-text w-75 m-auto">
+
+	<div class="text-center font-weight-bold" id="commentaire">
+		<span>{{ countComment }}</span>
+		commentaire(s)</div>
+
+    {% if comment is empty %}
+										
+    {% else %}
+
+        {% for comments in comment %}									
+            <div class="media d-block d-md-flex mt-4 w-75 m-auto">
+
+                <img class="card-img-64 rounded z-depth-1 d-flex mx-auto mb-3" src="../media/avatar/{{ comments.avatar }}" alt="{{ comments.author }}">
+    
+                <div class="media-body text-md-left ml-md-3 ml-0">
+                    <p class="font-weight-bold my-0">
+                        {{ comments.author }}
+                    </p>
+                    {{ comments.content }}
+                </div>
+            </div>
+        {% endfor %}
+
+    {% endif %} 
+
+    {% if is_granted('ROLE_USER') %}
+        <!-- Quick Reply -->
+        <div class="form-group mt-4 w-50 m-auto">
+            {{ form_start(form) }}
+            <label for="quickReplyFormComment">Votre commentaire</label>
+                {{ form_row(form.content) }}
+                {% if app.user.pictures is empty %}
+                    {{ form_widget(form.avatar, {'attr': { 'value': '/images/default_profil.png' }}) }}
+                {% else %}
+                    {% for picture in app.user.pictures %}
+                        {{ form_widget(form.avatar, {'attr': { 'value': picture.filename }}) }}
+                    {% endfor %}
+                {% endif %}
+            <div class="text-center my-4">
+                <button class="btn btn-info btn-sm" type="submit">Poster le commentaire</button>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    {% else %}
+         <div class="form-group mt-4 w-50 m-auto">
+                <div class="text-center my-4">
+                    <a href="{{ path('login') }}" class="btn btn-info btn-sm">Se connecter</a>
+                </div>
+         </div>
+    {% endif %}
+
+</section>
+<!--Section: Content-->

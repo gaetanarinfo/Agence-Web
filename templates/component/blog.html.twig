@@ -1,0 +1,74 @@
+<div class="container">
+
+	<!--Section: Content-->
+	<section
+		class="dark-grey-text text-center">
+
+		<!-- Section heading -->
+		<h2 class="text-center">Actualités récentes</h2>
+        <hr/>
+		<!-- Section description -->
+		<p class="text-center mx-auto w-responsive mb-3">Retrouvez la page 1 de nos actualit&eacute;s immobili&egrave;res, nos derni&egrave;res copropri&eacute;t&eacute;s, les info r&eacute;centes de nos agences en location et en vente d'appartements et maisons, les nouveaut&eacute;s de votre syndic de copropri&eacute;t&eacute; et les nouvelles applications de lois en gestion locative.</p>
+
+		<!-- Grid row -->
+		<div
+			class="row">
+
+			{% for blogs in blog %}
+				<!-- Grid column -->
+				<div
+					class="col-lg-4 col-md-12 mb-4">
+
+					<!-- Featured image -->
+					<div class="view overlay rounded z-depth-2 mb-4">
+						{% if blogs.pictures is empty %}
+							<img src="{{ '/images/empty.jpg' }}" class="img-fluid" alt="{{ blogs.title }}">
+						{% else %}
+							{% for picture in blogs.pictures %}
+							<img src="{{ vich_uploader_asset(picture, 'imageFile') }}" class="img-fluid" alt="{{ blogs.title }}" />
+							{% endfor %}
+						{% endif %}
+						<a>
+							<div class="mask rgba-white-slight"></div>
+						</a>
+					</div>
+
+					<!-- Category -->
+					<a href="#!" class="deep-orange-text">
+						<h6 class="font-weight-bold mb-3">
+							<i class="fas fa-caret-right pr-2"></i>{{ blogs.catType }}</h6>
+					</a>
+					<!-- Post title -->
+					<h4 class="mb-2">
+						<strong>{{ blogs.title }}</strong>
+					</h4>
+					<!-- Post data -->
+					<p><i class="fas fa-user mr-2"></i>par
+						<a href="{{ path('user.public', { username: blogs.author }) }}" class="font-weight-bold">{{ blogs.author }}</a>
+						<br/>
+						<i class="fas fa-pencil-alt mr-2"></i>Publié le {{ blogs.createdAt|format_datetime() }}
+						{% if blogs.updatedAt != null %}
+								<br/><span style="font-size: 13px;">Modifié le
+									{{ blogs.updatedAt|format_datetime() }}</span>
+							{% else %}
+								<br/><span style="font-size: 13px;">L'article n'a pas été modifié</span>
+							{% endif %}
+						</p>
+					<!-- Excerpt -->
+					<p class="dark-grey-text">{{ blogs.smallContent }}</p>
+					<!-- Read more button -->
+					<a href="{{ path('blog.show', {id: blogs.id}) }}" class="btn btn-deep-orange btn-rounded btn-md">Lire la suite</a>
+
+				</div>
+				<!-- Grid column -->
+			{% endfor %}
+
+		</div>
+		<!-- Grid row -->
+
+	</section>
+	<!--Section: Content-->
+
+    <hr/>
+
+</div>

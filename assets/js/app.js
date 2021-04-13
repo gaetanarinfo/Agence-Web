@@ -58,12 +58,18 @@ if (searchAddress !== null) {
 
 let $ = require('jquery')
 require('../css/app.css');
-require('select2')
+require('../css/blog.css');
+require('select2');
 
 $('[data-slider]').slick({
     dots: true,
     arrows: true
 })
+
+$("[id*=blog_smallContent]").MaxLength({
+    MaxLength: 135,
+    DisplayCharacterCount: false
+});
 
 $('select').select2()
 $('appartement_a_heat').select2()

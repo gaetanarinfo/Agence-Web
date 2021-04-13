@@ -25,7 +25,7 @@
                 <tr>
                     <th>Titre</th>
                     <th>Disponibilité</th>
-                    <th>Action</th>
+                    <th style="text-align: center;">Action</th>
                 </tr>    
             </thead>
             <tbody>
@@ -33,7 +33,7 @@
                 <tr>
                     <td style="vertical-align: middle;">{{ appartementAs.title }}</td>
                     <td style="vertical-align: middle;">{% if appartementAs.sold == 0 %}<i class="fas fa-check text-success"></i> Disponible{% else %}<i class="fas fa-times text-danger"></i> Vendu{% endif %}</td>
-                    <td style="vertical-align: middle;">
+                    <td style="vertical-align: middle; text-align: center;">
                         <a href="{{ path('admin.appartementA.edit', {id: appartementAs.id}) }}" class="btn btn-secondary">Editer</a>
                         <form method="post" action="{{ path('admin.appartementA.delete', {id: appartementAs.id}) }}" style="display: inline-block;">
                             <input type="hidden" name="_method" value="DELETE" />

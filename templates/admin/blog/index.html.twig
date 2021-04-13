@@ -1,0 +1,67 @@
+{% extends "base.html.twig" %}
+
+{% block title 'Gérer les actualités' %}
+
+{% block body %}
+
+    <div class="container mt-4 mb-4 w-75">
+
+        <p class="title-cont">Gérer les actualités</p>
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success text-center">
+                <i class="fa fa-check text-success" aria-hidden="true"></i> {{ message }}
+            </div>
+        {% endfor %}
+
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-danger text-center">
+                <i class="fas fa-times text-danger" aria-hidden="true"></i> {{ message }}
+            </div>
+        {% endfor %}
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Titre</th>
+                    <th>Mise en ligne</th>
+                    <th>Modifié le</th>  
+                    <th style="text-align: center;">Action</th>
+                </tr>    
+            </thead>
+            <tbody>
+            {% for blog in blogs %}
+                <tr>
+                    <td style="vertical-align: middle;">{{ blog.title }}</td>
+                    <td style="vertical-align: middle;">{{ blog.createdAt|format_datetime() }}</td>
+                    {% if blog.updatedAt != null %}
+                        <td style="vertical-align: middle;">{{ blog.updatedAt|format_datetime() }}</td>
+                    {% else %}   
+                        <td style="vertical-align: middle;">Pas de modification</td>
+                    {% endif %}    
+                    <td style="vertical-align: middle; text-align: center;">
+                        <a href="{{ path('blog.show', {id: blog.id}) }}" class="btn btn-primary">Voir</a>
+                        <a href="{{ path('admin.blog.edit', {id: blog.id}) }}" class="btn btn-secondary">Editer</a>
+                        <form method="post" action="{{ path('admin.blog.delete', {id: blog.id}) }}" style="display: inline-block;">
+                            <input type="hidden" name="_method" value="DELETE" />
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ blog.id) }}" />
+                            <button class="btn btn-danger">Supprimer</button>
+                        </form>
+                    </td style="vertical-align: middle;">
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="row mt-4">
+            <div class="col-12 col-md-12 col-xl-12" style="display: flex;justify-content: space-around;">
+                {{ knp_pagination_render(blogs) }}
+            </div>
+        </div>
+
+        <div class="text-right">
+            <a href='{{ path('admin.blog.new') }}' class="btn btn-primary">Crée une actualité</a>
+        </div>
+
+    </div>
+{% endblock %}
