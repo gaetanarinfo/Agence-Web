@@ -24,21 +24,21 @@
         <!-- Favicon -->
         <link rel="icon" type="image/png" href="https://agence-web.website/images/favicon.png" />
 
-        <link rel="stylesheet" href="../../../../css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-        <link rel="stylesheet" href="../../../../css/select2.min.css">
+        <link rel="stylesheet" href="{{ globals.WebSiteUrl }}css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{ globals.WebSiteUrl }}css/select2.min.css">
         <!-- Google Fonts -->
         <link
-        href="../../../../css/css.css"
+        href="{{ globals.WebSiteUrl }}css/css.css"
         rel="stylesheet"
         />
         <!-- MDB -->
         <link
-        href="../../../../css/mdb.min.css"
+        href="{{ globals.WebSiteUrl }}css/mdb.min.css"
         rel="stylesheet"
         />
         <!-- DateTimePicker -->
-        <link rel="stylesheet" type="text/css" href="../../../../css/DateTimePicker.css" />  
-        <link href="../../../../css/mapbox-gl.css" rel="stylesheet" />
+        <link rel="stylesheet" type="text/css" href="{{ globals.WebSiteUrl }}css/DateTimePicker.css" />  
+        <link href="{{ globals.WebSiteUrl }}css/mapbox-gl.css" rel="stylesheet" />
         <link rel="stylesheet" href="{{ asset('build/app.css') }}"></link>
         {% block stylesheets %}
         {% endblock %}
@@ -59,7 +59,7 @@
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     {% for website in globals.menu %}
                     <li class="nav-item {% if app.request.requesturi == '/' ~ website.link %}active{% endif %}">
-                        <a class="nav-link" href="../{{ website.link }}">{{ website.button }}</a>
+                        <a class="nav-link" href="{{ globals.WebSiteUrl }}{{ website.link }}">{{ website.button }}</a>
                     </li>
                     {% endfor %}
                 </ul>
@@ -75,7 +75,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         {% for website in globals.menuAdmin %}
-                        <a class="dropdown-item" href="../../../../{{ website.link }}"><i class="fas {{ website.icon }} mr-2"></i>{{ website.button }}</a>
+                        <a class="dropdown-item" href="{{ globals.WebSiteUrl }}{{ website.link }}"><i class="fas {{ website.icon }} mr-2"></i>{{ website.button }}</a>
                         <div class="dropdown-divider"></div>
                         {% endfor %}
                         </div>  
@@ -89,7 +89,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         {% for website in globals.menuPro %}
-                        <a class="dropdown-item" href="../../../../{{ website.link }}"><i class="fas {{ website.icon }} mr-2"></i>{{ website.button }}</a>
+                        <a class="dropdown-item" href="{{ globals.WebSiteUrl }}{{ website.link }}"><i class="fas {{ website.icon }} mr-2"></i>{{ website.button }}</a>
                         <div class="dropdown-divider"></div>
                         {% endfor %}
                         </div>  
@@ -100,12 +100,12 @@
                     {% for website in globals.menu2 %}
                         {% if website.button4 != null %}
                         <li class="nav-item {% if app.request.requesturi == '/' ~ website.link4 %}active{% endif %}">
-                            <a href="../../../{{ website.link4 }}" class="nav-link">{{ website.button4 }}</a>
+                            <a href="{{ globals.WebSiteUrl }}{{ website.link4 }}" class="nav-link">{{ website.button4 }}</a>
                         </li>
                         {% endif %}
                         {% if website.button3 != null %}    
                         <li class="nav-item">
-                            <a href="../../../{{ website.link3 }}" class="nav-link">{{ website.button3 }}</a>
+                            <a href="{{ globals.WebSiteUrl }}{{ website.link3 }}" class="nav-link">{{ website.button3 }}</a>
                         </li>
                         {% endif %}
                     {% endfor %}
@@ -118,12 +118,12 @@
                     {% for website in globals.menu2 %}
                         {% if website.button1 != null %}
                         <li class="nav-link">
-                            <a href="../../../{{ website.link1 }}" class="btn btn-outline-success nav-link text-white text-bold">{{ website.button1 }}</a>
+                            <a href="{{ globals.WebSiteUrl }}{{ website.link1 }}" class="btn btn-outline-success nav-link text-white text-bold">{{ website.button1 }}</a>
                         </li>
                         {% endif %}
                         {% if website.button2 != null %}
                         <li class="nav-link">
-                            <a href="../../../{{ website.link2 }}" class="btn btn-outline-info nav-link text-white text-bold">{{ website.button2 }}</a>
+                            <a href="{{ globals.WebSiteUrl }}{{ website.link2 }}" class="btn btn-outline-info nav-link text-white text-bold">{{ website.button2 }}</a>
                         </li>
                         {% endif %}
                     {% endfor %}    
@@ -133,7 +133,7 @@
             </div>
         </nav>
 
-        <div class="jumbotron text-center jumb-head">
+        <div class="jumbotron text-center jumb-head" style="background: url('{{ globals.WebSiteUrl }}{{ globals.backgroundHeader }}')">
             <div class="head-title">
                 <h1 class="mt-5">{{ globals.title }}</h1>
                 <p class="mt-5">{{ globals.description }}</p>
@@ -187,7 +187,9 @@
         <!-- Copyright -->
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
 
-        <a href="#contact" class="link-footer">Contactez-nous</a> | <a href="" class="link-footer">Mentions légales</a> | <a href="" class="link-footer">CGU</a> | <a href="" class="link-footer">Données personnelles</a>
+        {% for website in globals.footerMenu %}
+            <a href="{{ globals.WebSiteUrl }}{{ website.link }}" class="link-footer">{{ website.button }}</a> {% if website.id != 4 %}|{% endif %}
+        {% endfor %}
 
         <hr class="w-50 m-auto mb-3 mt-3">
 
@@ -196,21 +198,21 @@
         </div>
         <!-- Copyright -->
         </footer>
-        <script src="../../../../js/9d1d83a1dd.js" crossorigin="anonymous"></script>
-        <script src="../../../../js/jquery.min.js"></script>
-        <script type="text/javascript" src="{{ asset('js/MaxLength.min.js') }}"></script>
-        <script src="../../../../js/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-        <script src="../../../../js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
-        <script src="../../../../js/select2.min.js"></script>
+        <script src="{{ globals.WebSiteUrl }}js/9d1d83a1dd.js" crossorigin="anonymous"></script>
+        <script src="{{ globals.WebSiteUrl }}js/jquery.min.js"></script>
+        <script type="text/javascript" src="{{ globals.WebSiteUrl }}js/MaxLength.min.js"></script>
+        <script src="{{ globals.WebSiteUrl }}js/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="{{ globals.WebSiteUrl }}js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+        <script src="{{ globals.WebSiteUrl }}js/select2.min.js"></script>
         <!-- MDB -->
         <script
         type="text/javascript"
-        src="../../../../js/mdb.min.js"
+        src="{{ globals.WebSiteUrl }}js/mdb.min.js"
         ></script>
         <!-- Date§TimePicker -->
-        <script type="text/javascript" src="../../../../js/DateTimePicker.js"></script>
+        <script type="text/javascript" src="{{ globals.WebSiteUrl }}js/DateTimePicker.js"></script>
         <!-- For i18n Support -->
-        <script type="text/javascript" src="../../../../js/i18n/DateTimePicker-i18n-fr.js"></script>
+        <script type="text/javascript" src="{{ globals.WebSiteUrl }}js/i18n/DateTimePicker-i18n-fr.js"></script>
         <script src="{{ asset('build/app.js') }}"></script>
         {% block javascripts %}
         {% endblock %}

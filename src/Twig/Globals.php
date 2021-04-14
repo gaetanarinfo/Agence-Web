@@ -2,6 +2,9 @@
 
 namespace App\Twig;
 
+use App\Entity\WebSiteFooterMenuRepository;
+use App\Entity\WebSiteHeader;
+use App\Repository\WebSiteFooterMenuRepository as RepositoryWebSiteFooterMenuRepository;
 use App\Repository\WebSiteFooterRepository;
 use App\Repository\WebSiteHeaderRepository;
 use App\Repository\WebSiteMenu2Repository;
@@ -25,7 +28,7 @@ class Globals {
     private $repository5;
     private $repository6;
 
-    public function __construct(WebSiteHeaderRepository $repository, WebSiteFooterRepository $repository2, WebSiteMenuRepository $repository3, WebSiteMenu2Repository $repository4, WebSiteMenuAdminRepository $repository5, WebSiteMenuProRepository $repository6, EntityManagerInterface $em)
+    public function __construct(WebSiteHeaderRepository $repository, WebSiteFooterRepository $repository2, WebSiteMenuRepository $repository3, WebSiteMenu2Repository $repository4, WebSiteMenuAdminRepository $repository5, WebSiteMenuProRepository $repository6, RepositoryWebSiteFooterMenuRepository $repository7, EntityManagerInterface $em)
     {
         $this->repository = $repository;
         $this->repository2 = $repository2;
@@ -33,7 +36,19 @@ class Globals {
         $this->repository4 = $repository4;
         $this->repository5 = $repository5;
         $this->repository6 = $repository6;
+        $this->repository7 = $repository7;
         $this->em = $em;
+    }
+
+    public function websiteUrl()
+    {
+        $websiteHeader = $this->repository->findHeader();
+        $url = null;
+        foreach($websiteHeader as $event)
+        {
+            $url = $event->getWebSiteUrl();
+        }
+        return $url;
     }
 
     public function title()
@@ -45,6 +60,17 @@ class Globals {
             $title = $event->getWebTitle();
         }
         return $title;
+    }
+
+    public function backgroundHeader()
+    {
+        $websiteHeader = $this->repository->findHeader();
+        $background = null;
+        foreach($websiteHeader as $event)
+        {
+            $background = $event->getBackground();
+        }
+        return $background;
     }
 
     public function description()
@@ -98,6 +124,13 @@ class Globals {
         $menuPro = $this->repository6->findMenuPro();
         
         return $menuPro;
+    }
+
+    public function footerMenu()
+    {
+        $footer = $this->repository7->findFooterMenu();
+        
+        return $footer;
     }
 
     public function copyright()

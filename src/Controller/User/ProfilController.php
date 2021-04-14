@@ -36,17 +36,19 @@ class ProfilController extends AbstractController
      * @Route("/profil", name="profil", methods="GET|POST")
     */
 
-    public function index(PropertyRepository $propertyRepository, RentRepository $rentRepository, AppartementARepository $appartementARepository)
+    public function index(PropertyRepository $propertyRepository, RentRepository $rentRepository, AppartementARepository $appartementARepository, BlogRepository $blogRepository)
     {
         $username = $this->getUser('username')->getUsername();
         $properties = $propertyRepository->findAllProperty($username);
         $rents = $rentRepository->findAllRent($username);
         $appartementAs = $appartementARepository->findAllAppartementA($username);
+        $blogs = $blogRepository->findAllBlog($username);
 
         return $this->render('user/index.html.twig', [
             'properties' => $properties,
             'rents' => $rents,
-            'appartementAs' => $appartementAs
+            'appartementAs' => $appartementAs,
+            'blogs' => $blogs
         ]);
     }
 

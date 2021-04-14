@@ -29,6 +29,16 @@ class WebSiteHeader
      */
     private $content;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $background;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $websiteUrl;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -54,6 +64,30 @@ class WebSiteHeader
     public function setContent(?string $content): self
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    public function getBackground(): ?string
+    {
+        return $this->background;
+    }
+
+    public function setBackground(?string $background): self
+    {
+        $this->background = $background;
+
+        return $this;
+    }
+
+    public function getWebsiteUrl(): ?string
+    {
+        return $this->websiteUrl;
+    }
+
+    public function setWebsiteUrl(string $websiteUrl): self
+    {
+        $this->websiteUrl = $websiteUrl;
 
         return $this;
     }

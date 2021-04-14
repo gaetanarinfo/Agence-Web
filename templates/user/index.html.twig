@@ -229,6 +229,24 @@
 								<div class="col-sm-6 mb-3">
 									<div class="card h-100">
 										<div class="card-body">
+										<h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Les actualiés</i></h6>
+								
+										{% for blog in blogs %}
+										<small class="text-uppercase font-weight-bold"><a href="{{ path('blog.show', {id: blog.id}) }}" target="_blank">{{ blog.title }}</a></small>
+										<div class="mb-0">
+											<p class="mb-0"><i class="fas fa-pencil-alt mr-2"></i>Publié le {{ blog.createdAt|format_datetime() }}</p>
+											<p class="mb-0">{% if blog.updatedAt != null %}Modifié le {{ blog.updatedAt|format_datetime() }} {% else %} L'article n'a pas été modifié {% endif %}</p>
+											<p><i class="fas fa-caret-right text-primary pr-1"></i>{{ blog.catType }}</p>
+										</div>
+										<hr>
+										{% endfor %}
+										</div>
+									</div>
+								</div>
+
+								<div class="col-sm-6 mb-3">
+									<div class="card h-100">
+										<div class="card-body">
 											<h6 class="d-flex align-items-center mb-3">
 												<i class="material-icons text-info mr-2">Les biens</i>
 											</h6>

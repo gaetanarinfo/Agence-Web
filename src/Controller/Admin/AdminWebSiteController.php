@@ -2,17 +2,20 @@
 namespace App\Controller\Admin;
 
 use App\Entity\WebSiteFooter;
+use App\Entity\WebSiteFooterMenu;
 use App\Entity\WebSiteHeader;
 use App\Entity\WebSiteMenu;
 use App\Entity\WebSiteMenu2;
 use App\Entity\WebSiteMenuAdmin;
 use App\Entity\WebSiteMenuPro;
+use App\Form\WebSiteFooterMenuType;
 use App\Form\WebSiteFooterType;
 use App\Form\WebSiteHeaderType;
 use App\Form\WebSiteMenu2Type;
 use App\Form\WebSiteMenuAdminType;
 use App\Form\WebSiteMenuProType;
 use App\Form\WebSiteMenuType;
+use App\Repository\WebSiteFooterMenuRepository;
 use App\Repository\WebSiteFooterRepository;
 use App\Repository\WebSiteHeaderRepository;
 use App\Repository\WebSiteMenuRepository;
@@ -38,8 +41,9 @@ class AdminWebSiteController extends AbstractController
     private $repository4;
     private $repository5;
     private $repository6;
+    private $repository7;
 
-    public function __construct(WebSiteHeaderRepository $repository, WebSiteFooterRepository $repository2, WebSiteMenuRepository $repository3, WebSiteMenu2Repository $repository4, WebSiteMenuAdminRepository $repository5, WebSiteMenuProRepository $repository6, EntityManagerInterface $em)
+    public function __construct(WebSiteHeaderRepository $repository, WebSiteFooterRepository $repository2, WebSiteMenuRepository $repository3, WebSiteMenu2Repository $repository4, WebSiteMenuAdminRepository $repository5, WebSiteMenuProRepository $repository6, WebSiteFooterMenuRepository $repository7, EntityManagerInterface $em)
     {
         $this->repository = $repository;
         $this->repository2 = $repository2;
@@ -47,6 +51,7 @@ class AdminWebSiteController extends AbstractController
         $this->repository4 = $repository4;
         $this->repository5 = $repository5;
         $this->repository6 = $repository6;
+        $this->repository7 = $repository7;
         $this->em = $em;
     }
 
@@ -62,13 +67,15 @@ class AdminWebSiteController extends AbstractController
         $websiteFooter = $this->repository2->findFooter();
         $websiteMenuAdmin = $this->repository5->findMenuAdmin();
         $websiteMenuPro = $this->repository6->findMenuPro();
+        $websiteMenuFooter = $this->repository7->findFooterMenu();
         return $this->render('admin/website/index.html.twig', [
             'websiteHeader' => $websiteHeader,
             'websiteMenu' => $websiteMenu,
             'websiteMenu2' => $websiteMenu2,
             'websiteFooter' => $websiteFooter,
             'websiteMenuAdmin' => $websiteMenuAdmin,
-            'websiteMenuPro' => $websiteMenuPro
+            'websiteMenuPro' => $websiteMenuPro,
+            'websiteMenuFooter' => $websiteMenuFooter
         ]);
     }
 
@@ -281,7 +288,7 @@ class AdminWebSiteController extends AbstractController
         ]);
     }
 
-        /**
+    /**
      * @Route("/admin/website/menu/create", name="admin.website.newMenu")
      * @param WebSiteMenu $website
      * @param Request $request
@@ -338,6 +345,71 @@ class AdminWebSiteController extends AbstractController
      * @Route("/admin/website/menu/delete/{id}", name="admin.website.deleteMenu")
      */
     public function deleteMenu(WebSiteMenu $website)
+    {
+            $this->em->remove($website);
+            $this->em->flush();
+            $this->addFlash('success', 'Bouton supprimé avec succès');
+            return $this->redirectToRoute('admin.website.index');
+    }
+
+    /**
+     * @Route("/admin/website/menu/footer/menu/create", name="admin.website.newMenuFooter")
+     * @param WebSiteMenu $website
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function newMenuFooter(Request $request)
+    {
+        $website = new WebSiteFooterMenu();
+        $form = $this->createForm(WebSiteFooterMenuType::class, $website);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted())
+        {
+            if($form->isValid())
+            {
+                $this->em->persist($website);
+                $this->em->flush();
+                $this->addFlash('success', 'Bouton crée avec succès');
+                return $this->redirectToRoute('admin.website.index');
+            }else{
+                $this->addFlash('error', 'Une erreur est survenue');
+                return $this->redirectToRoute('admin.website.index');
+            }
+        }
+
+        return $this->render('admin/website/newMenuFooter.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/admin/website/footer/menu/{id}", name="admin.website.editMenuFooter", requirements={"id":"\d+"})
+     * @param WebSiteFooterMenu $website
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function editFooterMenu(WebSiteFooterMenu $website, Request $request)
+    {
+        $form = $this->createForm(WebSiteFooterMenuType::class, $website);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+                $this->em->flush();
+                $this->addFlash('success', 'Le bouton à été modifié');
+                return $this->redirectToRoute('admin.website.index');
+        }
+
+        return $this->render('admin/website/editMenuFooter.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+        /**
+     * @Route("/admin/website/footer/menu/delete/{id}", name="admin.website.deleteMenuFooter")
+     */
+    public function deleteFooteRMenu(WebSiteFooterMenu $website)
     {
             $this->em->remove($website);
             $this->em->flush();

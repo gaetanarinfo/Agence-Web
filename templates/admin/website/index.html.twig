@@ -30,11 +30,29 @@
                         <ul class="list-group">
                             <li class="list-group-item text-center"><b>Titre du site : </b><br/>{{ websites.webTitle }}</li>
                             <li class="list-group-item text-center"><b>Description : </b><br/>{{ websites.content }}</li>
+                            <li class="list-group-item text-center"><b>Lien du site : </b><br/>{{ websites.websiteurl }}</li>
                         </ul>
                         <div class="m-auto text-center mt-4 mb-4">
                             <a href="{{ path('admin.website.editHeader', {id: websites.id}) }}" class="btn btn-primary">Editer</a>
                         </div>
                     {% endfor %} 
+
+                    <hr>
+
+                        <p class="title-cont text-center">Menu Footer</p>
+                        {% for websites in websiteMenuFooter %}
+                            <ul class="list-group m-auto">
+                                <li class="list-group-item text-center"><b>Bouton {{ websites.id }} : </b><br/><a href="../{{ websites.link }}"><i class></i> {{ websites.button }}</a></li>
+                            </ul>
+                            <div class="m-auto text-center mt-4 mb-4">
+                                <a href="{{ path('admin.website.editMenuFooter', {id: websites.id}) }}" class="btn btn-primary">Editer</a>
+                                <a href="{{ path('admin.website.deleteMenuFooter', {id: websites.id}) }}" class="btn btn-danger ml-3">Supprimer</a>
+                            </div>
+                        {% endfor %}   
+                        <div class="m-auto text-center mt-4 mb-4">
+                                <a href="{{ path('admin.website.newMenuFooter') }}" class="btn btn-primary">Crée un bouton</a>             
+                        </div>  
+                    
                 </div>
                 <div class="col-md-6">
                     <p class="title-cont text-center">Menu Gauche</p>
@@ -71,31 +89,26 @@
                             <a href="{{ path('admin.website.editMenu2', {id: websites.id}) }}" class="btn btn-primary">Editer</a>
                         </div>
                     {% endfor %}  
-                </div>
-
-                <div class="col-md-6">
-                    <p class="title-cont text-center">Menu Admin</p>
-                    {% for websites in websiteMenuAdmin %}
+                    <hr>
+                    <p class="title-cont text-center">Footer</p>
+                    {% for websites in websiteFooter %}
                         <ul class="list-group m-auto">
-                            <li class="list-group-item text-center"><b>Bouton {{ websites.id }} : </b><i class="fas {{ websites.icon }} mr-2"></i><br/><a href="../{{ websites.link }}"><i class></i> {{ websites.button }}</a></li>
+                            <li class="list-group-item text-center"><b>Réseau social : </b><br/>{{ websites.facebook }}</li>
+                            <li class="list-group-item text-center"><b>Réseau social : </b><br/>{{ websites.twitter }}</li>
+                            <li class="list-group-item text-center"><b>Réseau social : </b><br/>{{ websites.instagram }}</li>
+                            <li class="list-group-item text-center"><b>Adresse : </b><br/>{{ websites.address }}</li>
+                            <li class="list-group-item text-center"><b>Code postal : </b><br/>{{ websites.postalCode }}</li>
+                            <li class="list-group-item text-center"><b>Ville : </b><br/>{{ websites.city }}</li>
+                            <li class="list-group-item text-center"><b>Téléphone : </b><br/>{{ websites.phone }}</li>
+                            <li class="list-group-item text-center"><b>Bas de page : </b><br/>{{ websites.copyright }}</li>
                         </ul>
                         <div class="m-auto text-center mt-4 mb-4">
-                            <a href="{{ path('admin.website.editMenuAdmin', {id: websites.id}) }}" class="btn btn-primary">Editer</a>
-                            <a href="{{ path('admin.website.deleteMenuAdmin', {id: websites.id}) }}" class="btn btn-danger ml-3">Supprimer</a>
+                            <a href="{{ path('admin.website.editFooter', {id: websites.id}) }}" class="btn btn-primary">Editer</a>
                         </div>
-                    {% endfor %}   
-                    <div class="m-auto text-center mt-4 mb-4">
-                            <a href="{{ path('admin.website.newMenuAdmin') }}" class="btn btn-primary">Crée un bouton</a>             
-                    </div>  
-                </div>
-            </div>        
-        </div>
+                    {% endfor %} 
 
-        <hr class="w-50 m-auto mb-3">
+                    <hr>
 
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
                     <p class="title-cont text-center">Menu Professionnel</p>
                     {% for websites in websiteMenuPro %}
                         <ul class="list-group m-auto">
@@ -113,25 +126,29 @@
                 </div>
 
                 <div class="col-md-6">
-                    <p class="title-cont text-center">Footer</p>
-                    {% for websites in websiteFooter %}
+                    <p class="title-cont text-center">Menu Admin</p>
+                    {% for websites in websiteMenuAdmin %}
                         <ul class="list-group m-auto">
-                            <li class="list-group-item text-center"><b>Réseau social : </b><br/>{{ websites.facebook }}</li>
-                            <li class="list-group-item text-center"><b>Réseau social : </b><br/>{{ websites.twitter }}</li>
-                            <li class="list-group-item text-center"><b>Réseau social : </b><br/>{{ websites.instagram }}</li>
-                            <li class="list-group-item text-center"><b>Adresse : </b><br/>{{ websites.address }}</li>
-                            <li class="list-group-item text-center"><b>Code postal : </b><br/>{{ websites.postalCode }}</li>
-                            <li class="list-group-item text-center"><b>Ville : </b><br/>{{ websites.city }}</li>
-                            <li class="list-group-item text-center"><b>Téléphone : </b><br/>{{ websites.phone }}</li>
-                            <li class="list-group-item text-center"><b>Bas de page : </b><br/>{{ websites.copyright }}</li>
+                            <li class="list-group-item text-center"><b>Bouton {{ websites.id }} : </b><i class="fas {{ websites.icon }} mr-2"></i><br/><a href="../{{ websites.link }}"><i class></i> {{ websites.button }}</a></li>
                         </ul>
-                        <div class="m-auto text-center mt-4">
-                            <a href="{{ path('admin.website.editFooter', {id: websites.id}) }}" class="btn btn-primary">Editer</a>
+                        <div class="m-auto text-center mt-4 mb-4">
+                            <a href="{{ path('admin.website.editMenuAdmin', {id: websites.id}) }}" class="btn btn-primary">Editer</a>
+                            <a href="{{ path('admin.website.deleteMenuAdmin', {id: websites.id}) }}" class="btn btn-danger ml-3">Supprimer</a>
                         </div>
                     {% endfor %}   
+                    <div class="m-auto text-center mt-4 mb-4">
+                            <a href="{{ path('admin.website.newMenuAdmin') }}" class="btn btn-primary">Crée un bouton</a>             
+                    </div> 
+                    
+                    <hr>
+
                 </div>
+                
             </div>        
         </div>
+
+        <hr class="w-50 m-auto mb-3 mt-3">
+
 
     </div>
 {% endblock %}
