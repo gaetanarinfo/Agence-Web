@@ -23,6 +23,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
+                    <th>Crée par</th>
                     <th>Titre</th>
                     <th>Mise en ligne</th>
                     <th>Modifié le</th>  
@@ -31,7 +32,9 @@
             </thead>
             <tbody>
             {% for blog in blogs %}
+                {% if blog.author == app.user.username %}
                 <tr>
+                    <td style="vertical-align: middle;"><b>{{ blog.author }}</b></td>
                     <td style="vertical-align: middle;">{{ blog.title }}</td>
                     <td style="vertical-align: middle;">{{ blog.createdAt|format_datetime() }}</td>
                     {% if blog.updatedAt != null %}
@@ -49,6 +52,7 @@
                         </form>
                     </td style="vertical-align: middle;">
                 </tr>
+                {% endif %}
             {% endfor %}
             </tbody>
         </table>

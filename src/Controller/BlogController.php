@@ -47,6 +47,7 @@ class BlogController extends AbstractController
         return $this->render('blog/index.html.twig', [
             'current_menu' => 'blog',
             'blogs' => $this->repository->paginateAllVisible($search, $request->query->getInt('page', 1)),
+            'blogsDate' => $this->repository->paginateAllVisible3($search, $request->query->getInt('page', 1)),
             'form' => $form->createView()
         ]);
     }

@@ -36,6 +36,8 @@
         href="../../../../css/mdb.min.css"
         rel="stylesheet"
         />
+        <!-- DateTimePicker -->
+        <link rel="stylesheet" type="text/css" href="../../../../css/DateTimePicker.css" />  
         <link href="../../../../css/mapbox-gl.css" rel="stylesheet" />
         <link rel="stylesheet" href="{{ asset('build/app.css') }}"></link>
         {% block stylesheets %}
@@ -79,9 +81,7 @@
                         </div>  
                     </li>
                 
-                {% endif %}
-
-                {% if is_granted('ROLE_PRO') %}
+                {% elseif is_granted('ROLE_PRO') %}
                     
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -207,6 +207,10 @@
         type="text/javascript"
         src="../../../../js/mdb.min.js"
         ></script>
+        <!-- Date§TimePicker -->
+        <script type="text/javascript" src="../../../../js/DateTimePicker.js"></script>
+        <!-- For i18n Support -->
+        <script type="text/javascript" src="../../../../js/i18n/DateTimePicker-i18n-fr.js"></script>
         <script src="{{ asset('build/app.js') }}"></script>
         {% block javascripts %}
         {% endblock %}

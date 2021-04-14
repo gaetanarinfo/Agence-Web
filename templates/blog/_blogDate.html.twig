@@ -1,12 +1,12 @@
 <div
-	class="container" id="display-1">
+	class="container" id="display-2" style="display:none;">
 
 	<!--Section: Content-->
 	<section
 		class="dark-grey-text text-center">
 
 		<!-- Section heading -->
-		<h2 class="text-center">Voir toutes les actualités</h2>
+		<h2 class="text-center">Trier les actualités par date</h2>
 		<hr/>
 		<!-- Section description -->
 		<p class="text-center mx-auto w-responsive mb-3">Retrouvez la page 1 de nos actualit&eacute;s immobili&egrave;res, nos derni&egrave;res copropri&eacute;t&eacute;s, les info r&eacute;centes de nos agences en location et en vente d'appartements et maisons, les nouveaut&eacute;s de votre syndic de copropri&eacute;t&eacute; et les nouvelles applications de lois en gestion locative.</p>
@@ -14,7 +14,7 @@
 		<!-- Grid row -->
 		<div class="row">
 
-			{% for blog in blogs %}
+			{% for blog in blogsDate %}
 					<!-- Grid column -->
 					<div
 						class="col-lg-4 col-md-12 mb-4">

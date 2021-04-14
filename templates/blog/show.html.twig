@@ -311,16 +311,16 @@
                                     </a>
 
 									<!-- Data -->
-									<p>
+									<p class="mb-0">
 										<i class="fas fa-user mr-2"></i>Écrit par
 										<a href="{{ path('user.public', { username: blog.author }) }}">
 											<strong>{{ blog.author }}</strong>
 										</a>,
 										<i class="fas fa-pencil-alt ml-2 mr-2"></i>Le
 										{{ blog.createdAt|format_datetime() }}</p>
-									<p>
+									<p style="font-size: 13px;" class="mt-2">
 										{% if blog.updatedAt != null %}
-											<i class="fas fa-pencil-alt mr-2"></i>Modifié le
+											Modifié le
 											{{ blog.updatedAt|format_datetime() }}
 										{% endif %}
 									</p>
@@ -357,11 +357,12 @@
 							</div>
 							<!-- Card -->
 
-							<!-- Excerpt -->
-							<div class="mt-5">
+							<hr class="mb-2 mt-4 w-50 m-auto"/>
 
-								<p>{{ blog.largeContent|raw }}
-								</p>
+							<!-- Excerpt -->
+							<div class="mt-3 text-center">
+
+								{{ blog.largeContent|raw }}		
 
 							</div>
 

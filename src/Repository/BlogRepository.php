@@ -74,11 +74,11 @@ class BlogRepository extends ServiceEntityRepository
                             $query->expr()->like('p.smallContent', ':query')
                         )))
                 ->setParameter('query', '%' . $search->getTitle() . '%');
-        }
+        }  
 
         $blog = $this->paginator->paginate(
             $query
-            ->orderBy('p.id', 'DESC')
+            ->orderBy('p.createdAt', 'DESC')
             ->getQuery(),
             $page,
             12
@@ -98,7 +98,7 @@ class BlogRepository extends ServiceEntityRepository
 
         $blog = $this->paginator->paginate(
             $query
-            ->orderBy('p.id', 'DESC')
+            ->orderBy('p.createdAt', 'DESC')
             ->getQuery(),
             $page,
             12
@@ -123,4 +123,51 @@ class BlogRepository extends ServiceEntityRepository
         }
     }
 
+     /**
+     * @return Blog[]
+     */
+    public function findAllBlog(string $username): array
+    {
+        $blog = $this->findVisibleQuery('p')
+            ->where('p.author = :username')
+            ->setParameter('username', $username)
+            ->setMaxResults(5)
+            ->orderBy('p.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+
+        return $blog;
+    }
+
+    /**
+     * @return Blog[]
+     */
+    public function paginateAllVisible3(BlogSearch $search, int $page)
+    {
+        $query = $this->findVisibleQuery('p');
+
+        $datetime = $search->getCreatedAt();
+        $from = new \DateTime($datetime->format("Y-m-d")." 00:00:00");
+        $to   = new \DateTime($datetime->format("Y-m-d")." 23:59:59");
+
+        if ($datetime != new \DateTime('now')) {
+            $query = $query
+                ->where('p.createdAt BETWEEN :from AND :to')
+                ->setParameter('from', $from )
+                ->setParameter('to', $to)
+                ->orderBy('p.createdAt', 'DESC');
+        }
+
+        $blog = $this->paginator->paginate(
+            $query
+            ->orderBy('p.createdAt', 'DESC')
+            ->getQuery(),
+            $page,
+            12
+        );
+
+        $this->hydratePicture($blog);
+
+        return $blog;
+    }
 }

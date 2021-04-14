@@ -20,16 +20,23 @@ class BlogSearchType extends AbstractType
                 'required' => false,
                 'label' => false,
                 'attr' => [
-                    'placeholder' => 'Rechercher par titre'
+                    'placeholder' => 'Rechercher par titre',
+                    'style' => 'text-align: center; margin: 0 auto;',
                 ]
             ])
-
             ->add('categorie', ChoiceType::class, [
                 'choices' => $this->getCat(),
                 'label' => false,
                 'attr' => [
-                    'value' => 'Rechercher par titre'
+                    'style' => 'text-align: center;'
                 ],
+            ])
+            ->add('createdAt', DateType::class, [
+               'widget' => 'single_text',
+               'html5' => false,
+               'label' => false,
+               'required' => false,
+               'attr' => ['class' => 'js-datapicker', 'data-field' => 'date', 'placeholder' => 'Dated', 'style' => 'text-align: center;']
             ])
         ;
     }

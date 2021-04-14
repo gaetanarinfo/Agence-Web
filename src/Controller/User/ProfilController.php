@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Form\UserType3;
 use App\Repository\PropertyRepository;
 use App\Repository\AppartementARepository;
+use App\Repository\BlogRepository;
 use App\Repository\RentRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -108,13 +109,14 @@ class ProfilController extends AbstractController
     /**
      * @Route("/profil/{username}", name="user.public", methods="GET|POST")
      */
-    public function show(User $user, PropertyRepository $propertyRepository, RentRepository $rentRepository, AppartementARepository $appartementARepository)
+    public function show(User $user, PropertyRepository $propertyRepository, RentRepository $rentRepository, AppartementARepository $appartementARepository, BlogRepository $blogRepository)
     {
         $username = $user->getUsername();
         $properties = $propertyRepository->findAllProperty($username);
         $username_role = $user->getRoles();
         $rents = $rentRepository->findAllRent($username);
         $appartementAs = $appartementARepository->findAllAppartementA($username);
+        $blogs = $blogRepository->findAllBlog($username);
 
         if($username == null || $username != $user->getUsername()){
 
@@ -132,7 +134,8 @@ class ProfilController extends AbstractController
                     'user' => $user,
                     'properties' => $properties,
                     'rents' => $rents,
-                    'appartementAs' => $appartementAs
+                    'appartementAs' => $appartementAs,
+                    'blogs' => $blogs
                 ]);
 
             }

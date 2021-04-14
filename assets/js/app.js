@@ -61,6 +61,10 @@ require('../css/app.css');
 require('../css/blog.css');
 require('select2');
 
+$(document).ready(function() {
+    $("#dtBox").DateTimePicker();
+});
+
 $('[data-slider]').slick({
     dots: true,
     arrows: true
@@ -80,6 +84,15 @@ $contactButton.click(e => {
     e.preventDefault();
     $('#contactForm').slideDown();
     $contactButton.slideUp();
+})
+
+let $display_date = $('#display_date');
+$display_date.click(e => {
+    e.preventDefault();
+    $('#display-2').fadeIn();
+    $('#display-1').fadeOut();
+    $('#display_date').fadeOut();
+    $('#display').fadeIn();
 })
 
 // Suppression des éléments
