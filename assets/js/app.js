@@ -45,6 +45,19 @@ if (inputAddress3 !== null) {
     })
 }
 
+let inputAddress4 = document.querySelector('#appartement_b_address')
+if (inputAddress4 !== null) {
+    let place = Places({
+        container: inputAddress4
+    })
+    place.on('change', e => {
+        document.querySelector('#appartement_b_city').value = e.suggestion.city
+        document.querySelector('#appartement_b_postal_code').value = e.suggestion.postcode
+        document.querySelector('#appartement_b_lat').value = e.suggestion.latlng.lat
+        document.querySelector('#appartement_b_lng').value = e.suggestion.latlng.lng
+    })
+}
+
 let searchAddress = document.querySelector('#search_address')
 if (searchAddress !== null) {
     let place = Places({
@@ -54,6 +67,32 @@ if (searchAddress !== null) {
         document.querySelector('#lat').value = e.suggestion.latlng.lat
         document.querySelector('#lng').value = e.suggestion.latlng.lng
     })
+}
+
+//Get the button
+let mybutton = document.getElementById("back-to-top");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {
+    scrollFunction();
+};
+
+function scrollFunction() {
+    if (
+        document.body.scrollTop > 20 ||
+        document.documentElement.scrollTop > 20
+    ) {
+        mybutton.style.display = "block";
+    } else {
+        mybutton.style.display = "none";
+    }
+}
+// When the user clicks on the button, scroll to the top of the document
+mybutton.addEventListener("click", backToTop);
+
+function backToTop() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
 }
 
 let $ = require('jquery')
@@ -77,6 +116,7 @@ $("[id*=blog_smallContent]").MaxLength({
 
 $('select').select2()
 $('appartement_a_heat').select2()
+$('appartement_b_heat').select2()
 $('property_heat').select2()
 $('rent_heat').select2()
 let $contactButton = $('#contactButton')

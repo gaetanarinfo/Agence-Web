@@ -22,7 +22,7 @@
         <meta property="twitter:image" content="{{ '/images/ban.jpg' }}">
         
         <!-- Favicon -->
-        <link rel="icon" type="image/png" href="https://agence-web.website/images/favicon.png" />
+        <link rel="icon" type="image/png" href="{{ globals.websiteUrl }}images/favicon.png" />
 
         <link rel="stylesheet" href="{{ globals.WebSiteUrl }}css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
         <link rel="stylesheet" href="{{ globals.WebSiteUrl }}css/select2.min.css">
@@ -196,6 +196,11 @@
             {{ globals.copyright }}
 
         </div>
+
+        <button type="button" class="btn btn-primary btn-floating btn-lg" id="back-to-top">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+
         <!-- Copyright -->
         </footer>
         <script src="{{ globals.WebSiteUrl }}js/9d1d83a1dd.js" crossorigin="anonymous"></script>

@@ -63,6 +63,19 @@
 		<hr/>
 	</div>
 
+	<div class="container">
+		<h2 class="text-center">Derniers appartements en location</h2>
+		<hr/>
+		<div class="row flex">
+			{% for appartementB in appartementb %}
+				<div class="col-4 mb-4">
+					{% include 'appartementB/_appartementB.html.twig' %}
+				</div>
+			{% endfor %}
+		</div>
+		<hr/>
+	</div>
+
 	{{ include('component/contact.html.twig') }}
 
 {% endblock %}

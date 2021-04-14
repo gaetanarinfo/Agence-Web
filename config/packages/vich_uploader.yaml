@@ -26,3 +26,7 @@ vich_uploader:
             uri_prefix: /media/blog
             upload_destination: '%kernel.project_dir%/public/media/blog'
             namer: Vich\UploaderBundle\Naming\UniqidNamer
+        appartementB_image:
+            uri_prefix: /media/appartementB
+            upload_destination: '%kernel.project_dir%/public/media/appartementB'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer    

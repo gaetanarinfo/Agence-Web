@@ -178,27 +178,28 @@
 														<tr>
 															<td align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;">
 																<div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:15px;line-height:1;text-align:center;color:#512d0b;">
-																	<strong>Inscription - {{ globals.title }}</strong><br><br>
-                                                                    Pour valider votre inscription merci de cliquer sur ce lien <a href="{{ url('security.registerValidate', {token: register.token}) }}">Cliquer ici</a>
+																	<strong>Réponse de {{ app.user.username }} - pour la location de l'appartement - {{ contact.subject }}</strong>
 																</div>
 															</td>
 														</tr>
                                                         <tr>
-															<td align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+															<td align="center" style="font-size:0px;padding:10px 10px;word-break:break-word;">
 																<div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:15px;line-height:1;text-align:center;color:#512d0b;">
-																	Nom d'utilisateur : {{ register.username }}
+																	Bonjour {{ contact.lastname }} {{ contact.firstname }}
 																</div>
 															</td>
 														</tr>
                                                         <tr>
-															<td align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+															<td align="center" style="font-size:0px;padding:10px 10px;word-break:break-word;">
 																<div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:15px;line-height:1;text-align:center;color:#512d0b;">
-																	Adresse email : {{ register.email }}
+																	<b>Tout d'abord merci pour l'intérêt que vous portez pour notre site internet voici la réponse à votre message</b>
+                                                                    <br/><br/>
+                                                                    {{ contact.content }}
 																</div>
 															</td>
 														</tr>
 														<tr>
-															<td align="center" style="font-size:0px;padding:0 25px;padding-top:40px;word-break:break-word;">
+															<td align="center" style="font-size:0px;padding:0 25px;padding-top:10px;word-break:break-word;">
 																<div style="font-family:Arial, sans-serif;font-size:14px;line-height:1;text-align:center;color:#000000;">
 																	{{ globals.title }}
 																	<p></p>

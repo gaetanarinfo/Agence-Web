@@ -23,7 +23,6 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Crée par</th>
                     <th>Titre</th>
                     <th>Disponibilité</th>
                     <th style="text-align: center;">Action</th>
@@ -31,8 +30,8 @@
             </thead>
             <tbody>
             {% for appartementAs in appartementA %}
+            {% if appartementAs.createdBy == app.user.username %}
                 <tr>
-                    <td style="vertical-align: middle;">{{ appartementAs.author }}</td>
                     <td style="vertical-align: middle;">{{ appartementAs.title }}</td>
                     <td style="vertical-align: middle;">{% if appartementAs.sold == 0 %}<i class="fas fa-check text-success"></i> Disponible{% else %}<i class="fas fa-times text-danger"></i> Vendu{% endif %}</td>
                     <td style="vertical-align: middle; text-align: center;">
@@ -44,6 +43,7 @@
                         </form>
                     </td style="vertical-align: middle;">
                 </tr>
+            {% endif %}
             {% endfor %}
             </tbody>
         </table>

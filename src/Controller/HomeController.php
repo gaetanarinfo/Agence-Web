@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Mailbox;
 use App\Form\ContactHomeType;
 use App\Repository\AppartementARepository;
+use App\Repository\AppartementBRepository;
 use App\Repository\BlogRepository;
 use App\Repository\PropertyRepository;
 use App\Repository\RentRepository;
@@ -26,12 +27,13 @@ class HomeController extends AbstractController
      * @return Responce
     */
 
-    public function index (PropertyRepository $repository, RentRepository $repositoryRent, SessionInterface $session, UserRepository $repositoryUser, AppartementARepository $repositoryAppartementA, BlogRepository $repositoryBlog, Request $request):Response{
+    public function index (PropertyRepository $repository, RentRepository $repositoryRent, SessionInterface $session, UserRepository $repositoryUser, AppartementARepository $repositoryAppartementA, AppartementBRepository $repositoryAppartementB, BlogRepository $repositoryBlog, Request $request):Response{
 
         $properties = $repository->findLatest();
         $rent = $repositoryRent->findLatest();
         $user = $repositoryUser->findLatest();
         $appartementA = $repositoryAppartementA->findLatest();
+        $appartementB = $repositoryAppartementB->findLatest();
         $blog = $repositoryBlog->findLatest();
         $mailbox = new Mailbox();
         $form = $this->createForm(ContactHomeType::class, $mailbox);
@@ -53,6 +55,7 @@ class HomeController extends AbstractController
             'rent' => $rent,
             'user' => $user,
             'appartementa' => $appartementA,
+            'appartementb' => $appartementB,
             'blog' => $blog,
             'form' => $form->createView()
         ]);

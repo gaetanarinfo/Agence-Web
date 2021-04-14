@@ -30,6 +30,7 @@
             </thead>
             <tbody>
             {% for rent in rents %}
+            {% if rent.createdBy == app.user.username %}
                 <tr>
                     <td style="vertical-align: middle;">{{ rent.title }}</td>
                     <td style="vertical-align: middle;">{% if rent.available == 0 %}<i class="fas fa-check text-success"></i> Disponible{% else %}<i class="fas fa-times text-danger"></i> Louer{% endif %}</td>
@@ -42,6 +43,7 @@
                         </form>
                     </td style="vertical-align: middle;">
                 </tr>
+            {% endif %}
             {% endfor %}
             </tbody>
         </table>

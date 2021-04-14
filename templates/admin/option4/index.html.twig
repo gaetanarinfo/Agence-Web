@@ -1,0 +1,52 @@
+{% extends "base.html.twig" %}
+
+{% block title 'Gérer les options' %}
+
+{% block body %}
+
+    <div class="container mt-4 mb-4 w-25">
+
+        <p class="title-cont">Gérer les options</p>
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success text-center">
+                <i class="fa fa-check text-success" aria-hidden="true"></i> {{ message }}
+            </div>
+        {% endfor %}
+
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-danger text-center">
+                <i class="fas fa-times text-danger" aria-hidden="true"></i> {{ message }}
+            </div>
+        {% endfor %}
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th style="text-align: center;">Action</th>
+                </tr>    
+            </thead>
+            <tbody>
+            {% for option in options %}
+                <tr>
+                    <td style="vertical-align: middle;">{{ option.name }}</td>
+                   <td style="vertical-align: middle; text-align: center;">
+                        <a href="{{ path('admin.option4.edit', {id: option.id}) }}" class="btn btn-secondary">Editer</a>
+                        <form method="post" action="{{ path('admin.option4.delete', {id: option.id}) }}" style="display: inline-block;">
+                            <input type="hidden" name="_method" value="DELETE" />
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ option.id) }}" />
+                            <button class="btn btn-danger">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="text-right">
+            <a href='{{ path('admin.option4.new') }}' class="btn btn-primary">Crée une option</a>
+        </div>
+
+    </div>
+{% endblock %}

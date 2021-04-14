@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Form\UserType3;
 use App\Repository\PropertyRepository;
 use App\Repository\AppartementARepository;
+use App\Repository\AppartementBRepository;
 use App\Repository\BlogRepository;
 use App\Repository\RentRepository;
 use App\Repository\UserRepository;
@@ -36,18 +37,20 @@ class ProfilController extends AbstractController
      * @Route("/profil", name="profil", methods="GET|POST")
     */
 
-    public function index(PropertyRepository $propertyRepository, RentRepository $rentRepository, AppartementARepository $appartementARepository, BlogRepository $blogRepository)
+    public function index(PropertyRepository $propertyRepository, RentRepository $rentRepository, AppartementARepository $appartementARepository, AppartementBRepository $appartementBRepository, BlogRepository $blogRepository)
     {
         $username = $this->getUser('username')->getUsername();
         $properties = $propertyRepository->findAllProperty($username);
         $rents = $rentRepository->findAllRent($username);
         $appartementAs = $appartementARepository->findAllAppartementA($username);
+        $appartementBs = $appartementBRepository->findAllAppartementB($username);
         $blogs = $blogRepository->findAllBlog($username);
 
         return $this->render('user/index.html.twig', [
             'properties' => $properties,
             'rents' => $rents,
             'appartementAs' => $appartementAs,
+            'appartementBs' => $appartementBs,
             'blogs' => $blogs
         ]);
     }
@@ -111,13 +114,14 @@ class ProfilController extends AbstractController
     /**
      * @Route("/profil/{username}", name="user.public", methods="GET|POST")
      */
-    public function show(User $user, PropertyRepository $propertyRepository, RentRepository $rentRepository, AppartementARepository $appartementARepository, BlogRepository $blogRepository)
+    public function show(User $user, PropertyRepository $propertyRepository, RentRepository $rentRepository, AppartementARepository $appartementARepository, AppartementBRepository $appartementBRepository, BlogRepository $blogRepository)
     {
         $username = $user->getUsername();
         $properties = $propertyRepository->findAllProperty($username);
         $username_role = $user->getRoles();
         $rents = $rentRepository->findAllRent($username);
         $appartementAs = $appartementARepository->findAllAppartementA($username);
+        $appartementBs = $appartementBRepository->findAllAppartementB($username);
         $blogs = $blogRepository->findAllBlog($username);
 
         if($username == null || $username != $user->getUsername()){
@@ -137,6 +141,7 @@ class ProfilController extends AbstractController
                     'properties' => $properties,
                     'rents' => $rents,
                     'appartementAs' => $appartementAs,
+                    'appartementBs' => $appartementBs,
                     'blogs' => $blogs
                 ]);
 

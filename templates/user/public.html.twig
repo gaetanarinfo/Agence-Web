@@ -217,6 +217,24 @@
                     </div>
                   </div>
                 </div>
+
+                <div class="col-sm-6 mb-3">
+                  <div class="card h-100">
+                    <div class="card-body">
+                      <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Les appartements (en ventes)</i></h6>
+              
+                      {% for appartementB in appartementBs %}
+                      <small class="text-uppercase font-weight-bold"><a href="{{ path('appartementB.show', {slug: appartementB.slug, id: appartementB.id}) }}" target="_blank">{{ appartementB.title }}</a></small>
+                      <div class="mb-0">
+                        <p class="mb-0">{% if appartementB.available == 0 %}<i class="fas fa-check text-success"></i> <span class="font-weight-bold">Disponible</span>{% else %}<i class="fas fa-times text-danger"></i> <span class="font-weight-bold">Louer</span>{% endif %} | Prix : <span class="font-weight-bold">{{ appartementB.formattedPrice }}</span> <i class="fas fa-euro-sign text-danger"></i></p>
+                        <p class="mb-0">{{ appartementB.address }} - {{ appartementB.postalCode}}</p>
+                        <p><i class="fas fa-map-marker-alt text-primary"></i> {{ appartementB.city }}</p>
+                      </div>
+                      <hr>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
                 
               </div>
             </div>
