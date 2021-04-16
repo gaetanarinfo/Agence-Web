@@ -19,7 +19,8 @@ class Mailbox
         2 => 'Gérance',
         3 => 'Transaction',
         5 => 'Appartement à vendre',
-        6 => 'Bug rencontré'
+        6 => 'Bug rencontré',
+        7 => 'Appartement à louer',
     ];
 
     /**

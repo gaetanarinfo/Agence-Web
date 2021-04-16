@@ -44,6 +44,10 @@
 			background-color: #FF8C00 !important;
 			color: #fff;
 		}
+		.bg-grey {
+			background-color: #585858 !important;
+			color: #fff;
+		}
 		.card {
 			background: #fff;
 			margin-bottom: 30px;
@@ -179,7 +183,7 @@
 								<div class="card shadow-none">
 									{% if is_granted('ROLE_SUPER_ADMIN') %}
 									<div class="list-group shadow-none">
-										<a href="{{ path('admin.mailbox.index') }}" class="list-group-item active">
+										<a href="{{ path('admin.mailbox.index') }}" class="list-group-item">
 										<i class="fa fa-inbox mr-2"></i>Boîte de réception
 											<b>
 												{% if receptionAdmin == false %}
@@ -206,7 +210,7 @@
 												<b>({{ trashAdmin }})</b>
 											{% endif %}
 										</a>
-										<a href="{{ path('admin.mailbox.importants') }}" class="list-group-item">
+										<a href="{{ path('admin.mailbox.importants') }}" class="list-group-item active">
 											<i class="fa fa-bookmark mr-2"></i>Important
 											{% if importantAdmin == false %}
 												(0)
@@ -218,7 +222,7 @@
 								</div>
 								{% elseif is_granted('ROLE_PRO') %}
 									<div class="list-group shadow-none">
-										<a href="{{ path('admin.mailbox.index') }}" class="list-group-item active">
+										<a href="{{ path('admin.mailbox.index') }}" class="list-group-item">
 										<i class="fa fa-inbox mr-2"></i>Boîte de réception
 											<b>
 												{% if receptionPro == false %}
@@ -245,7 +249,7 @@
 												<b>({{ trashPro }})</b>
 											{% endif %}
 										</a>
-										<a href="{{ path('admin.mailbox.importants') }}" class="list-group-item">
+										<a href="{{ path('admin.mailbox.importants') }}" class="list-group-item active">
 											<i class="fa fa-bookmark mr-2"></i>Important
 											{% if importantPro == false %}
 												(0)
@@ -350,7 +354,11 @@
 													<span class="badge bg-orange">
 														Bug rencontré
 													</span>		
-												{% endif %}
+												{% elseif mail.categorie == 7 %}
+														<span class="badge bg-grey">
+															Appartement à louer
+														</span>		
+													{% endif %}
 											<small class="float-right text-muted">
 												<time class="hidden-sm-down">{{ mail.createdAt|format_datetime() }}</time>
 											</small>

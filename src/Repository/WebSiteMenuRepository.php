@@ -28,10 +28,10 @@ class WebSiteMenuRepository extends ServiceEntityRepository
 
     public function findMenu()
     {
-        $menu = $this->findVisibleQuery()
+        $page = $this->findVisibleQuery()
             ->getQuery()
             ->getResult();
 
-        return $menu;
+        return $page;
     }
 }

@@ -158,6 +158,15 @@ document.querySelectorAll('[data-delete]').forEach(a => {
     })
 })
 
+if (localStorage.getItem("cookie-consent") === null) {
+    $('#cookie').modal({ backdrop: 'static', keyboard: false, show: true });
+    $("#cookieConsent").click(function() {
+        localStorage.setItem("cookie-consent", "accord-ok")
+        $('#cookie').modal({ backdrop: 'static', keyboard: false, show: false });
+    });
+}
+
+
 $(function() {
     $('[data-toggle="tooltip"]').tooltip()
 })

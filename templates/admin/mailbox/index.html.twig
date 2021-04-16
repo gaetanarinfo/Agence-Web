@@ -44,6 +44,10 @@
 			background-color: #FF8C00 !important;
 			color: #fff;
 		}
+		.bg-grey {
+			background-color: #585858 !important;
+			color: #fff;
+		}
 		.card {
 			background: #fff;
 			margin-bottom: 30px;
@@ -365,6 +369,10 @@
 														<span class="badge bg-orange">
 															Bug rencontré
 														</span>		
+													{% elseif mail.categorie == 7 %}
+														<span class="badge bg-grey">
+															Appartement à louer
+														</span>		
 													{% endif %}
 													<small class="float-right text-muted">
 														<time class="hidden-sm-down">{{ mail.createdAt|format_datetime() }}</time>
@@ -429,6 +437,10 @@
 													{% elseif mail.categorie == 6 %}
 														<span class="badge bg-orange">
 															Bug rencontré
+														</span>		
+													{% elseif mail.categorie == 7 %}
+														<span class="badge bg-grey">
+															Appartement à louer
 														</span>		
 													{% endif %}
 													<small class="float-right text-muted">

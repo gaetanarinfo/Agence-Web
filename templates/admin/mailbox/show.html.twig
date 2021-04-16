@@ -21,8 +21,9 @@
 							<div class="col-lg-3 col-md-4">
 								
 								<div class="card shadow-none">
+									{% if is_granted('ROLE_SUPER_ADMIN') %}
 									<div class="list-group shadow-none">
-										<a href="{{ path('admin.mailbox.index') }}" class="list-group-item">
+										<a href="{{ path('admin.mailbox.index') }}" class="list-group-item active">
 										<i class="fa fa-inbox mr-2"></i>Boîte de réception
 											<b>
 												{% if receptionAdmin == false %}
@@ -41,7 +42,6 @@
 												</b>
 											{% endif %}
 										</a>
-										
 										<a href="{{ path('admin.mailbox.trash') }}" class="list-group-item">
 											<i class="fa fa-trash-o mr-2"></i>Corbeille
 											{% if trashAdmin == false %}
@@ -60,6 +60,46 @@
 										</a>
 									</div>
 								</div>
+								{% elseif is_granted('ROLE_PRO') %}
+									<div class="list-group shadow-none">
+										<a href="{{ path('admin.mailbox.index') }}" class="list-group-item">
+										<i class="fa fa-inbox mr-2"></i>Boîte de réception
+											<b>
+												{% if receptionPro == false %}
+													(0)
+												{% else %}
+													({{ receptionPro }})
+												{% endif %}
+											</b>
+										</a>
+										<a href="{{ path('admin.mailbox.favoris') }}" class="list-group-item">
+											<i class="fa fa-star-o mr-2"></i>Favoris
+											{% if favoritePro == false %}
+												(0)
+											{% else %}
+												<b>({{ favoritePro }})
+												</b>
+											{% endif %}
+										</a>
+										<a href="{{ path('admin.mailbox.trash') }}" class="list-group-item">
+											<i class="fa fa-trash-o mr-2"></i>Corbeille
+											{% if trashPro == false %}
+												(0)
+											{% else %}
+												<b>({{ trashPro }})</b>
+											{% endif %}
+										</a>
+										<a href="{{ path('admin.mailbox.importants') }}" class="list-group-item">
+											<i class="fa fa-bookmark mr-2"></i>Important
+											{% if importantPro == false %}
+												(0)
+											{% else %}
+												<b>({{ importantPro }})</b>
+											{% endif %}
+										</a>
+									</div>
+								</div>
+								{% endif %}
 
 							</div>
 							<!-- End Left sidebar -->
@@ -172,6 +212,17 @@
 													<button class="btn btn-primary">Envoyer le message</button>    
 												</div>    
 												{{ form_end(formProperty) }}
+											{% elseif mailbox.categorie == 7 %}
+												{{ form_start(formAppartementB) }}
+												<div class="col-md-12">
+													<div class="row" style="justify-content: center;">
+														<div class="col-md-10">{{ form_row(formAppartementB.content) }}</div>
+													</div>
+												</div>	
+												<div style="text-align: center;">
+													<button class="btn btn-primary">Envoyer le message</button>    
+												</div>    
+												{{ form_end(formAppartementB) }}	
 											{% endif %}	
 										{% endif %}	
 

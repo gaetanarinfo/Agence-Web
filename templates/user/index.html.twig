@@ -98,8 +98,10 @@
 											<p class="text-secondary mb-1">Administrateur</p>
 										{% endif %}
 									{% endfor %}
-									<p class="text-muted font-size-sm">{{ app.user.city}},
-										{{ app.user.postalCode}}</p>
+									<p class="text-muted font-size-sm">
+										
+										{% if app.user.city != null %}{{ app.user.city }},{% endif %}
+										{% if app.user.postalCode != null %}{{ app.user.postalCode}}{% endif %}</p>
 									<div>
 										<a href='{{ path('user.edit') }}' class="btn btn-primary">Modifier mon profil</a>
 									</div>
@@ -175,9 +177,9 @@
 								<div class="col-sm-3">
 									<h6 class="mb-0">Nom et Prénom</h6>
 								</div>
-								<div class="col-sm-9 text-secondary">
-									{{ app.user.lastname }}
-									{{ app.user.firstname }}
+								<div class="col-sm-9 text-secondary">	
+								{% if app.user.lastname != null %}{{ app.user.lastname }}{% endif %}
+								{% if app.user.firstname != null %}{{ app.user.firstname }}{% endif %}
 								</div>
 							</div>
 							<hr>
@@ -213,9 +215,9 @@
 									<h6 class="mb-0">Adresse</h6>
 								</div>
 								<div class="col-sm-9 text-secondary">
-									{{ app.user.address }},
-									{{ app.user.city}},
-									{{ app.user.postalCode}}
+									{% if app.user.address != null %}{{ app.user.address }},{% endif %}
+									{% if app.user.city != null %}{{ app.user.city}},{% endif %}
+									{% if app.user.postalCode != null %}{{ app.user.postalCode}}{% endif %}
 								</div>
 							</div>
 						</div>
@@ -224,7 +226,7 @@
 
 						{% if is_granted('ROLE_SUPER_ADMIN') %}
 
-							{% else %}
+							{% elseif is_granted('ROLE_PRO') %}
 
 								<div class="col-sm-6 mb-3">
 									<div class="card h-100">
@@ -392,7 +394,6 @@
 										</div>
 									</div>
 								</div>
-
 						{% endif %}
 
 					</div>

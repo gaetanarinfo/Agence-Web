@@ -43,14 +43,14 @@
                         <td style="vertical-align: middle;">Pas de modification</td>
                     {% endif %}    
                     <td style="vertical-align: middle; text-align: center;">
-                        <a href="{{ path('blog.show', {id: blog.id}) }}" class="btn btn-primary">Voir</a>
+                        <a href="{{ path('blog.show', {id: blog.id}) }}" target="_blank" class="btn btn-primary">Voir</a>
                         <a href="{{ path('admin.blog.edit', {id: blog.id}) }}" class="btn btn-secondary">Editer</a>
                         <form method="post" action="{{ path('admin.blog.delete', {id: blog.id}) }}" style="display: inline-block;">
                             <input type="hidden" name="_method" value="DELETE" />
                             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ blog.id) }}" />
                             <button class="btn btn-danger">Supprimer</button>
                         </form>
-                    </td style="vertical-align: middle;">
+                    </td>
                 </tr>
                 {% endif %}
             {% endfor %}

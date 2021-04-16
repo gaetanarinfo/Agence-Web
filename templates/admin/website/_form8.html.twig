@@ -1,0 +1,32 @@
+<div class="mt-4 mb-4 w-75 m-auto">
+	{{ form_start(form) }}
+	<div class="col-md-12">
+		<div class="row" style="justify-content: center;">
+			<div class="col-md-5">{{ form_row(form.title) }}</div>
+			<div class="col-md-5">{{ form_row(form.link) }}</div>
+		</div>
+
+		<div class="row" style="justify-content: center;">
+			<div class="col-md-12">{{ form_row(form.smallContent) }}</div>
+		</div>
+
+		<div class="row" style="justify-content: center;">
+			<div class="col-md-12">{{ form_row(form.largeContent) }}</div>
+		</div>
+	</div>
+
+	{{ form_rest(form) }}
+
+	<div class="row mb-4">
+		<div class="m-auto">
+			<div class="row" style="justify-content: space-around;">
+				<button class="button-submit">{{ button|default('Enregistrer') }}</button>
+			</div>
+		</div>
+	</div>	
+	{{ form_end(form) }}
+</div>
+
+{% block javascripts %}
+<script src="{{ asset('../js/ckeditor/ckeditor.js') }}" type="text/javascript"></script>
+{% endblock %}

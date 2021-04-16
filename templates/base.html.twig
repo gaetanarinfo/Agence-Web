@@ -7,6 +7,9 @@
         <!-- Primary Meta Tags -->
         <meta name="description" content="{% block description %}{{ globals.description }}{% endblock %}">
 
+        <meta name="keywords" content="immobilier, appartement, maison, parking, immeuble, louer, acheter, location, vente, gestion, achat, syndic, copropri&eacute;t&eacute;" />
+        <meta name="robots" content="index, follow" />
+
         <!-- Open Graph / Facebook -->
         <meta property="og:type" content="website">
         <meta property="og:url" content="https://agence-web.website{% block url %}{% endblock %}">
@@ -40,98 +43,24 @@
         <link rel="stylesheet" type="text/css" href="{{ globals.WebSiteUrl }}css/DateTimePicker.css" />  
         <link href="{{ globals.WebSiteUrl }}css/mapbox-gl.css" rel="stylesheet" />
         <link rel="stylesheet" href="{{ asset('build/app.css') }}"></link>
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ globals.google }}"></script>
+        {% set globalKey = globals.google %}
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', "{{ globalKey }}");
+        </script>
+
         {% block stylesheets %}
         {% endblock %}
     </head>
     <body>
 
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-             <a class="navbar-brand" href="/">
-                <img src="/images/cropped-icone.png" width="30" height="30" class="d-inline-block align-top mr-2" alt="{{ globals.title }}">
-                {{ globals.title }}
-            </a>
-
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    {% for website in globals.menu %}
-                    <li class="nav-item {% if app.request.requesturi == '/' ~ website.link %}active{% endif %}">
-                        <a class="nav-link" href="{{ globals.WebSiteUrl }}{{ website.link }}">{{ website.button }}</a>
-                    </li>
-                    {% endfor %}
-                </ul>
-                {% if app.user %}
-
-                <ul class="navbar-nav">
-
-                {% if is_granted('ROLE_SUPER_ADMIN') %}
-
-                   <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Administration
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        {% for website in globals.menuAdmin %}
-                        <a class="dropdown-item" href="{{ globals.WebSiteUrl }}{{ website.link }}"><i class="fas {{ website.icon }} mr-2"></i>{{ website.button }}</a>
-                        <div class="dropdown-divider"></div>
-                        {% endfor %}
-                        </div>  
-                    </li>
-                
-                {% elseif is_granted('ROLE_PRO') %}
-                    
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Professionnel
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        {% for website in globals.menuPro %}
-                        <a class="dropdown-item" href="{{ globals.WebSiteUrl }}{{ website.link }}"><i class="fas {{ website.icon }} mr-2"></i>{{ website.button }}</a>
-                        <div class="dropdown-divider"></div>
-                        {% endfor %}
-                        </div>  
-                    </li>
-                
-                {% endif %}
-
-                    {% for website in globals.menu2 %}
-                        {% if website.button4 != null %}
-                        <li class="nav-item {% if app.request.requesturi == '/' ~ website.link4 %}active{% endif %}">
-                            <a href="{{ globals.WebSiteUrl }}{{ website.link4 }}" class="nav-link">{{ website.button4 }}</a>
-                        </li>
-                        {% endif %}
-                        {% if website.button3 != null %}    
-                        <li class="nav-item">
-                            <a href="{{ globals.WebSiteUrl }}{{ website.link3 }}" class="nav-link">{{ website.button3 }}</a>
-                        </li>
-                        {% endif %}
-                    {% endfor %}
-
-                </ul>
-
-                {% else %}   
-
-                    <ul class="navbar-nav">
-                    {% for website in globals.menu2 %}
-                        {% if website.button1 != null %}
-                        <li class="nav-link">
-                            <a href="{{ globals.WebSiteUrl }}{{ website.link1 }}" class="btn btn-outline-success nav-link text-white text-bold">{{ website.button1 }}</a>
-                        </li>
-                        {% endif %}
-                        {% if website.button2 != null %}
-                        <li class="nav-link">
-                            <a href="{{ globals.WebSiteUrl }}{{ website.link2 }}" class="btn btn-outline-info nav-link text-white text-bold">{{ website.button2 }}</a>
-                        </li>
-                        {% endif %}
-                    {% endfor %}    
-                    </ul>
-
-                {% endif %}
-            </div>
-        </nav>
+        {{ include('component/navbar.html.twig') }}
 
         <div class="jumbotron text-center jumb-head" style="background: url('{{ globals.WebSiteUrl }}{{ globals.backgroundHeader }}')">
             <div class="head-title">
@@ -203,6 +132,9 @@
 
         <!-- Copyright -->
         </footer>
+
+        {{ include('component/cookie.html.twig') }}
+
         <script src="{{ globals.WebSiteUrl }}js/9d1d83a1dd.js" crossorigin="anonymous"></script>
         <script src="{{ globals.WebSiteUrl }}js/jquery.min.js"></script>
         <script type="text/javascript" src="{{ globals.WebSiteUrl }}js/MaxLength.min.js"></script>

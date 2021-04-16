@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% block title page.title %}
+{% block description page.smallContent %}
+
+{% block body %}
+
+<div class="container" id="biens">
+    <h2 class="text-center">{{ page.title }}</h2>
+
+    <hr/>
+
+    <div>
+        {{ page.largeContent|raw }}		
+    </div>
+
+    <hr/>
+</div>
+
+{% endblock %}

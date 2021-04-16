@@ -20,11 +20,13 @@
 
 	</div>	
 
+	{{ include('component/navbarHeader.html.twig') }}
+
 	{{ include('component/blog.html.twig') }}
 
 	{{ include('component/team.html.twig') }}
 
-	<div class="container">
+	<div class="container" id="biens">
 		<h2 class="text-center">Derniers biens</h2>
 		<hr/>
 		<div class="row flex">
@@ -38,7 +40,7 @@
 	</div>
 
 	<div class="container">
-		<h2 class="text-center">Dernières locations</h2>
+		<h2 class="text-center" id="louer">Dernières locations</h2>
 		<hr/>
 		<div class="row flex">
 			{% for rents in rent %}
@@ -51,7 +53,7 @@
 	</div>
 
 	<div class="container">
-		<h2 class="text-center">Derniers appartements en vente</h2>
+		<h2 class="text-center" id="appartAchats">Derniers appartements en vente</h2>
 		<hr/>
 		<div class="row flex">
 			{% for appartementA in appartementa %}
@@ -64,7 +66,7 @@
 	</div>
 
 	<div class="container">
-		<h2 class="text-center">Derniers appartements en location</h2>
+		<h2 class="text-center" id="appartLocations">Derniers appartements en location</h2>
 		<hr/>
 		<div class="row flex">
 			{% for appartementB in appartementb %}

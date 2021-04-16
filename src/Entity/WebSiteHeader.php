@@ -39,6 +39,11 @@ class WebSiteHeader
      */
     private $websiteUrl;
 
+    /**
+     * @ORM\Column(type="string", length=12, nullable=true)
+     */
+    private $GoogleAnalystics;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -88,6 +93,18 @@ class WebSiteHeader
     public function setWebsiteUrl(string $websiteUrl): self
     {
         $this->websiteUrl = $websiteUrl;
+
+        return $this;
+    }
+
+    public function getGoogleAnalystics(): ?string
+    {
+        return $this->GoogleAnalystics;
+    }
+
+    public function setGoogleAnalystics(?string $GoogleAnalystics): self
+    {
+        $this->GoogleAnalystics = $GoogleAnalystics;
 
         return $this;
     }

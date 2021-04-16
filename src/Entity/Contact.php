@@ -58,6 +58,11 @@ class Contact
      */
     private $appartementA;
 
+     /**
+     * @var AppartementB|null
+     */
+    private $appartementB;
+
     /**
      * Get the value of content
      *
@@ -243,6 +248,30 @@ class Contact
     public function setAppartementA($appartementA)
     {
         $this->appartementA = $appartementA;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of appartementB
+     *
+     * @return AppartementB|null
+     */ 
+    public function getAppartementB()
+    {
+        return $this->appartementB;
+    }
+
+    /**
+     * Set the value of appartementB
+     *
+     * @param  AppartementB|null $appartementB
+     *
+     * @return  self
+     */ 
+    public function setAppartementB($appartementB)
+    {
+        $this->appartementB = $appartementB;
 
         return $this;
     }

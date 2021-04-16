@@ -25,6 +25,12 @@ class RegisterType extends AbstractType
                 'type' => PasswordType::class,
                 'first_options'  => array('label' => 'Password'),
                 'second_options' => array('label' => 'Repeat Password')))
+            ->add('phone', TextType::class, [
+                'required' => false
+            ])                  
+            ->add('mobile', TextType::class, [
+                'required' => false
+            ])    
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => new IsTrue()

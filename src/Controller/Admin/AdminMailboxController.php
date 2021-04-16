@@ -7,6 +7,7 @@ use App\Notification\ContactNotification3;
 use App\Notification\ContactNotification4;
 use App\Notification\ContactNotification2;
 use App\Notification\ContactNotification;
+use App\Notification\ContactNotification5;
 use App\Repository\MailboxRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -219,7 +220,7 @@ class AdminMailboxController extends AbstractController
     /**
      * @Route("/admin/mailbox/message/{slug}:{id}", name="admin.mailbox.show") requirements={"slug": [a-z0-9\-]""}
      */
-    public function show(Request $request, Mailbox $mailbox, string $slug, ContactNotification3 $notif3, ContactNotification2 $notif2, ContactNotification $notif, ContactNotification4 $notif4)
+    public function show(Request $request, Mailbox $mailbox, string $slug, ContactNotification3 $notif3, ContactNotification2 $notif2, ContactNotification $notif, ContactNotification4 $notif4, ContactNotification5 $notif5)
     {
         
         $mailboxCountAdmin = $this->repository->findCountAdmin();
@@ -238,6 +239,16 @@ class AdminMailboxController extends AbstractController
         if($formAppartementA->isSubmitted() && $formAppartementA->isValid() && $mailbox->getCategorie() == 5)
         {
             $notif3->notify($mailbox);
+            $this->addFlash('success', 'Message envoyer');
+            return $this->redirectToRoute('admin.mailbox.index');
+        }
+
+        $formAppartementB = $this->createForm(ReplyMessageType::class, $mailbox);
+        $formAppartementB->handleRequest($request);
+
+        if($formAppartementB->isSubmitted() && $formAppartementB->isValid() && $mailbox->getCategorie() == 7)
+        {
+            $notif5->notify($mailbox);
             $this->addFlash('success', 'Message envoyer');
             return $this->redirectToRoute('admin.mailbox.index');
         }
@@ -284,6 +295,7 @@ class AdminMailboxController extends AbstractController
             'importantPro' => $importantPro,
             'trashPro' => $trashPro,
             'formAppartementA' => $formAppartementA->createView(),
+            'formAppartementB' => $formAppartementB->createView(),
             'formRent' => $formRent->createView(),
             'formProperty' => $formProperty->createView(),
             'formAdmin' => $formAdmin->createView()

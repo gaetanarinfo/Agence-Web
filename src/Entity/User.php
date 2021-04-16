@@ -180,6 +180,13 @@ class User implements UserInterface,\Serializable
          $this->token = "";
          $this->updated_at = new \DateTime();
          $this->pictures = new ArrayCollection();
+         $this->lastname = 'Aucun nom';
+         $this->firstname = 'Aucun prénom';
+         $this->address = 'Aucune adresse';
+         $this->postalCode = 0;
+         $this->gender = 0;
+         $this->city = 'Aucune ville';
+         $this->country = 'FR';
      }
 
     public function getId(): ?int

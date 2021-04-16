@@ -1,0 +1,162 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<a class="navbar-brand" href="/">
+		<img src="/images/cropped-icone.png" width="30" height="30" class="d-inline-block align-top mr-2" alt="{{ globals.title }}">
+		{{ globals.title }}
+	</a>
+
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+			{% for website in globals.menu %}
+				<li class="nav-item {% if app.request.requesturi == '/' ~ website.link %}active{% endif %}">
+					<a class="nav-link" href="{{ globals.WebSiteUrl }}{{ website.link }}">{{ website.button }}</a>
+				</li>
+			{% endfor %}
+		</ul>
+		{% if app.user %}
+
+			<ul class="navbar-nav">
+
+				{% if is_granted('ROLE_SUPER_ADMIN') %}
+
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Administration
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							{% for website in globals.menuAdmin %}
+								<a class="dropdown-item" href="{{ globals.WebSiteUrl }}{{ website.link }}">
+									<i class="fas {{ website.icon }} mr-2"></i>
+									{{ website.button }}</a>
+								<div class="dropdown-divider"></div>
+							{% endfor %}
+						</div>
+					</li>
+
+				{% elseif is_granted('ROLE_PRO') %}
+
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Professionnel
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							{% for website in globals.menuPro %}
+								<a class="dropdown-item" href="{{ globals.WebSiteUrl }}{{ website.link }}">
+									<i class="fas {{ website.icon }} mr-2"></i>
+									{{ website.button }}</a>
+								<div class="dropdown-divider"></div>
+							{% endfor %}
+						</div>
+					</li>
+
+				{% endif %}
+
+                <li class="nav-item me-3 me-lg-1">
+                    <a class="nav-link d-sm-flex align-items-sm-center" href="{{ globals.WebSiteUrl }}profil">
+                    {% if app.user.pictures is empty %}
+                         <img
+                        src="{{ '/images/default_profil.png' }}"
+                        alt="{{ app.user.username }}"
+                        class="rounded-circle"
+                        height="22"
+                        alt=""
+                        loading="lazy"
+                     />
+                    {% else %}
+                        {% for picture in app.user.pictures %}
+                            <img
+                            src="{{ vich_uploader_asset(picture, 'imageFile') }}"
+                            alt="{{ app.user.username }}"
+                            class="rounded-circle"
+                            height="22"
+                            alt=""
+                            loading="lazy"
+                        />
+                        {% endfor %}
+                    {% endif %}
+                    <strong class="d-none d-sm-block ml-2">{{ app.user.username }}</strong>
+                    </a>
+                </li>
+
+                <li class="nav-item dropdown me-3 me-lg-1">
+                    <a
+                    class="nav-link dropdown-toggle hidden-arrow"
+                    href="#"
+                    id="navbarDropdownMenuLink"
+                    role="button"
+                    data-mdb-toggle="dropdown"
+                    aria-expanded="false"
+                    >
+                    <i class="fas fa-chevron-circle-down fa-lg"></i>
+                    </a>
+                    <ul
+                    class="dropdown-menu dropdown-menu-end"
+                    aria-labelledby="navbarDropdownMenuLink"
+                    >
+                    {% for website in globals.menu2 %}
+                        {% if website.button4 != null %}
+                        <li class="nav-item {% if app.request.requesturi == '/' ~ website.link4 %}active{% endif %}">
+							<a href="{{ globals.WebSiteUrl }}{{ website.link4 }}" class="dropdown-item">{{ website.button4 }}</a>
+						</li>
+                        {% endif %}
+                        {% if website.button3 != null %}
+						<li class="nav-item">
+							<a href="{{ globals.WebSiteUrl }}{{ website.link3 }}" class="dropdown-item">{{ website.button3 }}</a>
+						</li>
+					    {% endif %}
+                    {% endfor %}
+                    </ul>
+                </li>
+
+                {% if is_granted('ROLE_SUPER_ADMIN') %}
+
+                    <li class="nav-item dropdown me-3 me-lg-1">
+                        <a
+                        href="admin/mailbox"
+                        class="nav-link dropdown-toggle hidden-arrow"
+                        role="button"
+                        >
+                            <i class="fas fa-bell fa-lg"></i>
+                            <span class="badge rounded-pill badge-notification bg-danger">{{ globals.notification }}</span>
+                        </a>
+                    </li>
+
+                {% elseif is_granted('ROLE_PRO') %}
+
+                    <li class="nav-item dropdown me-3 me-lg-1">
+                        <a
+                        href="admin/mailbox"
+                        class="nav-link dropdown-toggle hidden-arrow"
+                        role="button"
+                        >
+                            <i class="fas fa-bell fa-lg"></i>
+                            <span class="badge rounded-pill badge-notification bg-danger">{{ globals.notification }}</span>
+                        </a>
+                    </li>
+
+                {% endif %}
+			</ul>
+
+		{% else %}
+
+			<ul class="navbar-nav">
+				{% for website in globals.menu2 %}
+					{% if website.button1 != null %}
+						<li class="nav-link">
+							<a href="{{ globals.WebSiteUrl }}{{ website.link1 }}" class="btn btn-outline-success nav-link text-white text-bold">{{ website.button1 }}</a>
+						</li>
+					{% endif %}
+					{% if website.button2 != null %}
+						<li class="nav-link">
+							<a href="{{ globals.WebSiteUrl }}{{ website.link2 }}" class="btn btn-outline-info nav-link text-white text-bold">{{ website.button2 }}</a>
+						</li>
+					{% endif %}
+				{% endfor %}
+			</ul>
+
+		{% endif %}
+	</div>
+</nav>
